@@ -1,0 +1,50 @@
+PODS:
+  - AWSAuthCore (2.12.7):
+    - AWSCore (= 2.12.7)
+  - AWSCognitoIdentityProvider (2.12.7):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.12.7)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.12.7)
+  - AWSMobileClient (2.12.7):
+    - AWSAuthCore (= 2.12.7)
+    - AWSCognitoIdentityProvider (= 2.12.7)
+  - AWSS3 (2.12.7):
+    - AWSCore (= 2.12.7)
+  - PMAlertController (4.0.1)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
+
+DEPENDENCIES:
+  - AWSMobileClient (~> 2.12.0)
+  - AWSS3 (~> 2.12.0)
+  - PMAlertController
+  - Socket.IO-Client-Swift (~> 15.2.0)
+
+SPEC REPOS:
+  trunk:
+    - AWSAuthCore
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSMobileClient
+    - AWSS3
+    - PMAlertController
+    - Socket.IO-Client-Swift
+    - Starscream
+
+SPEC CHECKSUMS:
+  AWSAuthCore: 288cb737a35ff031fbf42edaa8d0062328791d4e
+  AWSCognitoIdentityProvider: 4998bdbfbafe5038dae0237a598580e102e7b6b5
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: 2f0f88ae94a63a198274d683c7d0e18709d7090b
+  AWSMobileClient: bf1fb0868f9187141ca7b69220383c14878c0a29
+  AWSS3: 40d2f99d91e34999789a534d95c80cc7c1135c6d
+  PMAlertController: ab5fcf4d085b7878c9451466d701449c4bf6efb8
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+
+PODFILE CHECKSUM: 56594838f5051782432a87916680eb107a833359
+
+COCOAPODS: 1.8.4

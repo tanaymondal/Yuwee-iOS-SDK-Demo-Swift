@@ -3,17 +3,48 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43B474042DC201C9957C3432 /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32CC0B318030F7DDAC6A88A /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */; };
 		A640272D25D6520C00087824 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640272C25D6520C00087824 /* AppDelegate.swift */; };
 		A640272F25D6520C00087824 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640272E25D6520C00087824 /* SceneDelegate.swift */; };
 		A640273125D6520C00087824 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640273025D6520C00087824 /* ViewController.swift */; };
 		A640273425D6520C00087824 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A640273225D6520C00087824 /* Main.storyboard */; };
 		A640273625D6520D00087824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A640273525D6520D00087824 /* Assets.xcassets */; };
 		A640273925D6520D00087824 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A640273725D6520D00087824 /* LaunchScreen.storyboard */; };
+		A640274F25D6902700087824 /* YuWeeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640274E25D6902700087824 /* YuWeeSDK.framework */; };
+		A640275025D6902700087824 /* YuWeeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A640274E25D6902700087824 /* YuWeeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A640275325D6903500087824 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640275225D6903500087824 /* WebRTC.framework */; };
+		A640275425D6903500087824 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A640275225D6903500087824 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A640275925D6905E00087824 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640275825D6905E00087824 /* AVFoundation.framework */; };
+		A640275B25D6906600087824 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640275A25D6906600087824 /* AVKit.framework */; };
+		A640275D25D6907200087824 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640275C25D6907200087824 /* CFNetwork.framework */; };
+		A640275F25D6907900087824 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640275E25D6907900087824 /* CoreAudio.framework */; };
+		A640276125D6908100087824 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640276025D6908100087824 /* CoreVideo.framework */; };
+		A640276325D6909100087824 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640276225D6909100087824 /* GLKit.framework */; };
+		A640276525D690A500087824 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640276425D690A500087824 /* PushKit.framework */; };
+		A640276725D690AB00087824 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A640276625D690AB00087824 /* CallKit.framework */; };
+		A640278125D6E33D00087824 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640278025D6E33D00087824 /* LoginViewController.swift */; };
+		A640278325D6E35800087824 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640278225D6E35800087824 /* RegisterViewController.swift */; };
+		A640279125D6F9B700087824 /* String+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640279025D6F9B700087824 /* String+Shortcuts.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A640275125D6902700087824 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A640275025D6902700087824 /* YuWeeSDK.framework in Embed Frameworks */,
+				A640275425D6903500087824 /* WebRTC.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A640272925D6520C00087824 /* Yuwee-iOS-SDK-Demo-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yuwee-iOS-SDK-Demo-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +55,24 @@
 		A640273525D6520D00087824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A640273825D6520D00087824 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A640273A25D6520D00087824 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A640274E25D6902700087824 /* YuWeeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YuWeeSDK.framework; sourceTree = "<group>"; };
+		A640275225D6903500087824 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
+		A640275525D6903F00087824 /* OWT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OWT.framework; sourceTree = "<group>"; };
+		A640275825D6905E00087824 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A640275A25D6906600087824 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		A640275C25D6907200087824 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A640275E25D6907900087824 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		A640276025D6908100087824 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		A640276225D6909100087824 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		A640276425D690A500087824 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
+		A640276625D690AB00087824 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
+		A640277625D6C5C600087824 /* Yuwee-iOS-SDK-Demo-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Yuwee-iOS-SDK-Demo-Swift-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		A640278025D6E33D00087824 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A640278225D6E35800087824 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		A640279025D6F9B700087824 /* String+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Shortcuts.swift"; sourceTree = "<group>"; };
+		B32CC0B318030F7DDAC6A88A /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yuwee_iOS_SDK_Demo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D91D0459D4579DE0E15B49FE /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig"; path = "Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		F031DB3FB99D6E5FC120CDFF /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig"; path = "Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +80,58 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43B474042DC201C9957C3432 /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework in Frameworks */,
+				A640274F25D6902700087824 /* YuWeeSDK.framework in Frameworks */,
+				A640275F25D6907900087824 /* CoreAudio.framework in Frameworks */,
+				A640275D25D6907200087824 /* CFNetwork.framework in Frameworks */,
+				A640275B25D6906600087824 /* AVKit.framework in Frameworks */,
+				A640276725D690AB00087824 /* CallKit.framework in Frameworks */,
+				A640276125D6908100087824 /* CoreVideo.framework in Frameworks */,
+				A640275925D6905E00087824 /* AVFoundation.framework in Frameworks */,
+				A640275325D6903500087824 /* WebRTC.framework in Frameworks */,
+				A640276525D690A500087824 /* PushKit.framework in Frameworks */,
+				A640276325D6909100087824 /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2AAFE883210E3135DE78FFCB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D91D0459D4579DE0E15B49FE /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */,
+				F031DB3FB99D6E5FC120CDFF /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		72A4945ACA09A743711A80F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A640276625D690AB00087824 /* CallKit.framework */,
+				A640276425D690A500087824 /* PushKit.framework */,
+				A640276225D6909100087824 /* GLKit.framework */,
+				A640276025D6908100087824 /* CoreVideo.framework */,
+				A640275E25D6907900087824 /* CoreAudio.framework */,
+				A640275C25D6907200087824 /* CFNetwork.framework */,
+				A640275A25D6906600087824 /* AVKit.framework */,
+				A640275825D6905E00087824 /* AVFoundation.framework */,
+				A640275525D6903F00087824 /* OWT.framework */,
+				A640275225D6903500087824 /* WebRTC.framework */,
+				A640274E25D6902700087824 /* YuWeeSDK.framework */,
+				B32CC0B318030F7DDAC6A88A /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A640272025D6520B00087824 = {
 			isa = PBXGroup;
 			children = (
 				A640272B25D6520C00087824 /* Yuwee-iOS-SDK-Demo-Swift */,
 				A640272A25D6520C00087824 /* Products */,
+				2AAFE883210E3135DE78FFCB /* Pods */,
+				72A4945ACA09A743711A80F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,8 +153,20 @@
 				A640273525D6520D00087824 /* Assets.xcassets */,
 				A640273725D6520D00087824 /* LaunchScreen.storyboard */,
 				A640273A25D6520D00087824 /* Info.plist */,
+				A640277625D6C5C600087824 /* Yuwee-iOS-SDK-Demo-Swift-Bridging-Header.h */,
+				A640278025D6E33D00087824 /* LoginViewController.swift */,
+				A640278225D6E35800087824 /* RegisterViewController.swift */,
+				A640278F25D6F98C00087824 /* Utils */,
 			);
 			path = "Yuwee-iOS-SDK-Demo-Swift";
+			sourceTree = "<group>";
+		};
+		A640278F25D6F98C00087824 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A640279025D6F9B700087824 /* String+Shortcuts.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +176,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A640273D25D6520D00087824 /* Build configuration list for PBXNativeTarget "Yuwee-iOS-SDK-Demo-Swift" */;
 			buildPhases = (
+				5B5D911884E949B987966B48 /* [CP] Check Pods Manifest.lock */,
 				A640272525D6520C00087824 /* Sources */,
 				A640272625D6520C00087824 /* Frameworks */,
 				A640272725D6520C00087824 /* Resources */,
+				F6C1ADE438023498F6667F8C /* [CP] Embed Pods Frameworks */,
+				A640275125D6902700087824 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -98,6 +203,7 @@
 				TargetAttributes = {
 					A640272825D6520C00087824 = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 				};
 			};
@@ -132,14 +238,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5B5D911884E949B987966B48 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Yuwee-iOS-SDK-Demo-Swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6C1ADE438023498F6667F8C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A640272525D6520C00087824 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A640278125D6E33D00087824 /* LoginViewController.swift in Sources */,
+				A640278325D6E35800087824 /* RegisterViewController.swift in Sources */,
 				A640273125D6520C00087824 /* ViewController.swift in Sources */,
 				A640272D25D6520C00087824 /* AppDelegate.swift in Sources */,
 				A640272F25D6520C00087824 /* SceneDelegate.swift in Sources */,
+				A640279125D6F9B700087824 /* String+Shortcuts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,39 +434,62 @@
 		};
 		A640273E25D6520D00087824 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D91D0459D4579DE0E15B49FE /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 359D4SWRZC;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Yuwee-iOS-SDK-Demo-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yuwee.Yuwee-iOS-SDK-Demo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Yuwee-iOS-SDK-Demo-Swift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/YuWeeSDK.framework";
 			};
 			name = Debug;
 		};
 		A640273F25D6520D00087824 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F031DB3FB99D6E5FC120CDFF /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 359D4SWRZC;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Yuwee-iOS-SDK-Demo-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yuwee.Yuwee-iOS-SDK-Demo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Yuwee-iOS-SDK-Demo-Swift-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/YuWeeSDK.framework";
 			};
 			name = Release;
 		};
