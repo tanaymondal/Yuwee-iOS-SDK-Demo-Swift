@@ -23,6 +23,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^OnMeetingCompletionHandler)(NSDictionary *dict, BOOL success);
+typedef void(^OnStartRecordingCompletionHandler)(NSDictionary *dict, BOOL isSuccess);
+typedef void(^OnStopRecordingCompletionHandler)(NSString* message, BOOL isSuccess);
 
 typedef NS_ENUM(NSUInteger, RoleType) {
     presenter,
@@ -83,6 +85,16 @@ typedef NS_ENUM(NSUInteger, RoleType) {
 - (void)updatePresenterStatus:(CallPresenterBody *)body roleType:(RoleType)roleType withlistener:(OnMeetingCompletionHandler)completionHandler;
 - (void)makeOrRevokeAdmin:(CallAdminBody *)body withlistener:(OnMeetingCompletionHandler)completionHandler; 
 - (void)fetchActiveParticipantsList:(OnMeetingCompletionHandler)completionHandler;
+
+-(void)startCallRecordingWithRoleType:(RoleType)roleType
+                     withSenderUserId:(NSString*)senderUserId
+                          withMongoId:(NSString*)mongoId
+                  withCompletionBlock:(OnStartRecordingCompletionHandler)handler;
+
+-(void)stopCallRecordingWithRecordingId:(NSString*)recordingId
+                            withMongoId:(NSString*)mongoId
+                      withIsRoleUpdated:(BOOL)isRoleUpdated
+                    withCompletionBlock:(OnStopRecordingCompletionHandler)handler;
 
 @end
 

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedInstance;
 - (instancetype)init NS_UNAVAILABLE;
 
+- (void)getAwsCredentialsWithCompletionBlock:(OnGetAwsCredHandler)handler;
 
 - (void)setupAwsCredentialWithAccessKey:(NSString*)accessKeyId
                     withSecretAccessKey:(NSString*)secretAccessKey

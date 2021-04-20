@@ -45,12 +45,12 @@
 - (void)onDataReceivedFrom:(NSString*)remoteUserId withData:(NSString*)data;
 /**
   @brief This function will be invoked when a remote stream is available.
-  @param remoteUserId Remote user’s ID
+ @param stream Remote user’s ID
 */
 - (void)onStreamAdded:(OWTRemoteStream*)stream;
 /**
   @brief This function will be invoked when a remote stream is removed.
-  @param remoteUserId Remote user’s ID
+ @param stream Remote user’s ID
 */
 - (void)onStreamRemoved:(OWTRemoteStream*)stream;
 @end
