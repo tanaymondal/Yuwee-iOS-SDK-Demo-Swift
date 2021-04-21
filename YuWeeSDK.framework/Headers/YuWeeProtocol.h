@@ -22,7 +22,7 @@
 
 - (void)onAllUsersBusy;
 
-- (void)onReadyToInitiateCall:(CallParams *)callParams withBusyUserList:(NSArray *)arrBusyUserList;
+- (void)onReadyToInitiateCall:(NSDictionary *)callData withBusyUserList:(NSArray *)arrBusyUserList;
 
 - (void)onError:(CallParams *)callParams withMessage:(NSString *)strMessage;
 

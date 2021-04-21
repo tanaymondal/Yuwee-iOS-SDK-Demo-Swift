@@ -184,14 +184,38 @@
 		A65A1C3E262EB4B300B8AB71 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A6C605FA2630516800B736B2 /* User */,
+				A6C605F82630513900B736B2 /* OneToOne */,
+				A6C605F92630515500B736B2 /* Meeting */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A6C605F82630513900B736B2 /* OneToOne */ = {
+			isa = PBXGroup;
+			children = (
+				A691CB8B262F13A100B41307 /* OneToOneViewController.swift */,
+				A691CB8F262F208100B41307 /* OneToOneCallViewController.swift */,
+			);
+			path = OneToOne;
+			sourceTree = "<group>";
+		};
+		A6C605F92630515500B736B2 /* Meeting */ = {
+			isa = PBXGroup;
+			children = (
+				A691CB8D262F13C500B41307 /* MeetingViewController.swift */,
+			);
+			path = Meeting;
+			sourceTree = "<group>";
+		};
+		A6C605FA2630516800B736B2 /* User */ = {
+			isa = PBXGroup;
+			children = (
 				A640278025D6E33D00087824 /* LoginViewController.swift */,
 				A640278225D6E35800087824 /* RegisterViewController.swift */,
 				A691CB50262EC8F500B41307 /* DashboardViewController.swift */,
-				A691CB8B262F13A100B41307 /* OneToOneViewController.swift */,
-				A691CB8D262F13C500B41307 /* MeetingViewController.swift */,
-				A691CB8F262F208100B41307 /* OneToOneCallViewController.swift */,
 			);
-			path = ViewControllers;
+			path = User;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
