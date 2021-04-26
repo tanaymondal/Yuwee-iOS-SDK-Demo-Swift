@@ -22,6 +22,8 @@ class OneToOneViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
         self.fieldEmail.delegate = self
+        self.navigationItem.title = "One to One Call"
+        
         let isConnected = Yuwee.sharedInstance().getConnectionManager().isConnected()
         print("Is Yuwee Connected: \(isConnected)")
     }
