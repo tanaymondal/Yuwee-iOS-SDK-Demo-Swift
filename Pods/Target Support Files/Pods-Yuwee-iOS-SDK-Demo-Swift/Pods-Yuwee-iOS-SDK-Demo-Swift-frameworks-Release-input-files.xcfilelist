@@ -7,6 +7,7 @@ ${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework
 ${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework
 ${BUILT_PRODUCTS_DIR}/KRActivityIndicatorView/KRActivityIndicatorView.framework
 ${BUILT_PRODUCTS_DIR}/KRProgressHUD/KRProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/KYDrawerController/KYDrawerController.framework
 ${BUILT_PRODUCTS_DIR}/PMAlertController/PMAlertController.framework
 ${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework
 ${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework

@@ -33,11 +33,11 @@ RTC_OBJC_EXPORT
 - (void)stop;
 /// Stop sending data to remote endpoint.
 - (void)mute:(OWTTrackKind)trackKind
-   onSuccess:(nullable void (^)(void))onSuccess
+    onSuccess:(nullable void (^)())onSuccess
     onFailure:(nullable void (^)(NSError*))onFailure;
 /// Continue sending data to remote endpoint.
 - (void)unmute:(OWTTrackKind)trackKind
-     onSuccess:(nullable void (^)(void))onSuccess
+     onSuccess:(nullable void (^)())onSuccess
      onFailure:(nullable void (^)(NSError*))onFailure;
 /// Get stats of underlying PeerConnection.
 - (void)statsWithOnSuccess:(void (^)(NSArray<RTCLegacyStatsReport*>*))onSuccess

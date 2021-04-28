@@ -8,6 +8,7 @@
 import UIKit
 import Toaster
 import SwiftyJSON
+import KRProgressHUD
 
 class JoinMeetingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fieldMeetingId: UITextField!
@@ -37,6 +38,9 @@ class JoinMeetingViewController: UIViewController, UITextFieldDelegate {
         }
     }
     @IBAction func onJoinMeetingPressed(_ sender: Any) {
+        
+        let json = Utils.getLoginJSON()
+        
         if fieldMeetingId.text?.count == 0 {
             Toast(text: "Meeting ID is empty.").show()
             return
@@ -53,25 +57,25 @@ class JoinMeetingViewController: UIViewController, UITextFieldDelegate {
         joinMedia.video = videoSwitch.isOn
         
         let params = RegisterMeetingBody()
-        params.guestId = String(describing: Utils.getLoginJSON()["result"]["user"]["_id"].string!)
+        params.guestId = json["result"]["user"]["email"].string!
         params.meetingTokenId = fieldMeetingId.text!
         params.passcode = fieldPasscode.text!
-        params.nickName = String(describing: Utils.getLoginJSON()["result"]["user"]["name"].string!)
+        params.nickName = json["result"]["user"]["name"].string!
         params.joinMedia = joinMedia
         
-        print(JSON(params))
-        
+        KRProgressHUD.show()
         Yuwee.sharedInstance().getMeetingManager().register(inMeeting: params) { (data, isSuccess) in
+            let json = JSON(data)
             if isSuccess{
-                self.meetingData = JSON(data)
-                self.performSegue(withIdentifier: "MeetingCall", sender: self)
+                KRProgressHUD.dismiss()
+                AppDelegate.callTokenId = self.fieldMeetingId.text!
+                AppDelegate.meetingData = json
+                self.performSegue(withIdentifier: "MainMeetingDrawer", sender: self)
+            }
+            else{
+                KRProgressHUD.showError(withMessage: json["message"].string)
             }
         }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! MeetingCallViewController
-        vc.meetingData = self.meetingData
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

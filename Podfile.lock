@@ -14,6 +14,7 @@ PODS:
   - KRActivityIndicatorView (3.0.7)
   - KRProgressHUD (3.4.7):
     - KRActivityIndicatorView (= 3.0.7)
+  - KYDrawerController (2.1.0)
   - PMAlertController (4.0.1)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - AWSMobileClient (~> 2.12.0)
   - AWSS3 (~> 2.12.0)
   - KRProgressHUD
+  - KYDrawerController
   - PMAlertController
   - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftyJSON (~> 4.0)
@@ -40,6 +42,7 @@ SPEC REPOS:
     - AWSS3
     - KRActivityIndicatorView
     - KRProgressHUD
+    - KYDrawerController
     - PMAlertController
     - Socket.IO-Client-Swift
     - Starscream
@@ -55,12 +58,13 @@ SPEC CHECKSUMS:
   AWSS3: 40d2f99d91e34999789a534d95c80cc7c1135c6d
   KRActivityIndicatorView: ad69e89c4ce40c986cf580595be4829dcad0e35a
   KRProgressHUD: a248f0bc6c9c2aed40a37b76e03ffecc7f85c887
+  KYDrawerController: baad0e63b09c0cb564bd48f0f7f70f45d9176ebc
   PMAlertController: ab5fcf4d085b7878c9451466d701449c4bf6efb8
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: aa86d31adf31de189c4f1bd8005fecd097f4e723
+PODFILE CHECKSUM: e03a3822d0de92858a44658c03d8a5a9ef3df9be
 
 COCOAPODS: 1.10.1

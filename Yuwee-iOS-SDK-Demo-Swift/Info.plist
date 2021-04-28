@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>YuWee Swift</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,6 +22,17 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We will use the access to capture video from camera for video calling feature and use photos from gallery to use them in profiles or chat attachments.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>YuWee SDK Demo need this local network permission for connecting calls.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We will use the access to transfer your voice to others through call.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -41,12 +54,6 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>We will use the access to capture video from camera for video calling feature and use photos from gallery to use them in profiles or chat attachments.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>We will use the access to transfer your voice to others through call.</string>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>YuWee SDK Demo need this local network permission for connecting calls.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -68,10 +75,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 </dict>
 </plist>

@@ -27,12 +27,12 @@ RTC_OBJC_EXPORT
  */
 - (void)sendMessage:(NSString*)message
                  to:(NSString*)targetId
-          onSuccess:(void (^)(void))onSuccess
+          onSuccess:(void (^)())onSuccess
           onFailure:(void (^)(NSError*))onFailure;
 /**
  @brief Disconnect from signaling server.
  */
-- (void)disconnectWithOnSuccess:(void (^)(void))onSuccess
+- (void)disconnectWithOnSuccess:(void (^)())onSuccess
                       onFailure:(void (^)(NSError*))onFailure;
 @end
 /**

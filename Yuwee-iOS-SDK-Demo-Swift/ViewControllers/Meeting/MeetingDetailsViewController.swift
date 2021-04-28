@@ -52,7 +52,7 @@ class MeetingDetailsViewController: UIViewController {
         
         self.labelMeetingName.text = meetingDetails!["meetingName"].string
         self.labelMeetingId.text = "Meeting Token ID: \(meetingDetails!["meetingTokenId"].string!)"
-        let date = Date(milliseconds: meetingDetails!["callId"]["meetingStartTime"].int64!).localDate()
+        let date = Date(milliseconds: meetingDetails!["callId"]["meetingStartTime"].int64!)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         self.labelStartTime.text = "Start Time: \(dateFormatter.string(from: date))"

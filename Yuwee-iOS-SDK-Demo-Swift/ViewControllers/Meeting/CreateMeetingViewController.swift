@@ -82,7 +82,7 @@ class CreateMeetingViewController: UIViewController, UITextFieldDelegate {
         body.maxAllowedParticipant = 20
         body.callMode = 1 // sfu
         body.meetingExpireDuration = 5 * 60 // in seconds
-        body.meetingStartTime = Int(datePicker.date.localDate().timeIntervalSince1970 * 1000)
+        body.meetingStartTime = Int(datePicker.date.timeIntervalSince1970 * 1000)
         body.presenters = presentersEmail
         body.callAdmins = adminsEmail
         body.isCallAllowedWithoutInitiator = true

@@ -54,21 +54,21 @@ RTC_OBJC_EXPORT
   @param message The message to be sent.
 */
 - (void)send:(NSString*)message
-   onSuccess:(nullable void (^)(void))onSuccess
+    onSuccess:(nullable void (^)())onSuccess
     onFailure:(nullable void (^)(NSError*))onFailure;
 /**
   @brief Send message to specific participant in the conference.
   @param message The message to be sent.
-  @param receiver The user who receives this message.
+  @param to The user who receives this message.
 */
 - (void)send:(NSString*)message
            to:(NSString*)receiver
-   onSuccess:(nullable void (^)(void))onSuccess
+    onSuccess:(nullable void (^)())onSuccess
     onFailure:(nullable void (^)(NSError*))onFailure;
 /**
   @brief Leave current conference.
 */
-- (void)leaveWithOnSuccess:(nullable void (^)(void))onSuccess
+- (void)leaveWithOnSuccess:(nullable void (^)())onSuccess
                  onFailure:(nullable void (^)(NSError*))onFailure;
 @property(nonatomic, weak) id<OWTConferenceClientDelegate> delegate;
 @end

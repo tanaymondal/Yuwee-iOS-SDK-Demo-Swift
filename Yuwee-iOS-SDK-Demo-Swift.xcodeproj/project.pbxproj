@@ -37,6 +37,7 @@
 		A6A39623263150D000CBD533 /* CreateMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A39622263150D000CBD533 /* CreateMeetingViewController.swift */; };
 		A6A396252631517900CBD533 /* JoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A396242631517900CBD533 /* JoinMeetingViewController.swift */; };
 		A6A396272631534600CBD533 /* MeetingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A396262631534600CBD533 /* MeetingCallViewController.swift */; };
+		A6CFBA0F2637FFDE001F1A03 /* DrawerMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */; };
 		A6D99D812636973300B6DD9A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D99D802636973300B6DD9A /* Extensions.swift */; };
 		A6D99D832636BFDC00B6DD9A /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		A6A39622263150D000CBD533 /* CreateMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingViewController.swift; sourceTree = "<group>"; };
 		A6A396242631517900CBD533 /* JoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingViewController.swift; sourceTree = "<group>"; };
 		A6A396262631534600CBD533 /* MeetingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCallViewController.swift; sourceTree = "<group>"; };
+		A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewController.swift; sourceTree = "<group>"; };
 		A6D99D802636973300B6DD9A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		B32CC0B318030F7DDAC6A88A /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yuwee_iOS_SDK_Demo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,11 +216,12 @@
 		A6C605F92630515500B736B2 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
+				A6A396262631534600CBD533 /* MeetingCallViewController.swift */,
+				A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */,
 				A691CB8D262F13C500B41307 /* MeetingViewController.swift */,
+				A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */,
 				A6A39622263150D000CBD533 /* CreateMeetingViewController.swift */,
 				A6A396242631517900CBD533 /* JoinMeetingViewController.swift */,
-				A6A396262631534600CBD533 /* MeetingCallViewController.swift */,
-				A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */,
 			);
 			path = Meeting;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				A640272F25D6520C00087824 /* SceneDelegate.swift in Sources */,
 				A6D99D812636973300B6DD9A /* Extensions.swift in Sources */,
 				A6A39623263150D000CBD533 /* CreateMeetingViewController.swift in Sources */,
+				A6CFBA0F2637FFDE001F1A03 /* DrawerMenuTableViewController.swift in Sources */,
 				A640279125D6F9B700087824 /* String+Shortcuts.swift in Sources */,
 				A691CB8E262F13C500B41307 /* MeetingViewController.swift in Sources */,
 				A691CB88262F05BE00B41307 /* Constants.swift in Sources */,

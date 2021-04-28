@@ -116,7 +116,7 @@ extension MeetingViewController: UITableViewDataSource, UITableViewDelegate{
         
         
         cell.textLabel?.text = json["meetingName"].string
-        cell.detailTextLabel?.text = dateFormatter.string(from: date.localDate())
+        cell.detailTextLabel?.text = dateFormatter.string(from: date)
         
         return cell
         

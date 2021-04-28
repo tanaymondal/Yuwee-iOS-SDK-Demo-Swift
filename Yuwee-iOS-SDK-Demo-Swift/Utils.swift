@@ -11,14 +11,19 @@ import Toaster
 
 class Utils {
     
+    static var json : JSON?
+    
     static func getLoginJSON() -> JSON{
+        if json != nil {
+            return json!
+        }
         let data = UserDefaults.init(suiteName: Constants.APP_GROUP_NAME)?.value(forKey: Constants.LOGIN_DATA)
         
         do{
             let dict = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data as! Data)
             
-            let json = JSON(dict!)
-            return json
+            json = JSON(dict!)
+            return json!
         }
         catch{
             return JSON("")
