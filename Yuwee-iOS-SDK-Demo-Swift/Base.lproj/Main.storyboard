@@ -509,90 +509,143 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evM-fb-6PQ" customClass="YuweeVideoView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="692"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xRO-YC-u1a">
-                                <rect key="frame" x="0.0" y="300" width="414" height="136"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y5l-ij-0Z7">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="f9S-3w-oVq">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dCB-qZ-jm2">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="azU-36-foz">
-                                <rect key="frame" x="32" y="644" width="350" height="60"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cBa-L5-6DT">
+                                <rect key="frame" x="8" y="608" width="398" height="120"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66V-gJ-uuJ" userLabel="Chat">
-                                        <rect key="frame" x="8.0000000000000036" y="8" width="62.333333333333343" height="44"/>
-                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRO-YC-u1a">
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="50"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="5Nj-NX-pl1"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SYx-vq-jAQ">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collection_view_cell" id="f9S-3w-oVq" customClass="StreamCollectionViewCell" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dCB-qZ-jm2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRw-gC-m9E" customClass="YuweeVideoView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="sRw-gC-m9E" firstAttribute="top" secondItem="dCB-qZ-jm2" secondAttribute="top" id="TUn-yw-GJP"/>
+                                                        <constraint firstItem="sRw-gC-m9E" firstAttribute="leading" secondItem="dCB-qZ-jm2" secondAttribute="leading" id="Tb3-dS-Kce"/>
+                                                        <constraint firstAttribute="bottom" secondItem="sRw-gC-m9E" secondAttribute="bottom" id="b9C-dY-8r8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="sRw-gC-m9E" secondAttribute="trailing" id="lkv-id-ZID"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <size key="customSize" width="50" height="50"/>
+                                                <connections>
+                                                    <outlet property="yuweeVideoView" destination="sRw-gC-m9E" id="abm-Rx-YtM"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
                                         <connections>
-                                            <action selector="onChatPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="uTD-cG-z2z"/>
-                                            <action selector="onOpenChat:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="u3p-PM-ncO"/>
+                                            <outlet property="dataSource" destination="Gd9-FO-o0e" id="CfT-z5-SBm"/>
+                                            <outlet property="delegate" destination="Gd9-FO-o0e" id="s3Z-DA-5v2"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucS-LB-iJj" userLabel="Button Video">
-                                        <rect key="frame" x="75.333333333333329" y="8" width="62.333333333333329" height="44"/>
-                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <connections>
-                                            <action selector="onVideoPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="qff-CH-D8H"/>
-                                            <action selector="onVideoToggle:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="pyN-pd-vec"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsM-qm-tq3" userLabel="Button End">
-                                        <rect key="frame" x="142.66666666666666" y="8" width="62.666666666666657" height="44"/>
-                                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                        <connections>
-                                            <action selector="onEndPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="ES4-uz-UCS"/>
-                                            <action selector="onEndPressed:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="tuv-df-LTk"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXk-O2-oUb" userLabel="Audio">
-                                        <rect key="frame" x="210.33333333333334" y="8" width="62.333333333333343" height="44"/>
-                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <connections>
-                                            <action selector="onAudioPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="laL-47-RAQ"/>
-                                            <action selector="onAudioToggle:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="qzL-RO-4hW"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7DJ-0P-AkX" userLabel="Speaker">
-                                        <rect key="frame" x="277.66666666666669" y="8" width="62.333333333333314" height="44"/>
-                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <connections>
-                                            <action selector="onSpeakerPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="jaj-dV-pmK"/>
-                                            <action selector="onSpeakerToggle:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="qjU-O1-d3i"/>
-                                        </connections>
-                                    </button>
+                                    </collectionView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="azU-36-foz">
+                                        <rect key="frame" x="35" y="70" width="328" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66V-gJ-uuJ" userLabel="Chat">
+                                                <rect key="frame" x="8" y="8" width="30" height="34"/>
+                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                <connections>
+                                                    <action selector="onChatPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="uTD-cG-z2z"/>
+                                                    <action selector="onOpenChat:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="u3p-PM-ncO"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucS-LB-iJj" userLabel="Button Video">
+                                                <rect key="frame" x="78" y="8" width="30" height="34"/>
+                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                <connections>
+                                                    <action selector="onVideoPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="qff-CH-D8H"/>
+                                                    <action selector="onVideoToggle:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="pyN-pd-vec"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsM-qm-tq3" userLabel="Button End">
+                                                <rect key="frame" x="148" y="8" width="30" height="34"/>
+                                                <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                <connections>
+                                                    <action selector="onEndPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="ES4-uz-UCS"/>
+                                                    <action selector="onEndPressed:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="tuv-df-LTk"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXk-O2-oUb" userLabel="Audio">
+                                                <rect key="frame" x="218" y="8" width="30" height="34"/>
+                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                <connections>
+                                                    <action selector="onAudioPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="laL-47-RAQ"/>
+                                                    <action selector="onAudioToggle:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="qzL-RO-4hW"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7DJ-0P-AkX" userLabel="Speaker">
+                                                <rect key="frame" x="288" y="8" width="30" height="34"/>
+                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                <connections>
+                                                    <action selector="onSpeakerPressed:" destination="Gd9-FO-o0e" eventType="touchUpInside" id="jaj-dV-pmK"/>
+                                                    <action selector="onSpeakerToggle:" destination="PB8-zE-Nb1" eventType="touchUpInside" id="qjU-O1-d3i"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.8053563641" green="0.99807558350000003" blue="0.99066036120000001" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="7DJ-0P-AkX" firstAttribute="firstBaseline" secondItem="66V-gJ-uuJ" secondAttribute="firstBaseline" id="0Qw-fc-wuj"/>
+                                            <constraint firstItem="NsM-qm-tq3" firstAttribute="firstBaseline" secondItem="ucS-LB-iJj" secondAttribute="firstBaseline" id="162-zY-yjk"/>
+                                            <constraint firstItem="NsM-qm-tq3" firstAttribute="baseline" secondItem="ZXk-O2-oUb" secondAttribute="baseline" id="39s-GH-GHL"/>
+                                            <constraint firstItem="ucS-LB-iJj" firstAttribute="firstBaseline" secondItem="ZXk-O2-oUb" secondAttribute="firstBaseline" id="3yY-8r-VgE"/>
+                                            <constraint firstItem="66V-gJ-uuJ" firstAttribute="firstBaseline" secondItem="ZXk-O2-oUb" secondAttribute="firstBaseline" id="4yY-Jv-Vxp"/>
+                                            <constraint firstItem="ucS-LB-iJj" firstAttribute="firstBaseline" secondItem="66V-gJ-uuJ" secondAttribute="firstBaseline" id="6ih-xQ-ZzF"/>
+                                            <constraint firstItem="ZXk-O2-oUb" firstAttribute="baseline" secondItem="66V-gJ-uuJ" secondAttribute="baseline" id="GLA-pk-8GQ"/>
+                                            <constraint firstItem="7DJ-0P-AkX" firstAttribute="firstBaseline" secondItem="NsM-qm-tq3" secondAttribute="firstBaseline" id="QAO-7o-78t"/>
+                                            <constraint firstItem="ucS-LB-iJj" firstAttribute="firstBaseline" secondItem="7DJ-0P-AkX" secondAttribute="firstBaseline" id="R2y-GP-M4n"/>
+                                            <constraint firstItem="ZXk-O2-oUb" firstAttribute="firstBaseline" secondItem="7DJ-0P-AkX" secondAttribute="firstBaseline" id="Sl4-qe-Ayr"/>
+                                            <constraint firstItem="NsM-qm-tq3" firstAttribute="firstBaseline" secondItem="66V-gJ-uuJ" secondAttribute="firstBaseline" id="XCN-AL-QAo"/>
+                                            <constraint firstAttribute="height" constant="50" id="Yru-Tb-zdT"/>
+                                            <constraint firstItem="66V-gJ-uuJ" firstAttribute="baseline" secondItem="NsM-qm-tq3" secondAttribute="baseline" id="YuG-bQ-R3n"/>
+                                            <constraint firstItem="ZXk-O2-oUb" firstAttribute="firstBaseline" secondItem="NsM-qm-tq3" secondAttribute="firstBaseline" id="fK0-VN-PXR"/>
+                                            <constraint firstItem="ucS-LB-iJj" firstAttribute="baseline" secondItem="66V-gJ-uuJ" secondAttribute="baseline" id="gwa-rW-ugE"/>
+                                            <constraint firstItem="ucS-LB-iJj" firstAttribute="baseline" secondItem="7DJ-0P-AkX" secondAttribute="baseline" id="hJs-Vr-Qp1"/>
+                                            <constraint firstItem="7DJ-0P-AkX" firstAttribute="baseline" secondItem="66V-gJ-uuJ" secondAttribute="baseline" id="tKT-zb-vrM"/>
+                                            <constraint firstItem="ZXk-O2-oUb" firstAttribute="baseline" secondItem="ucS-LB-iJj" secondAttribute="baseline" id="wlm-8M-rjB"/>
+                                            <constraint firstItem="NsM-qm-tq3" firstAttribute="baseline" secondItem="ucS-LB-iJj" secondAttribute="baseline" id="wwj-pC-5Jz"/>
+                                            <constraint firstItem="NsM-qm-tq3" firstAttribute="baseline" secondItem="7DJ-0P-AkX" secondAttribute="baseline" id="xeT-68-ydh"/>
+                                            <constraint firstItem="ZXk-O2-oUb" firstAttribute="baseline" secondItem="7DJ-0P-AkX" secondAttribute="baseline" id="zP1-l5-xkB"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="10"/>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.8053563641" green="0.99807558350000003" blue="0.99066036120000001" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="GdA-gf-SJK"/>
+                                    <constraint firstItem="xRO-YC-u1a" firstAttribute="leading" secondItem="cBa-L5-6DT" secondAttribute="leading" id="FWT-7A-r0q"/>
+                                    <constraint firstAttribute="trailing" secondItem="xRO-YC-u1a" secondAttribute="trailing" id="QL0-yt-v9y"/>
                                 </constraints>
-                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="10"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="z27-u0-cdL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="z27-u0-cdL" firstAttribute="bottom" secondItem="evM-fb-6PQ" secondAttribute="bottom" id="2a8-Ko-4Iz"/>
-                            <constraint firstItem="evM-fb-6PQ" firstAttribute="leading" secondItem="z27-u0-cdL" secondAttribute="leading" id="A9G-Ci-0xD"/>
-                            <constraint firstItem="evM-fb-6PQ" firstAttribute="top" secondItem="z27-u0-cdL" secondAttribute="top" id="NTd-XB-IKm"/>
-                            <constraint firstItem="z27-u0-cdL" firstAttribute="trailing" secondItem="azU-36-foz" secondAttribute="trailing" constant="32" id="aiA-U0-J2l"/>
-                            <constraint firstItem="z27-u0-cdL" firstAttribute="bottom" secondItem="azU-36-foz" secondAttribute="bottom" constant="32" id="arF-sY-O5F"/>
-                            <constraint firstItem="azU-36-foz" firstAttribute="leading" secondItem="z27-u0-cdL" secondAttribute="leading" constant="32" id="k89-Io-ska"/>
-                            <constraint firstItem="z27-u0-cdL" firstAttribute="trailing" secondItem="evM-fb-6PQ" secondAttribute="trailing" id="non-4N-yuY"/>
+                            <constraint firstItem="evM-fb-6PQ" firstAttribute="top" secondItem="z27-u0-cdL" secondAttribute="top" id="1I8-CW-b7W"/>
+                            <constraint firstItem="cBa-L5-6DT" firstAttribute="leading" secondItem="z27-u0-cdL" secondAttribute="leading" constant="8" id="2Vy-NT-BXt"/>
+                            <constraint firstItem="z27-u0-cdL" firstAttribute="bottom" secondItem="cBa-L5-6DT" secondAttribute="bottom" constant="8" id="A95-zk-GSk"/>
+                            <constraint firstItem="z27-u0-cdL" firstAttribute="trailing" secondItem="cBa-L5-6DT" secondAttribute="trailing" constant="8" id="AFE-Ts-gT2"/>
+                            <constraint firstItem="evM-fb-6PQ" firstAttribute="leading" secondItem="z27-u0-cdL" secondAttribute="leading" id="QBv-Kc-BUy"/>
+                            <constraint firstItem="evM-fb-6PQ" firstAttribute="centerY" secondItem="z27-u0-cdL" secondAttribute="centerY" id="i8o-ZL-3hv"/>
+                            <constraint firstItem="evM-fb-6PQ" firstAttribute="centerX" secondItem="z27-u0-cdL" secondAttribute="centerX" id="iko-Ho-slc"/>
+                            <constraint firstItem="z27-u0-cdL" firstAttribute="bottom" secondItem="evM-fb-6PQ" secondAttribute="bottom" id="oST-2y-cGT"/>
+                            <constraint firstItem="evM-fb-6PQ" firstAttribute="trailing" secondItem="z27-u0-cdL" secondAttribute="trailing" id="xww-LM-X64"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XXn-5m-HF9"/>
@@ -602,6 +655,7 @@
                         <outlet property="buttonEnd" destination="NsM-qm-tq3" id="ZGd-1R-wga"/>
                         <outlet property="buttonSpeaker" destination="7DJ-0P-AkX" id="dth-mk-Flk"/>
                         <outlet property="buttonVideo" destination="ucS-LB-iJj" id="zeV-xr-TeX"/>
+                        <outlet property="collectionView" destination="xRO-YC-u1a" id="RqT-1z-myB"/>
                         <outlet property="mainVideoView" destination="evM-fb-6PQ" id="H7k-7G-xfR"/>
                         <outlet property="stackView" destination="azU-36-foz" id="OXI-HU-dne"/>
                     </connections>
@@ -1061,7 +1115,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="JBy-v0-yXO"/>
+        <segue reference="9Pe-gA-Nj7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
@@ -1075,6 +1129,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

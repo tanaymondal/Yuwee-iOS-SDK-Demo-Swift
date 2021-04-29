@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static var meetingData: JSON = JSON("")
     static var callTokenId = ""
+    static var isAudioEnabled = false
+    static var isVideoEnabled = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

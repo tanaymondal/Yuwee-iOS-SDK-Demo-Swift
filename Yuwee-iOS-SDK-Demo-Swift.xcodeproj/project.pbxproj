@@ -40,6 +40,7 @@
 		A6CFBA0F2637FFDE001F1A03 /* DrawerMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */; };
 		A6D99D812636973300B6DD9A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D99D802636973300B6DD9A /* Extensions.swift */; };
 		A6D99D832636BFDC00B6DD9A /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */; };
+		A6D9DA8B263AB27900A9EEA0 /* StreamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D9DA8A263AB27900A9EEA0 /* StreamCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +94,7 @@
 		A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewController.swift; sourceTree = "<group>"; };
 		A6D99D802636973300B6DD9A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
+		A6D9DA8A263AB27900A9EEA0 /* StreamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamCollectionViewCell.swift; sourceTree = "<group>"; };
 		B32CC0B318030F7DDAC6A88A /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yuwee_iOS_SDK_Demo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91D0459D4579DE0E15B49FE /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig"; path = "Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		F031DB3FB99D6E5FC120CDFF /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig"; path = "Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig"; sourceTree = "<group>"; };
@@ -216,8 +218,7 @@
 		A6C605F92630515500B736B2 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
-				A6A396262631534600CBD533 /* MeetingCallViewController.swift */,
-				A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */,
+				A6D9DA89263AB1FC00A9EEA0 /* MeetingCall */,
 				A691CB8D262F13C500B41307 /* MeetingViewController.swift */,
 				A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */,
 				A6A39622263150D000CBD533 /* CreateMeetingViewController.swift */,
@@ -234,6 +235,16 @@
 				A691CB50262EC8F500B41307 /* DashboardViewController.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		A6D9DA89263AB1FC00A9EEA0 /* MeetingCall */ = {
+			isa = PBXGroup;
+			children = (
+				A6A396262631534600CBD533 /* MeetingCallViewController.swift */,
+				A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */,
+				A6D9DA8A263AB27900A9EEA0 /* StreamCollectionViewCell.swift */,
+			);
+			path = MeetingCall;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +379,7 @@
 				A6CFBA0F2637FFDE001F1A03 /* DrawerMenuTableViewController.swift in Sources */,
 				A640279125D6F9B700087824 /* String+Shortcuts.swift in Sources */,
 				A691CB8E262F13C500B41307 /* MeetingViewController.swift in Sources */,
+				A6D9DA8B263AB27900A9EEA0 /* StreamCollectionViewCell.swift in Sources */,
 				A691CB88262F05BE00B41307 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

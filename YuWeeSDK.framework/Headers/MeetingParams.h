@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic) NSString *token;
 @property (nonatomic,assign) MeetingType meetingType;
 @property (strong,nonatomic) NSString *roomId;
+@property (assign,nonatomic) BOOL isAudioEnabled;
+@property (assign,nonatomic) BOOL isVideoEnabled;
 
 @end
 
