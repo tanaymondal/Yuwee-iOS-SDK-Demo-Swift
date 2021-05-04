@@ -9,6 +9,7 @@ target 'Yuwee-iOS-SDK-Demo-Swift' do
     pod 'SwiftyJSON', '~> 4.0'
     pod 'KRProgressHUD'
     pod 'KYDrawerController'
+    pod 'NewPopMenu', '~> 2.0'
 
     # Pods for YuWee SDK
     pod 'Socket.IO-Client-Swift', '~> 15.2.0'

@@ -8,6 +8,9 @@
 import UIKit
 
 class DrawerMenuTableViewController: UITableViewController {
+    
+    private var memberArray: [YWMember] = []
+    private var amIAdmin = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,29 +20,31 @@ class DrawerMenuTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        print("Drawer View Did Load")
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return memberArray.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell: MemberTableViewCell = tableView.dequeueReusableCell(withIdentifier: "member_cell", for: indexPath) as! MemberTableViewCell
+        
+        cell.buttonThreeDots.isHidden = !amIAdmin
+        cell.labelAdmin.padding()
+        cell.labelPresenter.padding()
+        cell.labelAdmin.layer.cornerRadius = 5
+        cell.labelPresenter.layer.cornerRadius = 5
+        cell.selectionStyle = .none
+        //textView.textContainerInset = UIEdgeInsetsMake(10, 0, 10, 0);
+        cell.update(member: memberArray[indexPath.row])
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -85,5 +90,15 @@ class DrawerMenuTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    public func reloadTable(memberArray: [YWMember]){
+        self.memberArray = memberArray
+        self.tableView.reloadData()
+    }
+    
+    public func setAmIAdmin(amIAdmin: Bool){
+        self.amIAdmin = amIAdmin
+    }
 
 }
+

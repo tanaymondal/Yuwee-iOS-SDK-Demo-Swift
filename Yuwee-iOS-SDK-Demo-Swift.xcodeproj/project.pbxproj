@@ -37,6 +37,8 @@
 		A6A39623263150D000CBD533 /* CreateMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A39622263150D000CBD533 /* CreateMeetingViewController.swift */; };
 		A6A396252631517900CBD533 /* JoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A396242631517900CBD533 /* JoinMeetingViewController.swift */; };
 		A6A396272631534600CBD533 /* MeetingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A396262631534600CBD533 /* MeetingCallViewController.swift */; };
+		A6C77861263C0C1B00E6DAC7 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C77860263C0C1B00E6DAC7 /* MemberTableViewCell.swift */; };
+		A6CF523F26401EE400198797 /* Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CF523E26401EE400198797 /* Communication.swift */; };
 		A6CFBA0F2637FFDE001F1A03 /* DrawerMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */; };
 		A6D99D812636973300B6DD9A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D99D802636973300B6DD9A /* Extensions.swift */; };
 		A6D99D832636BFDC00B6DD9A /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */; };
@@ -91,6 +93,8 @@
 		A6A39622263150D000CBD533 /* CreateMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingViewController.swift; sourceTree = "<group>"; };
 		A6A396242631517900CBD533 /* JoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingViewController.swift; sourceTree = "<group>"; };
 		A6A396262631534600CBD533 /* MeetingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCallViewController.swift; sourceTree = "<group>"; };
+		A6C77860263C0C1B00E6DAC7 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
+		A6CF523E26401EE400198797 /* Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communication.swift; sourceTree = "<group>"; };
 		A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewController.swift; sourceTree = "<group>"; };
 		A6D99D802636973300B6DD9A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A6D99D822636BFDC00B6DD9A /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				A691CB87262F05BE00B41307 /* Constants.swift */,
 				A691CB89262F0D5A00B41307 /* Utils.swift */,
 				A6D99D802636973300B6DD9A /* Extensions.swift */,
+				A6CF523E26401EE400198797 /* Communication.swift */,
 				A640273225D6520C00087824 /* Main.storyboard */,
 				A640273525D6520D00087824 /* Assets.xcassets */,
 				A640273725D6520D00087824 /* LaunchScreen.storyboard */,
@@ -243,6 +248,7 @@
 				A6A396262631534600CBD533 /* MeetingCallViewController.swift */,
 				A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */,
 				A6D9DA8A263AB27900A9EEA0 /* StreamCollectionViewCell.swift */,
+				A6C77860263C0C1B00E6DAC7 /* MemberTableViewCell.swift */,
 			);
 			path = MeetingCall;
 			sourceTree = "<group>";
@@ -375,9 +381,11 @@
 				A691CB90262F208100B41307 /* OneToOneCallViewController.swift in Sources */,
 				A640272F25D6520C00087824 /* SceneDelegate.swift in Sources */,
 				A6D99D812636973300B6DD9A /* Extensions.swift in Sources */,
+				A6C77861263C0C1B00E6DAC7 /* MemberTableViewCell.swift in Sources */,
 				A6A39623263150D000CBD533 /* CreateMeetingViewController.swift in Sources */,
 				A6CFBA0F2637FFDE001F1A03 /* DrawerMenuTableViewController.swift in Sources */,
 				A640279125D6F9B700087824 /* String+Shortcuts.swift in Sources */,
+				A6CF523F26401EE400198797 /* Communication.swift in Sources */,
 				A691CB8E262F13C500B41307 /* MeetingViewController.swift in Sources */,
 				A6D9DA8B263AB27900A9EEA0 /* StreamCollectionViewCell.swift in Sources */,
 				A691CB88262F05BE00B41307 /* Constants.swift in Sources */,

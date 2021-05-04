@@ -11,6 +11,7 @@ import KYDrawerController
 import SwiftyJSON
 import KRProgressHUD
 import Toaster
+import PopMenu
 
 class MeetingCallViewController: UIViewController {
     
@@ -25,7 +26,12 @@ class MeetingCallViewController: UIViewController {
     private var isAudioEnabled = true
     private var isVideoEnabled = true
     private var isSpeakerEnabled = false
-    private var remoteStreamArray : [YWRemoteStream] = []
+    private var remoteStreamArray: [YWRemoteStream] = []
+    private var membersArray: [YWMember] = []
+    private var drawerController: KYDrawerController?
+    private var drawer: DrawerMenuTableViewController?
+    private var memberData: YWMember?
+    private var attachedViewId = ""
     
     @IBOutlet weak var mainVideoView: YuweeVideoView!
     @IBOutlet weak var buttonEnd: UIButton!
@@ -45,6 +51,8 @@ class MeetingCallViewController: UIViewController {
         
         let image = UIImage(named: "menu_icon")
         let leftItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(rightButtonAction(sender:)))
+        
+        self.drawerController = self.navigationController?.parent as? KYDrawerController
 
         self.navigationItem.leftBarButtonItem = leftItem
         self.meetingData = AppDelegate.meetingData
@@ -83,16 +91,19 @@ class MeetingCallViewController: UIViewController {
         
         self.joinMeeting()
         Yuwee.sharedInstance().getMeetingManager().setMeetingDelegate(self)
+        
+        Communication.shared.setMemberActionDelegate(memberActionDelegate: self)
+        self.drawer = self.drawerController?.drawerViewController?.children[0] as? DrawerMenuTableViewController
     }
     
     @objc func rightButtonAction(sender: UIBarButtonItem){
         isDrawerOpened = !isDrawerOpened
-        let vc = self.navigationController?.parent as! KYDrawerController
+        
         if isDrawerOpened {
-            vc.setDrawerState(.opened, animated: true)
+            self.drawerController!.setDrawerState(.opened, animated: true)
         }
         else{
-            vc.setDrawerState(.closed, animated: true)
+            self.drawerController!.setDrawerState(.closed, animated: true)
         }
     }
     
@@ -127,30 +138,24 @@ class MeetingCallViewController: UIViewController {
     }
     
     private func nextStep() {
-        let arrayPresenters = self.meetingData!["result"]["callData"]["presenters"].arrayValue
-        for email in arrayPresenters {
-            if email.stringValue == self.loggedInEmail {
-                self.amIPresenter = true
-                break
-            }
+        let role = self.meetingData!["result"]["role"].string
+        if role == "presenter" {
+            self.amIPresenter = true
+        }
+        else if role == "subPresenter" {
+            self.amISubPresenter = true
         }
         
-        let arrayAdmin = self.meetingData!["result"]["callData"]["callAdmins"].arrayValue
-        for email in arrayAdmin {
-            if email.stringValue == self.loggedInEmail {
-                self.amIAdmin = true
-                break
-            }
-        }
+        self.amIAdmin = self.meetingData!["result"]["isCallAdmin"].boolValue
 
         self.publishStream()
         self.getAllRemoteStreams()
-        
-
+        self.getAllParticipants()
+        self.drawer?.setAmIAdmin(amIAdmin: self.amIAdmin)
     }
     
     private func publishStream(){
-        
+        Yuwee.sharedInstance().getMeetingManager().unpublishCameraStream()
         if !amIPresenter {
             if !amISubPresenter {
                 return
@@ -188,6 +193,39 @@ class MeetingCallViewController: UIViewController {
             self.subscribeStream(remoteStream: item)
         }
         self.collectionView.reloadData()
+    }
+    
+    private func getAllParticipants(){
+        Yuwee.sharedInstance().getMeetingManager().fetchActiveParticipantsList { (data, isSuccess) in
+            let json = JSON(data)
+            print(json)
+            if isSuccess{
+                print("Get All Participants")
+                let array = json["result"].arrayValue
+                for item in array {
+                    let member = YWMember()
+                    member.email = item["email"].string
+                    member.isAdmin = item["isCallAdmin"].bool!
+                    member.isAudioOn = item["isAudioOn"].bool!
+                    member.isVideoOn = item["isVideoOn"].bool!
+                    member.name = item["name"].string
+                    
+                    var roleType : RoleType = .viewer
+                    if item["isPresenter"].bool! {
+                        roleType = .presenter
+                    }
+                    if item["isSubPresenter"].bool! {
+                        roleType = .subPresenter
+                    }
+                    member.roleType = roleType
+                    member.userId = item["_id"].string
+                    
+                    self.membersArray.append(member)
+                }
+                self.drawer?.reloadTable(memberArray: self.membersArray)
+                
+            }
+        }
     }
     
     private func subscribeStream(remoteStream: OWTRemoteStream){
@@ -271,12 +309,13 @@ extension MeetingCallViewController : YuWeeRemoteStreamSubscriptionDelegate{
             Yuwee.sharedInstance().getMeetingManager().attach(remoteStream, with: self.mainVideoView) { (data, isSuccess) in
                 let json = JSON(data)
                 print("\(isSuccess) \(json)")
+                self.attachedViewId = remoteStream.streamId
             }
             for (index, item) in self.remoteStreamArray.enumerated() {
                 if item.remoteStream?.streamId == remoteStream.streamId {
                     item.subscription = subsription
                     
-                    let indexPath = IndexPath(index: index)
+                    let indexPath = IndexPath(row: index, section: 0)
                     self.collectionView.reloadItems(at: [indexPath])
                     break
                 }
@@ -302,8 +341,9 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
             self.collectionView.reloadData()
         }
         else{
+            
             let index = self.remoteStreamArray.count - 1
-            self.collectionView.insertItems(at: [IndexPath(index: index)])
+            self.collectionView.insertItems(at: [IndexPath(row: index, section: 0)])
         }
 
         self.subscribeStream(remoteStream: remoteStream)
@@ -314,7 +354,11 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
         for (index, item) in self.remoteStreamArray.enumerated() {
             if item.remoteStream?.streamId == remoteStream.streamId {
                 self.remoteStreamArray.remove(at: index)
-                self.collectionView.deleteItems(at: [IndexPath(index: index)])
+                self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+                
+                if self.attachedViewId == item.remoteStream?.streamId {
+                    //self.mainVideoView.clear
+                }
                 break
             }
         }
@@ -323,41 +367,151 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
     func onCallParticipantRoleUpdated(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallParticipantRoleUpdated \(json)")
+        let _id = json["userId"].string
+
+        for item in membersArray {
+            if item.userId == _id {
+                let newRole = json["newRole"].string
+                switch newRole {
+                case "presenter":
+                    item.roleType = .presenter
+                    break
+                case "subPresenter":
+                    item.roleType = .subPresenter
+                    break
+                default:
+                    item.roleType = .viewer
+                }
+                if _id == loggedInUserId {
+                    switch item.roleType {
+                    case .presenter:
+                        self.amIPresenter = true
+                        self.amISubPresenter = false
+                        break
+                    case .subPresenter:
+                        self.amISubPresenter = true
+                        self.amIPresenter = false
+                        break
+                    default:
+                        self.amIPresenter = false
+                        self.amISubPresenter = false
+                    }
+                    self.publishStream()
+                }
+                self.drawer?.reloadTable(memberArray: membersArray)
+                break
+            }
+        }
     }
     
     func onCallAdminsUpdated(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallAdminsUpdated \(json)")
+        let _id = json["userId"].string
+        if json["userId"].string == loggedInUserId {
+            self.amIAdmin = false
+            self.drawer?.setAmIAdmin(amIAdmin: amIAdmin)
+        }
+        
+        for item in membersArray {
+            if item.userId == _id {
+                item.isAdmin = json["isCallAdmin"].boolValue
+                self.drawer?.reloadTable(memberArray: membersArray)
+                break
+            }
+        }
     }
     
     func onCallParticipantMuted(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallParticipantMuted \(json)")
+        let _id = json["userId"].string
+        
+        for item in membersArray {
+            if item.userId == _id {
+                item.isAudioOn = !json["isMuted"].boolValue
+                self.drawer?.reloadTable(memberArray: membersArray)
+                break
+            }
+        }
     }
     
     func onCallParticipantDropped(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallParticipantDropped \(json)")
+        for (index, item) in membersArray.enumerated() {
+            if item.userId == json["userId"].string {
+                membersArray.remove(at: index)
+                self.drawer?.reloadTable(memberArray: membersArray)
+                break
+            }
+        }
     }
     
     func onCallParticipantJoined(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallParticipantJoined \(json)")
+        let member = YWMember()
+        member.email = json["info"]["email"].string
+        member.name = json["info"]["name"].string
+        member.isAdmin = json["info"]["isCallAdmin"].boolValue
+        member.isVideoOn = json["info"]["isVideoOn"].boolValue
+        member.isAudioOn = json["info"]["isAudioOn"].boolValue
+        member.userId = json["info"]["_id"].string
+        var role : RoleType = .viewer
+        if json["isSubPresenter"].boolValue {
+            role = .subPresenter
+        }
+        else if json["isPresenter"].boolValue {
+            role = .presenter
+        }
+        member.roleType = role
+        
+        self.membersArray.append(member)
+        self.drawer?.reloadTable(memberArray: self.membersArray)
     }
     
     func onCallParticipantLeft(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallParticipantLeft \(json)")
+        for (index, item) in membersArray.enumerated() {
+            if item.userId == json["userId"].string {
+                membersArray.remove(at: index)
+                self.drawer?.reloadTable(memberArray: membersArray)
+                break
+            }
+        }
     }
     
     func onCallParticipantStatusUpdated(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallParticipantStatusUpdated \(json)")
+        let _id = json["userId"].string
+        
+        for item in membersArray {
+            if item.userId == _id {
+                if json["info"]["isAudioOn"].exists() {
+                    item.isAudioOn = json["info"]["isAudioOn"].boolValue
+                }
+                if json["info"]["isVideoOn"].exists() {
+                    item.isVideoOn = json["info"]["isVideoOn"].boolValue
+                }
+                self.drawer?.reloadTable(memberArray: membersArray)
+                break
+            }
+        }
     }
     
     func onCallHandRaised(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallHandRaised \(json)")
+        let _id = json["userId"].string
+        for item in membersArray {
+            if item.userId == _id {
+                item.isHandRaised = json["isHandRaised"].boolValue
+                self.drawer?.reloadTable(memberArray: membersArray)
+            }
+        }
     }
     
     func onMeetingEnded(_ dict: [AnyHashable : Any]!) {
@@ -366,8 +520,8 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
     }
     
     func onCallActiveSpeaker(_ dict: [AnyHashable : Any]!) {
-        let json = JSON(dict!)
-        print("onCallActiveSpeaker \(json)")
+        //let json = JSON(dict!)
+        //print("onCallActiveSpeaker \(json)")
     }
     
     func onCallRecordingStatusChanged(_ dict: [AnyHashable : Any]!) {
@@ -376,7 +530,7 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
     }
     
     func onError(_ error: String!) {
-        print("onError \(error)")
+        print("onError \(String(describing: error))")
     }
     
     
@@ -401,12 +555,164 @@ extension MeetingCallViewController : UICollectionViewDelegate, UICollectionView
         
         return cell
     }
+}
+
+extension MeetingCallViewController: MemberActionDelegate{    
+    
+    func onThreeDotIcon(view: UIButton, member: YWMember) {
+        self.memberData = member
+        
+        var array: [PopMenuDefaultAction] = []
+        
+        switch member.roleType {
+        case .presenter:
+            array.append(PopMenuDefaultAction(title: "Make Sub-Presenter", image: nil))
+            break
+        case .subPresenter:
+            array.append(PopMenuDefaultAction(title: "Make Presenter", image: nil))
+            break
+        case .viewer:
+            array.append(PopMenuDefaultAction(title: "Make Presenter", image: nil))
+            array.append(PopMenuDefaultAction(title: "Make Sub-Presenter", image: nil))
+            break
+        default:
+            return
+        }
+        
+        array.append(PopMenuDefaultAction(title: member.isAdmin ? "Remove Admin" : "Make Admin", image: nil))
+        
+        array.append(PopMenuDefaultAction(title: member.isAudioOn ? "Mute" : "Unmute", image: nil))
+        array.append(PopMenuDefaultAction(title: "Remove", image: nil))
+
+        
+        let menuViewController = PopMenuViewController(sourceView: view, actions: array, appearance: .none)
+        menuViewController.delegate = self
+        
+        present(menuViewController, animated: true, completion: nil)
+    }
     
     
+}
+
+extension MeetingCallViewController: PopMenuViewControllerDelegate {
+
+    func popMenuDidSelectItem(_ popMenuViewController: PopMenuViewController, at index: Int) {
+        
+        let title = popMenuViewController.actions[index].title
+        switch title {
+        case "Make Sub-Presenter":
+            changeRoleType(role: .subPresenter)
+            break
+        case "Make Presenter":
+            changeRoleType(role: .presenter)
+            break
+        case "Make Admin":
+            makeRemoveAdmin(makeAdmin: true)
+            break
+        case "Remove Admin":
+            makeRemoveAdmin(makeAdmin: false)
+            break
+        case "Mute":
+            muteUnmuteAudio(audioEnabled: false)
+            break
+        case "Unmute":
+            muteUnmuteAudio(audioEnabled: true)
+            break
+        case "Remove":
+            removeUser()
+            break
+        default:
+            return
+        }
+    }
+    
+    func changeRoleType(role: RoleType) {
+        let body = CallPresenterBody()
+        body.isTempPresenter = false
+        body.userId = self.memberData!.userId!
+        KRProgressHUD.show()
+        Yuwee.sharedInstance().getMeetingManager().updatePresenterStatus(body, roleType: .presenter) { (data, isSuccess) in
+            KRProgressHUD.dismiss()
+            if isSuccess{
+                self.memberData!.roleType = .presenter
+                self.drawer?.reloadTable(memberArray: self.membersArray)
+            }
+            else{
+                Toast(text: "Role changing failed.").show()
+            }
+        }
+        
+    }
+    
+    func muteUnmuteAudio(audioEnabled: Bool) {
+        
+        let body = MuteUnmuteBody()
+        body.audioStatus = audioEnabled
+        body.userId = self.memberData!.userId!
+        KRProgressHUD.show()
+        Yuwee.sharedInstance().getMeetingManager().toggleParticipantAudio(body) { (data, isSuccess) in
+            KRProgressHUD.dismiss()
+            if isSuccess{
+                self.memberData!.isAudioOn = audioEnabled
+                self.drawer?.reloadTable(memberArray: self.membersArray)
+            }
+            else{
+                Toast(text: "Audio status change failed.").show()
+            }
+        }
+    }
+    
+    func makeRemoveAdmin(makeAdmin: Bool) {
+        let body = CallAdminBody()
+        body.userId = self.memberData!.userId!
+        body.isCallAdmin = makeAdmin
+        KRProgressHUD.show()
+        Yuwee.sharedInstance().getMeetingManager().makeOrRevokeAdmin(body) { (data, isSuccess) in
+            KRProgressHUD.dismiss()
+            if isSuccess{
+                self.memberData!.isAdmin = makeAdmin
+                self.drawer?.reloadTable(memberArray: self.membersArray)
+            }
+            else{
+                Toast(text: "Admin status change failed.").show()
+            }
+        }
+    }
+    
+    func removeUser() {
+        KRProgressHUD.show()
+        Yuwee.sharedInstance().getMeetingManager().dropParticipant(self.memberData!.userId!) { (data, isSuccess) in
+            KRProgressHUD.dismiss()
+            if isSuccess{
+                for (index, item) in self.membersArray.enumerated() {
+                    if  item.userId == self.memberData!.userId! {
+                        self.membersArray.remove(at: index)
+                        self.drawer?.reloadTable(memberArray: self.membersArray)
+                        break
+                    }
+                }
+            }
+            else {
+                Toast(text: "Unable to remove user.").show()
+            }
+        }
+    }
+
 }
 
 
 class YWRemoteStream {
     var remoteStream: OWTRemoteStream?
     var subscription: OWTConferenceSubscription?
+}
+
+class YWMember {
+    var userId: String?
+    var name: String?
+    var email: String?
+    var isAdmin = false
+    var roleType: RoleType = .viewer
+    var isVideoOn = true
+    var isAudioOn = true
+    var isHandRaised = false
 }

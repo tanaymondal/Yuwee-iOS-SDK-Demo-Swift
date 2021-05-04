@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1051,19 +1052,114 @@
         <!--Drawer Menu Table View Controller-->
         <scene sceneID="2ZQ-j7-4id">
             <objects>
-                <tableViewController id="tQw-cZ-Oda" customClass="DrawerMenuTableViewController" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="drawer_table_controller" id="tQw-cZ-Oda" customClass="DrawerMenuTableViewController" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CL2-Y8-ffU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iVH-Pk-tpD">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="member_cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="member_cell" rowHeight="65" id="iVH-Pk-tpD" customClass="MemberTableViewCell" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iVH-Pk-tpD" id="OMN-dy-Rjk">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fE5-0Y-1aA" userLabel="ButtonDots">
+                                            <rect key="frame" x="385" y="17.666666666666671" width="29" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="jMD-Pt-Zld"/>
+                                                <constraint firstAttribute="width" constant="29" id="uQL-Xx-jDG"/>
+                                            </constraints>
+                                            <state key="normal" image="three_dot"/>
+                                            <connections>
+                                                <action selector="onThreeDotPressed:" destination="iVH-Pk-tpD" eventType="touchUpInside" id="M8e-br-um5"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bb-Gr-wVv" userLabel="ButtonAudio">
+                                            <rect key="frame" x="345" y="15.666666666666664" width="34" height="34"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="34" id="GWl-yi-FC2"/>
+                                                <constraint firstAttribute="width" constant="34" id="eAM-HM-3wW"/>
+                                            </constraints>
+                                            <state key="normal" image="audio_unmute"/>
+                                            <connections>
+                                                <action selector="onAudioPressed:" destination="iVH-Pk-tpD" eventType="touchUpInside" id="5Yr-EN-dyk"/>
+                                            </connections>
+                                        </button>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zcu-tO-TA8">
+                                            <rect key="frame" x="10" y="10" width="285" height="45"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYW-Gn-o9g">
+                                                    <rect key="frame" x="0.0" y="0.0" width="285" height="17.666666666666668"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OdS-yT-aMj">
+                                                    <rect key="frame" x="0.0" y="27.666666666666664" width="285" height="17.333333333333336"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsY-UT-uvx">
+                                                            <rect key="frame" x="0.0" y="0.0" width="285" height="17.333333333333332"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQ2-ni-zPd">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="17.333333333333332"/>
+                                                                    <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                                    <state key="normal" title="Admin"/>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNi-vH-SiH">
+                                                                    <rect key="frame" x="54" y="0.0" width="67" height="17.333333333333332"/>
+                                                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                                    <state key="normal" title="Presenter"/>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="pQ2-ni-zPd" firstAttribute="leading" secondItem="rsY-UT-uvx" secondAttribute="leading" id="38l-k4-s5r"/>
+                                                                <constraint firstItem="pQ2-ni-zPd" firstAttribute="top" secondItem="rsY-UT-uvx" secondAttribute="top" id="DHB-r2-Xu5"/>
+                                                                <constraint firstItem="aNi-vH-SiH" firstAttribute="leading" secondItem="pQ2-ni-zPd" secondAttribute="trailing" constant="10" id="F9C-dH-1yQ"/>
+                                                                <constraint firstAttribute="bottom" secondItem="aNi-vH-SiH" secondAttribute="bottom" id="MTp-ib-d6A"/>
+                                                                <constraint firstItem="aNi-vH-SiH" firstAttribute="top" secondItem="rsY-UT-uvx" secondAttribute="top" id="PpE-8t-0UQ"/>
+                                                                <constraint firstAttribute="bottom" secondItem="pQ2-ni-zPd" secondAttribute="bottom" id="URh-sy-BUE"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTu-d9-ZQX" userLabel="ButtonVideo">
+                                            <rect key="frame" x="305" y="15.666666666666664" width="34" height="34"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="34" id="COi-bT-X3x"/>
+                                                <constraint firstAttribute="width" constant="34" id="xkX-sE-cph"/>
+                                            </constraints>
+                                            <state key="normal" image="video_unmute"/>
+                                            <connections>
+                                                <action selector="onVideoPressed:" destination="iVH-Pk-tpD" eventType="touchUpInside" id="iGf-gW-kst"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qTu-d9-ZQX" firstAttribute="centerY" secondItem="OMN-dy-Rjk" secondAttribute="centerY" id="8yl-90-vU8"/>
+                                        <constraint firstItem="2Bb-Gr-wVv" firstAttribute="centerY" secondItem="OMN-dy-Rjk" secondAttribute="centerY" id="DBF-j1-yCC"/>
+                                        <constraint firstItem="Zcu-tO-TA8" firstAttribute="leading" secondItem="OMN-dy-Rjk" secondAttribute="leading" constant="10" id="Kbh-dk-hGo"/>
+                                        <constraint firstItem="qTu-d9-ZQX" firstAttribute="leading" secondItem="Zcu-tO-TA8" secondAttribute="trailing" constant="10" id="M63-xT-dQb"/>
+                                        <constraint firstItem="2Bb-Gr-wVv" firstAttribute="leading" secondItem="qTu-d9-ZQX" secondAttribute="trailing" constant="6" id="WJi-C5-pzF"/>
+                                        <constraint firstItem="fE5-0Y-1aA" firstAttribute="leading" secondItem="2Bb-Gr-wVv" secondAttribute="trailing" constant="6" id="WSv-mQ-Wd1"/>
+                                        <constraint firstItem="fE5-0Y-1aA" firstAttribute="centerY" secondItem="OMN-dy-Rjk" secondAttribute="centerY" id="ZSL-Q3-NE9"/>
+                                        <constraint firstAttribute="bottom" secondItem="Zcu-tO-TA8" secondAttribute="bottom" constant="10" id="ZXd-wI-ieI"/>
+                                        <constraint firstAttribute="trailing" secondItem="fE5-0Y-1aA" secondAttribute="trailing" id="v47-bS-JEL"/>
+                                        <constraint firstItem="Zcu-tO-TA8" firstAttribute="top" secondItem="OMN-dy-Rjk" secondAttribute="top" constant="10" id="xfW-uj-VMA"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="buttonAudio" destination="2Bb-Gr-wVv" id="2qg-Yn-eVg"/>
+                                    <outlet property="buttonThreeDots" destination="fE5-0Y-1aA" id="T4v-7P-hS7"/>
+                                    <outlet property="buttonVideo" destination="qTu-d9-ZQX" id="rOM-KF-Sn8"/>
+                                    <outlet property="labelAdmin" destination="pQ2-ni-zPd" id="phf-qp-hDZ"/>
+                                    <outlet property="labelName" destination="FYW-Gn-o9g" id="2lx-dd-Zka"/>
+                                    <outlet property="labelPresenter" destination="aNi-vH-SiH" id="Vm4-LE-zrI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1075,7 +1171,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="faf-83-GA7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1723" y="455"/>
+            <point key="canvasLocation" x="1721.7391304347827" y="454.89130434782612"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rbc-KH-bVm">
@@ -1118,6 +1214,9 @@
         <segue reference="9Pe-gA-Nj7"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="audio_unmute" width="33" height="33"/>
+        <image name="three_dot" width="23.333333969116211" height="23.333333969116211"/>
+        <image name="video_unmute" width="33" height="33"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
