@@ -254,6 +254,14 @@ class MeetingCallViewController: UIViewController {
                 }
             }
         }
+        
+        for item in membersArray {
+            if item.userId == loggedInUserId {
+                item.isVideoOn = isVideoEnabled
+                self.drawer?.reloadTable(memberArray: membersArray)
+                break
+            }
+        }
     }
     
     @IBAction func onEndPressed(_ sender: Any) {
@@ -284,6 +292,14 @@ class MeetingCallViewController: UIViewController {
                 }
             }
         }
+        
+        for item in membersArray {
+            if item.userId == loggedInUserId {
+                item.isAudioOn = isAudioEnabled
+                self.drawer?.reloadTable(memberArray: membersArray)
+                break
+            }
+        }
     }
     @IBAction func onSpeakerPressed(_ sender: Any) {
         isSpeakerEnabled = !isSpeakerEnabled
@@ -306,6 +322,7 @@ extension MeetingCallViewController : YuWeeRemoteStreamSubscriptionDelegate{
     func onSubscribeRemoteStreamResult(_ subsription: OWTConferenceSubscription!, with remoteStream: OWTRemoteStream!, withMessage message: String!, withStatus success: Bool) {
         if success {
             print(message!)
+            self.mainVideoView.isHidden = false
             Yuwee.sharedInstance().getMeetingManager().attach(remoteStream, with: self.mainVideoView) { (data, isSuccess) in
                 let json = JSON(data)
                 print("\(isSuccess) \(json)")
@@ -357,7 +374,7 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
                 self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
                 
                 if self.attachedViewId == item.remoteStream?.streamId {
-                    //self.mainVideoView.clear
+                    self.mainVideoView.isHidden = true
                 }
                 break
             }
