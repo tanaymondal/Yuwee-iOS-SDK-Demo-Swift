@@ -1,0 +1,6 @@
+framework module Pods_Yuwee_Screen_Share {
+  umbrella header "Pods-Yuwee Screen Share-umbrella.h"
+
+  export *
+  module * { export * }
+}

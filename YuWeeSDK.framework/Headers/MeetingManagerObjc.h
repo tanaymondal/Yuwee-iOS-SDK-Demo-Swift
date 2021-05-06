@@ -55,7 +55,10 @@ typedef NS_ENUM(NSUInteger, RoleType) {
 - (void)detachLocalCameraStream:(YuweeVideoView *)videoView;
 //    - (void)detachLocalScreenStream(videoView: YuweeVideoView) // doc
 
-- (void)attachRemoteStream:(OWTRemoteStream *)stream withVideoView:(YuweeVideoView *)videoView withlistener:(OnMeetingCompletionHandler)completionHandler;
+- (void)attachRemoteStream:(OWTRemoteStream *)stream withVideoView:(YuweeVideoView *)videoView;
+
+- (void)detachRemoteStream:(OWTRemoteStream *)stream videoView:(YuweeVideoView *)videoView;
+
 - (void)subscribeRemoteStream:(OWTRemoteStream *)stream withlistener:(id<YuWeeRemoteStreamSubscriptionDelegate>)listener;
 - (void)publishCameraStream:(RoleType)roleType withlistener:(OnMeetingCompletionHandler)completionHandler;
 - (void)unpublishCameraStream;

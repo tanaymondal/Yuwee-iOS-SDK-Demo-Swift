@@ -13,9 +13,6 @@ class StreamCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var yuweeVideoView: YuweeVideoView!
     
     public func attachStream(stream : OWTRemoteStream){
-        Yuwee.sharedInstance().getMeetingManager().attach(stream, with: yuweeVideoView) { (data, isSuccess) in
-            let json = JSON(data)
-            print("\(isSuccess) \(json)")
-        }
+        Yuwee.sharedInstance().getMeetingManager().attach(stream, with: yuweeVideoView)
     }
 }

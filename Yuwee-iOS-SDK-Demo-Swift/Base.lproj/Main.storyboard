@@ -516,7 +516,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRO-YC-u1a">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="50"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="5Nj-NX-pl1"/>
@@ -629,6 +629,7 @@
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="10"/>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="xRO-YC-u1a" firstAttribute="leading" secondItem="cBa-L5-6DT" secondAttribute="leading" id="FWT-7A-r0q"/>
                                     <constraint firstAttribute="trailing" secondItem="xRO-YC-u1a" secondAttribute="trailing" id="QL0-yt-v9y"/>
@@ -1173,6 +1174,67 @@
             </objects>
             <point key="canvasLocation" x="1721.7391304347827" y="454.89130434782612"/>
         </scene>
+        <!--Screen Share Dialog View Controller-->
+        <scene sceneID="Wps-p8-2W8">
+            <objects>
+                <viewController storyboardIdentifier="screen_share_alert" id="ig3-Er-6vX" customClass="ScreenShareDialogViewController" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HeV-Oc-7kg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QK3-x5-Peu">
+                                <rect key="frame" x="107" y="268" width="200" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click on the below icon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pal-5y-uKT">
+                                        <rect key="frame" x="0.0" y="9.9999999999999982" width="200" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-EY-zml">
+                                        <rect key="frame" x="0.0" y="40.333333333333321" width="200" height="109.66666666666669"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpa-3Y-5df">
+                                        <rect key="frame" x="50" y="160" width="100" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                        <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="onClosePressed:" destination="ig3-Er-6vX" eventType="touchUpInside" id="s77-3G-w5g"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dpa-3Y-5df" secondAttribute="trailing" constant="50" id="2GH-iT-47Y"/>
+                                    <constraint firstAttribute="height" constant="200" id="Bgl-yR-dKo"/>
+                                    <constraint firstItem="Rza-EY-zml" firstAttribute="leading" secondItem="QK3-x5-Peu" secondAttribute="leading" id="I4R-hv-kEW"/>
+                                    <constraint firstAttribute="width" constant="200" id="Kbk-S2-YK1"/>
+                                    <constraint firstItem="dpa-3Y-5df" firstAttribute="leading" secondItem="QK3-x5-Peu" secondAttribute="leading" constant="50" id="U1W-zf-IvU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pal-5y-uKT" secondAttribute="trailing" id="YIz-1W-iOO"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rza-EY-zml" secondAttribute="trailing" id="arF-gy-qt6"/>
+                                    <constraint firstItem="Pal-5y-uKT" firstAttribute="leading" secondItem="QK3-x5-Peu" secondAttribute="leading" id="s0M-x3-3M3"/>
+                                </constraints>
+                                <directionalEdgeInsets key="directionalLayoutMargins" top="10" leading="0.0" bottom="10" trailing="0.0"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3st-jD-2KX"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.30146993674979305" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="QK3-x5-Peu" firstAttribute="centerY" secondItem="3st-jD-2KX" secondAttribute="centerY" id="5Dk-JI-NqE"/>
+                            <constraint firstItem="QK3-x5-Peu" firstAttribute="centerX" secondItem="3st-jD-2KX" secondAttribute="centerX" id="INu-lM-2Cn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="recordIconView" destination="Rza-EY-zml" id="yhK-ky-TW0"/>
+                        <outlet property="rootView" destination="HeV-Oc-7kg" id="AKV-B2-25d"/>
+                        <outlet property="stackView" destination="QK3-x5-Peu" id="84T-TC-C92"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K9e-Oh-bd8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2573.913043478261" y="454.89130434782612"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rbc-KH-bVm">
             <objects>
@@ -1222,6 +1284,12 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -70,6 +70,7 @@ class JoinMeetingViewController: UIViewController, UITextFieldDelegate {
                 KRProgressHUD.dismiss()
                 AppDelegate.callTokenId = self.fieldMeetingId.text!
                 AppDelegate.meetingData = json
+                AppDelegate.passCode = self.fieldPasscode.text!
                 AppDelegate.isAudioEnabled = self.audioSwitch.isOn
                 AppDelegate.isVideoEnabled = self.videoSwitch.isOn
                 self.performSegue(withIdentifier: "MainMeetingDrawer", sender: self)

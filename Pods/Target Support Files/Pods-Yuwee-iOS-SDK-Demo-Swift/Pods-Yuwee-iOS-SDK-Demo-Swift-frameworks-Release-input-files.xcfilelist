@@ -8,6 +8,7 @@ ${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework
 ${BUILT_PRODUCTS_DIR}/KRActivityIndicatorView/KRActivityIndicatorView.framework
 ${BUILT_PRODUCTS_DIR}/KRProgressHUD/KRProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/KYDrawerController/KYDrawerController.framework
+${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework
 ${BUILT_PRODUCTS_DIR}/NewPopMenu/PopMenu.framework
 ${BUILT_PRODUCTS_DIR}/PMAlertController/PMAlertController.framework
 ${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework

@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static var meetingData: JSON = JSON("")
     static var callTokenId = ""
+    static var passCode = ""
     static var isAudioEnabled = false
     static var isVideoEnabled = false
 

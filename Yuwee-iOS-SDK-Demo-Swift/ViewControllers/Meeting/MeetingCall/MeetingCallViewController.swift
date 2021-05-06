@@ -12,6 +12,8 @@ import SwiftyJSON
 import KRProgressHUD
 import Toaster
 import PopMenu
+import MMWormhole
+import ReplayKit
 
 class MeetingCallViewController: UIViewController {
     
@@ -26,12 +28,15 @@ class MeetingCallViewController: UIViewController {
     private var isAudioEnabled = true
     private var isVideoEnabled = true
     private var isSpeakerEnabled = false
+    private var isRecordingStarted = false
+    private var isScreenSharingStarted = false
     private var remoteStreamArray: [YWRemoteStream] = []
     private var membersArray: [YWMember] = []
     private var drawerController: KYDrawerController?
     private var drawer: DrawerMenuTableViewController?
     private var memberData: YWMember?
     private var attachedViewId = ""
+    let wormhome = MMWormhole(applicationGroupIdentifier: "group.com.yuwee.SwiftSdkDemo", optionalDirectory: "wormhole")
     
     @IBOutlet weak var mainVideoView: YuweeVideoView!
     @IBOutlet weak var buttonEnd: UIButton!
@@ -46,21 +51,42 @@ class MeetingCallViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        KRProgressHUD.show()
         
         self.navigationItem.title = "Meeting"
         
-        let image = UIImage(named: "menu_icon")
-        let leftItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(rightButtonAction(sender:)))
+        let leftImage = UIImage(named: "menu_icon")
+        let leftItem = UIBarButtonItem(image: leftImage, style: .plain, target: self, action: #selector(leftButtonAction(sender:)))
+        
+        let btn = UIButton(type: .custom)
+        btn.frame = CGRect(x: 0, y: 0, width: 15, height: 15)
+        btn.setBackgroundImage(UIImage(named: "three_dot"), for: .normal)
+        btn.addTarget(self, action: #selector(rightButtonAction), for: .touchUpInside)
+        let rightItem = UIBarButtonItem(customView: btn)
         
         self.drawerController = self.navigationController?.parent as? KYDrawerController
 
         self.navigationItem.leftBarButtonItem = leftItem
+        self.navigationItem.rightBarButtonItem = rightItem
         self.meetingData = AppDelegate.meetingData
         self.meetingTokenId = AppDelegate.callTokenId
         self.isAudioEnabled = AppDelegate.isAudioEnabled
         self.isVideoEnabled = AppDelegate.isVideoEnabled
         self.loggedInEmail = Utils.getLoginJSON()["result"]["user"]["email"].string!
         self.loggedInUserId = Utils.getLoginJSON()["result"]["user"]["_id"].string!
+        
+        
+        let screenShareName = "\(Utils.getLoginJSON()["result"]["user"]["name"].string!) (Screen)"
+        let dict: [String: String?] = [
+            "name" : screenShareName,
+            "userId" : loggedInUserId,
+            "email" : loggedInEmail,
+            "authToken": Utils.getLoginJSON()["access_token"].string!,
+            "meetingId": self.meetingTokenId!,
+            "passCode": AppDelegate.passCode]
+        
+        UserDefaults.init(suiteName: Constants.APP_GROUP_NAME)?.setValue(dict, forKey: Constants.SCREEN_SHARE_DATA)
+        
         
         stackView.layer.cornerRadius = 20
         
@@ -94,9 +120,10 @@ class MeetingCallViewController: UIViewController {
         
         Communication.shared.setMemberActionDelegate(memberActionDelegate: self)
         self.drawer = self.drawerController?.drawerViewController?.children[0] as? DrawerMenuTableViewController
+        
     }
     
-    @objc func rightButtonAction(sender: UIBarButtonItem){
+    @objc func leftButtonAction(sender: UIBarButtonItem){
         isDrawerOpened = !isDrawerOpened
         
         if isDrawerOpened {
@@ -107,8 +134,35 @@ class MeetingCallViewController: UIViewController {
         }
     }
     
+    @objc func rightButtonAction(sender: UIBarButtonItem){
+        var array: [PopMenuDefaultAction] = []
+
+        if amIAdmin {
+            array.append(PopMenuDefaultAction(title: "End Meeting", image: nil))
+        }
+
+        if isScreenSharingStarted {
+            array.append(PopMenuDefaultAction(title: "Stop Screen Sharing", image: nil))
+        }
+        else{
+            array.append(PopMenuDefaultAction(title: "Start Screen Sharing", image: nil))
+        }
+
+        if isRecordingStarted {
+            array.append(PopMenuDefaultAction(title: "Stop Recording", image: nil))
+        }
+        else{
+            array.append(PopMenuDefaultAction(title: "Start Recording", image: nil))
+        }
+
+        let menuViewController = PopMenuViewController(sourceView: self.navigationItem.rightBarButtonItem?.customView, actions: array, appearance: .none)
+
+        menuViewController.delegate = self
+
+        present(menuViewController, animated: true, completion: nil)
+    }
+    
     private func joinMeeting(){
-        KRProgressHUD.show()
         
         let params = MeetingParams()
         params.callId = self.meetingData!["result"]["callData"]["callId"].string!
@@ -175,7 +229,7 @@ class MeetingCallViewController: UIViewController {
             let json = JSON(data)
             print(json)
             if isSuccess{
-                KRProgressHUD.showSuccess(withMessage: "Camera Stream successfully published")
+                KRProgressHUD.showSuccess(withMessage: "Camera Stream published")
             }
             else{
                 KRProgressHUD.showError(withMessage: "Unable to publish camera stream")
@@ -322,12 +376,9 @@ extension MeetingCallViewController : YuWeeRemoteStreamSubscriptionDelegate{
     func onSubscribeRemoteStreamResult(_ subsription: OWTConferenceSubscription!, with remoteStream: OWTRemoteStream!, withMessage message: String!, withStatus success: Bool) {
         if success {
             print(message!)
-            self.mainVideoView.isHidden = false
-            Yuwee.sharedInstance().getMeetingManager().attach(remoteStream, with: self.mainVideoView) { (data, isSuccess) in
-                let json = JSON(data)
-                print("\(isSuccess) \(json)")
-                self.attachedViewId = remoteStream.streamId
-            }
+            Yuwee.sharedInstance().getMeetingManager().attach(remoteStream, with: self.mainVideoView)
+            self.attachedViewId = remoteStream.streamId
+            
             for (index, item) in self.remoteStreamArray.enumerated() {
                 if item.remoteStream?.streamId == remoteStream.streamId {
                     item.subscription = subsription
@@ -374,7 +425,8 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
                 self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
                 
                 if self.attachedViewId == item.remoteStream?.streamId {
-                    self.mainVideoView.isHidden = true
+                    print("VideoTrack Count: \(remoteStream.mediaStream.videoTracks.count)")
+                    Yuwee.sharedInstance().getMeetingManager().detach(remoteStream, videoView: self.mainVideoView)
                 }
                 break
             }
@@ -550,7 +602,6 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
         print("onError \(String(describing: error))")
     }
     
-    
 }
 
 extension MeetingCallViewController : UICollectionViewDelegate, UICollectionViewDataSource{
@@ -571,6 +622,26 @@ extension MeetingCallViewController : UICollectionViewDelegate, UICollectionView
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if remoteStreamArray[indexPath.row].subscription != nil {
+            
+            for item in remoteStreamArray {
+                if self.attachedViewId == item.remoteStream?.streamId {
+                    Yuwee.sharedInstance().getMeetingManager().detach(item.remoteStream!, videoView: self.mainVideoView)
+                    break
+                }
+            }
+            
+            Yuwee.sharedInstance().getMeetingManager().attach(remoteStreamArray[indexPath.row].remoteStream!, with: self.mainVideoView)
+            self.attachedViewId = remoteStreamArray[indexPath.row].remoteStream!.streamId
+        }
+        else{
+            Toast(text: "Stream is not subscribed yet").show()
+        }
+
     }
 }
 
@@ -638,8 +709,54 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         case "Remove":
             removeUser()
             break
+        case "Start Screen Sharing":
+            print("Start Screen Sharing")
+            self.showScreenShareDialog()
+            self.listenWormhole()
+//            self.wormhome.passMessageObject(true as NSCoding, identifier: "screen-sharing-started")
+//            KRProgressHUD.show()
+            break
+        case "Stop Screen Sharing":
+            print("End Screen Sharing")
+            self.wormhome.passMessageObject(false as NSCoding, identifier: "screen-sharing-started")
+            self.isScreenSharingStarted = false
+            break
+        case "End Meeting":
+            endMeeting()
+            break
         default:
             return
+        }
+    }
+    
+    private func showScreenShareDialog(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let myAlert = storyboard.instantiateViewController(withIdentifier: "screen_share_alert")
+        myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
+    private func listenWormhole(){
+        self.wormhome.listenForMessage(withIdentifier: "screen-sharing-status") { (data) in
+            print("broadcast started \(String(describing: data))")
+            if data as! Bool == true {
+                self.isScreenSharingStarted = true
+                KRProgressHUD.showSuccess(withMessage: "Screen Sharing Started")
+            }
+            else {
+                KRProgressHUD.showError(withMessage: "Unable to start screen sharing.")
+            }
+        }
+    }
+    
+    private func endMeeting(){
+        KRProgressHUD.show()
+        Yuwee.sharedInstance().getMeetingManager().endMeeting { (data, isSuccess) in
+            KRProgressHUD.showSuccess(withMessage: "Meeting Ended")
+            if isSuccess{
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
