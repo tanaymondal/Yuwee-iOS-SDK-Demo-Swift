@@ -18,11 +18,16 @@ class Communication {
         self.memberActionDelegate = memberActionDelegate
     }
     
-    func onThreeDotIconClicked(view: UIButton, member: YWMember){
+    func onThreeDotIconClicked(view: UIButton, member: YWMember) {
         self.memberActionDelegate?.onThreeDotIcon(view: view, member: member)
+    }
+    
+    func onHandClicked(member: YWMember) {
+        self.memberActionDelegate?.onHandButtonPressed(member: member)
     }
 }
 
 protocol MemberActionDelegate {
     func onThreeDotIcon(view: UIButton, member: YWMember)
+    func onHandButtonPressed(member: YWMember)
 }

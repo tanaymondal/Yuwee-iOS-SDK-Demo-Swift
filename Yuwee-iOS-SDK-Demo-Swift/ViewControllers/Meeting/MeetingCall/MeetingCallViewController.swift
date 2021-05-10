@@ -30,12 +30,15 @@ class MeetingCallViewController: UIViewController {
     private var isSpeakerEnabled = false
     private var isRecordingStarted = false
     private var isScreenSharingStarted = false
+    private var isHandRaised = false
     private var remoteStreamArray: [YWRemoteStream] = []
     private var membersArray: [YWMember] = []
     private var drawerController: KYDrawerController?
     private var drawer: DrawerMenuTableViewController?
     private var memberData: YWMember?
-    private var attachedViewId = ""
+    private var attachedViewId: String? = nil
+    private var recordingId: String? = nil
+    private var mongoId : String? = nil
     let wormhome = MMWormhole(applicationGroupIdentifier: "group.com.yuwee.SwiftSdkDemo", optionalDirectory: "wormhole")
     
     @IBOutlet weak var mainVideoView: YuweeVideoView!
@@ -121,38 +124,55 @@ class MeetingCallViewController: UIViewController {
         Communication.shared.setMemberActionDelegate(memberActionDelegate: self)
         self.drawer = self.drawerController?.drawerViewController?.children[0] as? DrawerMenuTableViewController
         
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+        
     }
     
-    @objc func leftButtonAction(sender: UIBarButtonItem){
+    private func resetToPortrait() {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
+    
+    // MARK: Navigation Left and Right Button Action
+    
+    @objc func leftButtonAction(sender: UIBarButtonItem) {
         isDrawerOpened = !isDrawerOpened
         
         if isDrawerOpened {
             self.drawerController!.setDrawerState(.opened, animated: true)
         }
-        else{
+        else {
             self.drawerController!.setDrawerState(.closed, animated: true)
         }
     }
     
-    @objc func rightButtonAction(sender: UIBarButtonItem){
+    @objc func rightButtonAction(sender: UIBarButtonItem) {
         var array: [PopMenuDefaultAction] = []
 
         if amIAdmin {
             array.append(PopMenuDefaultAction(title: "End Meeting", image: nil))
         }
+        
+        if isHandRaised {
+            array.append(PopMenuDefaultAction(title: "Lower Hand", image: nil))
+        }
+        else {
+            array.append(PopMenuDefaultAction(title: "Raise Hand", image: nil))
+        }
 
         if isScreenSharingStarted {
             array.append(PopMenuDefaultAction(title: "Stop Screen Sharing", image: nil))
         }
-        else{
+        else {
             array.append(PopMenuDefaultAction(title: "Start Screen Sharing", image: nil))
         }
 
-        if isRecordingStarted {
-            array.append(PopMenuDefaultAction(title: "Stop Recording", image: nil))
-        }
-        else{
-            array.append(PopMenuDefaultAction(title: "Start Recording", image: nil))
+        if amIAdmin {
+            if isRecordingStarted {
+                array.append(PopMenuDefaultAction(title: "Stop Recording", image: nil))
+            }
+            else{
+                array.append(PopMenuDefaultAction(title: "Start Recording", image: nil))
+            }
         }
 
         let menuViewController = PopMenuViewController(sourceView: self.navigationItem.rightBarButtonItem?.customView, actions: array, appearance: .none)
@@ -162,7 +182,9 @@ class MeetingCallViewController: UIViewController {
         present(menuViewController, animated: true, completion: nil)
     }
     
-    private func joinMeeting(){
+    // MARK: Yuwee Methods Starts
+    
+    private func joinMeeting() {
         
         let params = MeetingParams()
         params.callId = self.meetingData!["result"]["callData"]["callId"].string!
@@ -178,8 +200,15 @@ class MeetingCallViewController: UIViewController {
             
             let json = JSON(data)
             print("Meeting Joined: \(isSuccess) \(json)")
-            if isSuccess{
+            if isSuccess {
                 KRProgressHUD.showSuccess(withMessage: "Successfully Joined.")
+                
+                if json["isRecording"].boolValue {
+                    self.mongoId = json["mongoId"].string!
+                    // when senderUserId is not mine, means I'm not starting the recording.
+                    self.startRecording(senderUserId: "other")
+                }
+                
                 self.nextStep()
             }
             else {
@@ -208,7 +237,7 @@ class MeetingCallViewController: UIViewController {
         self.drawer?.setAmIAdmin(amIAdmin: self.amIAdmin)
     }
     
-    private func publishStream(){
+    private func publishStream() {
         Yuwee.sharedInstance().getMeetingManager().unpublishCameraStream()
         if !amIPresenter {
             if !amISubPresenter {
@@ -228,16 +257,16 @@ class MeetingCallViewController: UIViewController {
         Yuwee.sharedInstance().getMeetingManager().publishCameraStream(roleType) { (data, isSuccess) in
             let json = JSON(data)
             print(json)
-            if isSuccess{
+            if isSuccess {
                 KRProgressHUD.showSuccess(withMessage: "Camera Stream published")
             }
-            else{
+            else {
                 KRProgressHUD.showError(withMessage: "Unable to publish camera stream")
             }
         }
     }
     
-    private func getAllRemoteStreams(){
+    private func getAllRemoteStreams() {
         let remoteStreamArray = Yuwee.sharedInstance().getMeetingManager().getAllRemoteStream() as NSArray as! [OWTRemoteStream]
         
         for item in remoteStreamArray {
@@ -249,11 +278,11 @@ class MeetingCallViewController: UIViewController {
         self.collectionView.reloadData()
     }
     
-    private func getAllParticipants(){
+    private func getAllParticipants() {
         Yuwee.sharedInstance().getMeetingManager().fetchActiveParticipantsList { (data, isSuccess) in
             let json = JSON(data)
             print(json)
-            if isSuccess{
+            if isSuccess {
                 print("Get All Participants")
                 let array = json["result"].arrayValue
                 for item in array {
@@ -282,11 +311,14 @@ class MeetingCallViewController: UIViewController {
         }
     }
     
-    private func subscribeStream(remoteStream: OWTRemoteStream){
+    private func subscribeStream(remoteStream: OWTRemoteStream) {
         Yuwee.sharedInstance().getMeetingManager().subscribeRemoteStream(remoteStream, withlistener: self)
     }
     
+    // MARK: Controll Bar Button Actions
+    
     @IBAction func onChatPressed(_ sender: Any) {
+        
     }
     
     @IBAction func onVideoPressed(_ sender: Any) {
@@ -295,13 +327,13 @@ class MeetingCallViewController: UIViewController {
         Yuwee.sharedInstance().getMeetingManager().setMediaEnabled(isAudioEnabled, withVideoEnabled: isVideoEnabled) { (data, isSuccess) in
             let json = JSON(data)
             print(json)
-            if isSuccess{
+            if isSuccess {
                 if !self.isVideoEnabled {
                     self.buttonVideo.setBackgroundImage(UIImage(named: "video_mute"), for: .normal)
                     self.buttonVideo.layoutIfNeeded()
                     self.buttonVideo.subviews.first?.contentMode = .scaleAspectFit
                 }
-                else{
+                else {
                     self.buttonVideo.setBackgroundImage(UIImage(named: "video_unmute"), for: .normal)
                     self.buttonVideo.layoutIfNeeded()
                     self.buttonVideo.subviews.first?.contentMode = .scaleAspectFit
@@ -320,11 +352,15 @@ class MeetingCallViewController: UIViewController {
     
     @IBAction func onEndPressed(_ sender: Any) {
         KRProgressHUD.show()
+        if isScreenSharingStarted {
+            self.stopScreenSharing()
+        }
         Yuwee.sharedInstance().getMeetingManager().leaveMeeting { (data, isSuccess) in
             let json = JSON(data)
             print("\(isSuccess) \(json)")
             KRProgressHUD.showSuccess(withMessage: "Successfully Left.")
             self.dismiss(animated: true, completion: nil)
+            self.resetToPortrait()
         }
     }
     @IBAction func onAudioPressed(_ sender: Any) {
@@ -333,13 +369,13 @@ class MeetingCallViewController: UIViewController {
         Yuwee.sharedInstance().getMeetingManager().setMediaEnabled(isAudioEnabled, withVideoEnabled: isVideoEnabled) { (data, isSuccess) in
             let json = JSON(data)
             print(json)
-            if isSuccess{
+            if isSuccess {
                 if !self.isAudioEnabled {
                     self.buttonAudio.setBackgroundImage(UIImage(named: "audio_mute"), for: .normal)
                     self.buttonAudio.layoutIfNeeded()
                     self.buttonAudio.subviews.first?.contentMode = .scaleAspectFit
                 }
-                else{
+                else {
                     self.buttonAudio.setBackgroundImage(UIImage(named: "audio_unmute"), for: .normal)
                     self.buttonAudio.layoutIfNeeded()
                     self.buttonAudio.subviews.first?.contentMode = .scaleAspectFit
@@ -363,7 +399,7 @@ class MeetingCallViewController: UIViewController {
             self.buttonSpeaker.layoutIfNeeded()
             self.buttonSpeaker.subviews.first?.contentMode = .scaleAspectFit
         }
-        else{
+        else {
             self.buttonSpeaker.setBackgroundImage(UIImage(named: "speaker_on"), for: .normal)
             self.buttonSpeaker.layoutIfNeeded()
             self.buttonSpeaker.subviews.first?.contentMode = .scaleAspectFit
@@ -372,10 +408,19 @@ class MeetingCallViewController: UIViewController {
     
 }
 
-extension MeetingCallViewController : YuWeeRemoteStreamSubscriptionDelegate{
+extension MeetingCallViewController : YuWeeRemoteStreamSubscriptionDelegate {
     func onSubscribeRemoteStreamResult(_ subsription: OWTConferenceSubscription!, with remoteStream: OWTRemoteStream!, withMessage message: String!, withStatus success: Bool) {
         if success {
             print(message!)
+            if self.attachedViewId != nil {
+                for item in self.remoteStreamArray {
+                    if item.remoteStream?.streamId == self.attachedViewId {
+                        Yuwee.sharedInstance().getMeetingManager().detach(item.remoteStream!, videoView: self.mainVideoView)
+                        self.attachedViewId = nil
+                        break
+                    }
+                }
+            }
             Yuwee.sharedInstance().getMeetingManager().attach(remoteStream, with: self.mainVideoView)
             self.attachedViewId = remoteStream.streamId
             
@@ -399,7 +444,9 @@ extension MeetingCallViewController : YuWeeRemoteStreamSubscriptionDelegate{
     
 }
 
-extension MeetingCallViewController: OnHostedMeetingDelegate{
+// MARK: Host Meeting Callbacks
+
+extension MeetingCallViewController: OnHostedMeetingDelegate {
     func onStreamAdded(_ remoteStream: OWTRemoteStream!) {
         print("onStreamAdded")
         let stream = YWRemoteStream()
@@ -408,8 +455,7 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
         if self.remoteStreamArray.count == 1 {
             self.collectionView.reloadData()
         }
-        else{
-            
+        else {
             let index = self.remoteStreamArray.count - 1
             self.collectionView.insertItems(at: [IndexPath(row: index, section: 0)])
         }
@@ -427,6 +473,13 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
                 if self.attachedViewId == item.remoteStream?.streamId {
                     print("VideoTrack Count: \(remoteStream.mediaStream.videoTracks.count)")
                     Yuwee.sharedInstance().getMeetingManager().detach(remoteStream, videoView: self.mainVideoView)
+                    if self.remoteStreamArray.count > 0 {
+                        Yuwee.sharedInstance().getMeetingManager().attach(self.remoteStreamArray[0].remoteStream!, with: self.mainVideoView)
+                        self.attachedViewId = self.remoteStreamArray[0].remoteStream?.streamId
+                    }
+                    else {
+                        self.attachedViewId = nil
+                    }
                 }
                 break
             }
@@ -584,8 +637,15 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
     }
     
     func onMeetingEnded(_ dict: [AnyHashable : Any]!) {
-        let json = JSON(dict!)
-        print("onMeetingEnded \(json)")
+        //let json = JSON(dict!)
+        KRProgressHUD.show()
+        Yuwee.sharedInstance().getMeetingManager().leaveMeeting { (data, isSuccess) in
+            let json = JSON(data)
+            print("\(isSuccess) \(json)")
+            KRProgressHUD.showSuccess(withMessage: "Meeting ended by admin.")
+            self.dismiss(animated: true, completion: nil)
+            self.resetToPortrait()
+        }
     }
     
     func onCallActiveSpeaker(_ dict: [AnyHashable : Any]!) {
@@ -596,6 +656,11 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
     func onCallRecordingStatusChanged(_ dict: [AnyHashable : Any]!) {
         let json = JSON(dict!)
         print("onCallRecordingStatusChanged \(json)")
+        if json["status"].string! == "started" {
+            self.mongoId = json["mongoId"].string!
+            
+            self.startRecording(senderUserId: json["senderUserId"].string!)
+        }
     }
     
     func onError(_ error: String!) {
@@ -604,6 +669,7 @@ extension MeetingCallViewController: OnHostedMeetingDelegate{
     
 }
 
+// MARK: Remote Stream Collection View
 extension MeetingCallViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.remoteStreamArray.count
@@ -638,14 +704,16 @@ extension MeetingCallViewController : UICollectionViewDelegate, UICollectionView
             Yuwee.sharedInstance().getMeetingManager().attach(remoteStreamArray[indexPath.row].remoteStream!, with: self.mainVideoView)
             self.attachedViewId = remoteStreamArray[indexPath.row].remoteStream!.streamId
         }
-        else{
+        else {
             Toast(text: "Stream is not subscribed yet").show()
         }
 
     }
 }
 
-extension MeetingCallViewController: MemberActionDelegate{    
+    // MARK: Drawer Action Delegate Methods
+
+extension MeetingCallViewController: MemberActionDelegate {
     
     func onThreeDotIcon(view: UIButton, member: YWMember) {
         self.memberData = member
@@ -679,6 +747,32 @@ extension MeetingCallViewController: MemberActionDelegate{
         present(menuViewController, animated: true, completion: nil)
     }
     
+    func onHandButtonPressed(member: YWMember) {
+        if !self.amIAdmin {
+            return
+        }
+        if member.userId == self.loggedInUserId {
+            self.raiseHand()
+            member.isHandRaised = !member.isHandRaised
+            self.drawer?.reloadTable(memberArray: self.membersArray)
+            return
+        }
+        let body = HandRaiseBody()
+        body.raiseHand = !member.isHandRaised
+        body.userId = member.userId!
+        
+        Yuwee.sharedInstance().getMeetingManager().toggleHandRaise(body) { (data, isSuccess) in
+            if isSuccess {
+                Toast(text: "Hand toggled successfully").show()
+                member.isHandRaised = !member.isHandRaised
+                self.drawer?.reloadTable(memberArray: self.membersArray)
+            }
+            else {
+                Toast(text: "Toggle hand failed.").show()
+            }
+        }
+    }
+    
     
 }
 
@@ -691,45 +785,154 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         case "Make Sub-Presenter":
             changeRoleType(role: .subPresenter)
             break
+            
         case "Make Presenter":
             changeRoleType(role: .presenter)
             break
+            
         case "Make Admin":
             makeRemoveAdmin(makeAdmin: true)
             break
+            
         case "Remove Admin":
             makeRemoveAdmin(makeAdmin: false)
             break
+            
         case "Mute":
             muteUnmuteAudio(audioEnabled: false)
             break
+            
         case "Unmute":
             muteUnmuteAudio(audioEnabled: true)
             break
+            
         case "Remove":
             removeUser()
             break
+            
         case "Start Screen Sharing":
             print("Start Screen Sharing")
             self.showScreenShareDialog()
             self.listenWormhole()
-//            self.wormhome.passMessageObject(true as NSCoding, identifier: "screen-sharing-started")
-//            KRProgressHUD.show()
             break
+            
         case "Stop Screen Sharing":
             print("End Screen Sharing")
-            self.wormhome.passMessageObject(false as NSCoding, identifier: "screen-sharing-started")
-            self.isScreenSharingStarted = false
+            self.stopScreenSharing()
             break
+            
         case "End Meeting":
             endMeeting()
             break
+            
+        case "Start Recording":
+            self.startRecording(senderUserId: self.loggedInUserId)
+            break
+            
+        case "Stop Recording":
+            self.stopCallRecording()
+            break
+            
+        case "Raise Hand":
+            self.raiseHand()
+            break
+            
+        case "Lower Hand":
+            self.raiseHand()
+            break
+            
         default:
             return
         }
     }
     
-    private func showScreenShareDialog(){
+    private func stopScreenSharing() {
+        self.wormhome.passMessageObject(false as NSCoding, identifier: "screen-sharing-started")
+        self.isScreenSharingStarted = false
+    }
+    
+    private func raiseHand() {
+        let body = HandRaiseBody()
+        body.raiseHand = !isHandRaised
+        body.userId = self.loggedInUserId
+        
+        Yuwee.sharedInstance().getMeetingManager().toggleHandRaise(body) { (data, isSuccess) in
+            if isSuccess {
+                Toast(text: self.isHandRaised ? "Hand lowered" : "Hand raised").show()
+                self.isHandRaised = !self.isHandRaised
+                for item in self.membersArray {
+                    if item.userId == self.loggedInUserId {
+                        item.isHandRaised = self.isHandRaised
+                        break
+                    }
+                }
+                self.drawer?.reloadTable(memberArray: self.membersArray)
+            }
+            else {
+                Toast(text: self.isHandRaised ? "Failed to lower hand" : "Failed to raise hand").show()
+            }
+        }
+    }
+    
+    private func startRecording(senderUserId: String) {
+        var roleType : RoleType = .viewer
+        
+        if amIPresenter {
+            roleType = .presenter
+        }
+        else if amISubPresenter {
+            roleType = .subPresenter
+        }
+        
+        // I am starting the recording for first time, so send mongoId nil
+        
+        Yuwee.sharedInstance().getMeetingManager().startCallRecording(with: roleType, withSenderUserId: senderUserId, withMongoId: self.mongoId!) { (data, isSuccess) in
+            let json = JSON(data)
+            if isSuccess {
+                self.recordingId = json["recordingId"].string!
+                self.mongoId = json["mongoId"].string!
+                self.isRecordingStarted = true
+                self.startScreenRecording()
+            }
+            else {
+                // due to a bug, call recording may not start.
+                // start call recording until we get success.
+                self.startRecording(senderUserId: senderUserId)
+            }
+            
+        }
+    }
+    
+    private func stopCallRecording() {
+        KRProgressHUD.show()
+        
+        Yuwee.sharedInstance().getMeetingManager().stopCallRecording(withRecordingId: self.recordingId!, withMongoId: self.mongoId!, withIsRoleUpdated: false) { (message, isSuccess) in
+            if isSuccess {
+                KRProgressHUD.showSuccess(withMessage: "Call Recording Ended.")
+                self.recordingId = ""
+                self.mongoId = nil
+                self.isRecordingStarted = false
+                self.stopScreenRecording()
+            }
+            else {
+                KRProgressHUD.showError(withMessage: "Ending call recording failed.")
+            }
+        }
+    }
+    
+    private func startScreenRecording() {
+        UserDefaults.init(suiteName: "group.com.yuwee.SwiftSdkDemo")?.setValue(true, forKey: "screen-recording-started")
+        
+        self.wormhome.passMessageObject(true as NSCoding, identifier: "screen-recording-started")
+    }
+    
+    private func stopScreenRecording() {
+        UserDefaults.init(suiteName: "group.com.yuwee.SwiftSdkDemo")?.setValue(false, forKey: "screen-recording-started")
+        
+        self.wormhome.passMessageObject(false as NSCoding, identifier: "screen-recording-started")
+    }
+    
+    private func showScreenShareDialog() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let myAlert = storyboard.instantiateViewController(withIdentifier: "screen_share_alert")
         myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -737,7 +940,7 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         self.present(myAlert, animated: true, completion: nil)
     }
     
-    private func listenWormhole(){
+    private func listenWormhole() {
         self.wormhome.listenForMessage(withIdentifier: "screen-sharing-status") { (data) in
             print("broadcast started \(String(describing: data))")
             if data as! Bool == true {
@@ -750,12 +953,13 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         }
     }
     
-    private func endMeeting(){
+    private func endMeeting() {
         KRProgressHUD.show()
         Yuwee.sharedInstance().getMeetingManager().endMeeting { (data, isSuccess) in
             KRProgressHUD.showSuccess(withMessage: "Meeting Ended")
-            if isSuccess{
+            if isSuccess {
                 self.dismiss(animated: true, completion: nil)
+                self.resetToPortrait()
             }
         }
     }
@@ -765,13 +969,13 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         body.isTempPresenter = false
         body.userId = self.memberData!.userId!
         KRProgressHUD.show()
-        Yuwee.sharedInstance().getMeetingManager().updatePresenterStatus(body, roleType: .presenter) { (data, isSuccess) in
+        Yuwee.sharedInstance().getMeetingManager().updatePresenterStatus(body, roleType: role) { (data, isSuccess) in
             KRProgressHUD.dismiss()
-            if isSuccess{
-                self.memberData!.roleType = .presenter
+            if isSuccess {
+                self.memberData!.roleType = role
                 self.drawer?.reloadTable(memberArray: self.membersArray)
             }
-            else{
+            else {
                 Toast(text: "Role changing failed.").show()
             }
         }
@@ -786,11 +990,11 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         KRProgressHUD.show()
         Yuwee.sharedInstance().getMeetingManager().toggleParticipantAudio(body) { (data, isSuccess) in
             KRProgressHUD.dismiss()
-            if isSuccess{
+            if isSuccess {
                 self.memberData!.isAudioOn = audioEnabled
                 self.drawer?.reloadTable(memberArray: self.membersArray)
             }
-            else{
+            else {
                 Toast(text: "Audio status change failed.").show()
             }
         }
@@ -803,11 +1007,11 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         KRProgressHUD.show()
         Yuwee.sharedInstance().getMeetingManager().makeOrRevokeAdmin(body) { (data, isSuccess) in
             KRProgressHUD.dismiss()
-            if isSuccess{
+            if isSuccess {
                 self.memberData!.isAdmin = makeAdmin
                 self.drawer?.reloadTable(memberArray: self.membersArray)
             }
-            else{
+            else {
                 Toast(text: "Admin status change failed.").show()
             }
         }
@@ -817,7 +1021,7 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         KRProgressHUD.show()
         Yuwee.sharedInstance().getMeetingManager().dropParticipant(self.memberData!.userId!) { (data, isSuccess) in
             KRProgressHUD.dismiss()
-            if isSuccess{
+            if isSuccess {
                 for (index, item) in self.membersArray.enumerated() {
                     if  item.userId == self.memberData!.userId! {
                         self.membersArray.remove(at: index)

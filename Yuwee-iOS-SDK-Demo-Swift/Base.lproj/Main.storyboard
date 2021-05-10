@@ -488,7 +488,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="mainSegueIdentifier" value="main"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="drawerSegueIdentifier" value="drawer"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="drawerWidth">
-                            <real key="value" value="300"/>
+                            <real key="value" value="450"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -1088,28 +1088,50 @@
                                                 <action selector="onAudioPressed:" destination="iVH-Pk-tpD" eventType="touchUpInside" id="5Yr-EN-dyk"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTu-d9-ZQX" userLabel="ButtonVideo">
+                                            <rect key="frame" x="305" y="15.666666666666664" width="34" height="34"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="34" id="COi-bT-X3x"/>
+                                                <constraint firstAttribute="width" constant="34" id="xkX-sE-cph"/>
+                                            </constraints>
+                                            <state key="normal" image="video_unmute"/>
+                                            <connections>
+                                                <action selector="onVideoPressed:" destination="iVH-Pk-tpD" eventType="touchUpInside" id="iGf-gW-kst"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCI-LV-O0j">
+                                            <rect key="frame" x="265" y="15.666666666666664" width="34" height="34"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="34" id="HBs-dd-vHJ"/>
+                                                <constraint firstAttribute="height" constant="34" id="xcs-Uk-Q9I"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="hand_raise"/>
+                                            <connections>
+                                                <action selector="onHandPressed:" destination="iVH-Pk-tpD" eventType="touchUpInside" id="GkW-pd-ZmW"/>
+                                            </connections>
+                                        </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zcu-tO-TA8">
-                                            <rect key="frame" x="10" y="10" width="285" height="45"/>
+                                            <rect key="frame" x="6" y="6" width="253" height="53"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYW-Gn-o9g">
-                                                    <rect key="frame" x="0.0" y="0.0" width="285" height="17.666666666666668"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="253" height="21.666666666666668"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OdS-yT-aMj">
-                                                    <rect key="frame" x="0.0" y="27.666666666666664" width="285" height="17.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="31.666666666666664" width="253" height="21.333333333333336"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsY-UT-uvx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="285" height="17.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="253" height="21.333333333333332"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQ2-ni-zPd">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="17.333333333333332"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="21.333333333333332"/>
                                                                     <color key="backgroundColor" systemColor="systemPinkColor"/>
                                                                     <state key="normal" title="Admin"/>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNi-vH-SiH">
-                                                                    <rect key="frame" x="54" y="0.0" width="67" height="17.333333333333332"/>
+                                                                    <rect key="frame" x="54" y="0.0" width="67" height="21.333333333333332"/>
                                                                     <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                                     <state key="normal" title="Presenter"/>
                                                                 </button>
@@ -1128,33 +1150,25 @@
                                                 </stackView>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTu-d9-ZQX" userLabel="ButtonVideo">
-                                            <rect key="frame" x="305" y="15.666666666666664" width="34" height="34"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="34" id="COi-bT-X3x"/>
-                                                <constraint firstAttribute="width" constant="34" id="xkX-sE-cph"/>
-                                            </constraints>
-                                            <state key="normal" image="video_unmute"/>
-                                            <connections>
-                                                <action selector="onVideoPressed:" destination="iVH-Pk-tpD" eventType="touchUpInside" id="iGf-gW-kst"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Zcu-tO-TA8" firstAttribute="leading" secondItem="OMN-dy-Rjk" secondAttribute="leading" constant="6" id="2yt-aC-5Rd"/>
                                         <constraint firstItem="qTu-d9-ZQX" firstAttribute="centerY" secondItem="OMN-dy-Rjk" secondAttribute="centerY" id="8yl-90-vU8"/>
                                         <constraint firstItem="2Bb-Gr-wVv" firstAttribute="centerY" secondItem="OMN-dy-Rjk" secondAttribute="centerY" id="DBF-j1-yCC"/>
-                                        <constraint firstItem="Zcu-tO-TA8" firstAttribute="leading" secondItem="OMN-dy-Rjk" secondAttribute="leading" constant="10" id="Kbh-dk-hGo"/>
-                                        <constraint firstItem="qTu-d9-ZQX" firstAttribute="leading" secondItem="Zcu-tO-TA8" secondAttribute="trailing" constant="10" id="M63-xT-dQb"/>
+                                        <constraint firstAttribute="bottom" secondItem="Zcu-tO-TA8" secondAttribute="bottom" constant="6" id="GVL-k1-9HZ"/>
+                                        <constraint firstItem="Zcu-tO-TA8" firstAttribute="top" secondItem="OMN-dy-Rjk" secondAttribute="top" constant="6" id="JKf-91-ToH"/>
                                         <constraint firstItem="2Bb-Gr-wVv" firstAttribute="leading" secondItem="qTu-d9-ZQX" secondAttribute="trailing" constant="6" id="WJi-C5-pzF"/>
                                         <constraint firstItem="fE5-0Y-1aA" firstAttribute="leading" secondItem="2Bb-Gr-wVv" secondAttribute="trailing" constant="6" id="WSv-mQ-Wd1"/>
                                         <constraint firstItem="fE5-0Y-1aA" firstAttribute="centerY" secondItem="OMN-dy-Rjk" secondAttribute="centerY" id="ZSL-Q3-NE9"/>
-                                        <constraint firstAttribute="bottom" secondItem="Zcu-tO-TA8" secondAttribute="bottom" constant="10" id="ZXd-wI-ieI"/>
+                                        <constraint firstItem="SCI-LV-O0j" firstAttribute="leading" secondItem="Zcu-tO-TA8" secondAttribute="trailing" constant="6" id="cCA-bK-P5C"/>
+                                        <constraint firstItem="SCI-LV-O0j" firstAttribute="centerY" secondItem="OMN-dy-Rjk" secondAttribute="centerY" id="idi-wX-Xle"/>
+                                        <constraint firstItem="qTu-d9-ZQX" firstAttribute="leading" secondItem="SCI-LV-O0j" secondAttribute="trailing" constant="6" id="u2t-34-mNa"/>
                                         <constraint firstAttribute="trailing" secondItem="fE5-0Y-1aA" secondAttribute="trailing" id="v47-bS-JEL"/>
-                                        <constraint firstItem="Zcu-tO-TA8" firstAttribute="top" secondItem="OMN-dy-Rjk" secondAttribute="top" constant="10" id="xfW-uj-VMA"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="buttonAudio" destination="2Bb-Gr-wVv" id="2qg-Yn-eVg"/>
+                                    <outlet property="buttonHand" destination="SCI-LV-O0j" id="zVM-BA-5Zc"/>
                                     <outlet property="buttonThreeDots" destination="fE5-0Y-1aA" id="T4v-7P-hS7"/>
                                     <outlet property="buttonVideo" destination="qTu-d9-ZQX" id="rOM-KF-Sn8"/>
                                     <outlet property="labelAdmin" destination="pQ2-ni-zPd" id="phf-qp-hDZ"/>
@@ -1277,6 +1291,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="audio_unmute" width="33" height="33"/>
+        <image name="hand_raise" width="33" height="33"/>
         <image name="three_dot" width="23.333333969116211" height="23.333333969116211"/>
         <image name="video_unmute" width="33" height="33"/>
         <systemColor name="systemBackgroundColor">

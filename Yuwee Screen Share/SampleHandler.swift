@@ -15,7 +15,9 @@ class SampleHandler: RPBroadcastSampleHandler, RPBroadcastControllerDelegate {
     var json = JSON()
     var yuweeScreenShare = YWScreenShare()
     var isInitSuccessful = false
-    let wormhome = MMWormhole(applicationGroupIdentifier: "group.com.yuwee.SwiftSdkDemo", optionalDirectory: "wormhole")
+    var recordingId: String? = nil
+    var mongoId: String? = nil
+    let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yuwee.SwiftSdkDemo", optionalDirectory: "wormhole")
     
     override init() {
         super.init()
@@ -26,17 +28,48 @@ class SampleHandler: RPBroadcastSampleHandler, RPBroadcastControllerDelegate {
     }
     
     private func initWormHole() {
-        wormhome.listenForMessage(withIdentifier: "screen-sharing-started") { (data) in
+        wormhole.listenForMessage(withIdentifier: "screen-sharing-started") { (data) in
             if data as! Bool == false {
                 self.isInitSuccessful = false
                 self.yuweeScreenShare.cleanUp()
-                self.wormhome.clearAllMessageContents()
+                self.wormhole.clearAllMessageContents()
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     let userInfo = [NSLocalizedFailureReasonErrorKey: "Screen share ended by user."]
                     let error = NSError(domain: "Yuwee Screen Share", code: -1, userInfo: userInfo)
                     self.finishBroadcastWithError(error)
                 }
+            }
+        }
+        
+        wormhole.listenForMessage(withIdentifier: "screen-recording-started") { (data) in
+            if data as! Bool == true {
+                self.startScreenRecording()
+            }
+            else {
+                self.stopScreenRecording()
+            }
+        }
+    }
+    
+    private func startScreenRecording(){
+        let mongoId: String? = nil
+        yuweeScreenShare.startCallRecording(with: .presenter, withMId: mongoId!) { (data, isSuccess) in
+            if isSuccess {
+                let json = JSON(data)
+                self.recordingId = json["recordingId"].string!
+                self.mongoId = json["mongoId"].string!
+            }
+            else {
+                self.startScreenRecording()
+            }
+        }
+    }
+    
+    private func stopScreenRecording(){
+        yuweeScreenShare.stopCallRecording(withRecordingId: self.recordingId!, withMId: self.mongoId!) { (message, isSuccess) in
+            if isSuccess {
+                print("screen recording stopped.")
             }
         }
     }
@@ -47,11 +80,11 @@ class SampleHandler: RPBroadcastSampleHandler, RPBroadcastControllerDelegate {
             if isSuccess {
                 print("screen sharing started")
                 self.isInitSuccessful = true
-                self.wormhome.passMessageObject(true as NSCoding, identifier: "screen-sharing-status")
+                self.wormhole.passMessageObject(true as NSCoding, identifier: "screen-sharing-status")
             }
             else {
                 print("screen sharing failed to start")
-                self.wormhome.passMessageObject(false as NSCoding, identifier: "screen-sharing-status")
+                self.wormhole.passMessageObject(false as NSCoding, identifier: "screen-sharing-status")
             }
         }
         

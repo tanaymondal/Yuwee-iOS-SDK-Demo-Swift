@@ -16,6 +16,7 @@ class MemberTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonVideo: UIButton!
     @IBOutlet weak var buttonAudio: UIButton!
     @IBOutlet weak var buttonThreeDots: UIButton!
+    @IBOutlet weak var buttonHand: UIButton!
     
     private var member : YWMember?
     
@@ -28,6 +29,11 @@ class MemberTableViewCell: UITableViewCell {
     @IBAction func onVideoPressed(_ sender: Any) {
        
     }
+    
+    @IBAction func onHandPressed(_ sender: Any) {
+        Communication.shared.onHandClicked(member: member!)
+    }
+    
     
     public func update(member: YWMember) {
         self.member = member
@@ -44,6 +50,10 @@ class MemberTableViewCell: UITableViewCell {
         buttonVideo.setBackgroundImage(UIImage(named: member.isVideoOn ? "video_unmute" : "video_mute"), for: .normal)
         buttonVideo.layoutIfNeeded()
         buttonVideo.subviews.first?.contentMode = .scaleAspectFit
+        
+        buttonHand.setBackgroundImage(UIImage(named: member.isHandRaised ? "hand_raise_fill" : "hand_raise"), for: .normal)
+        buttonHand.layoutIfNeeded()
+        buttonHand.subviews.first?.contentMode = .scaleAspectFit
         
         switch member.roleType {
         case .presenter:
