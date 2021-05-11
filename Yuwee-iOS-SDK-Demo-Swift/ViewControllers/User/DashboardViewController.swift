@@ -8,11 +8,13 @@
 import UIKit
 import SwiftyJSON
 import KRProgressHUD
+import Toaster
 
 class DashboardViewController: UIViewController {
     
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelEmail: UILabel!
+    private var callData: JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,8 @@ class DashboardViewController: UIViewController {
         
         self.labelName.text = "Name: \(String(describing: json["result"]["user"]["name"].string!))"
         self.labelEmail.text = "Email: \(String(describing: json["result"]["user"]["email"].string!))"
+        
+        Yuwee.sharedInstance().getCallManager().setIncomingCallEventDelegate(self)
     }
     
 
@@ -47,4 +51,40 @@ class DashboardViewController: UIViewController {
     }
     */
 
+}
+
+extension DashboardViewController: YuWeeIncomingCallEventDelegate {
+    
+    func onIncomingCall(_ callData: [AnyHashable : Any]!) {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewController(withIdentifier: "incoming_call") as! IncomingCallViewController
+        controller.modalPresentationStyle = .fullScreen
+        controller.callData = callData
+        self.present(controller, animated: true, completion: nil)
+        
+    }
+    
+    func onIncomingCallAcceptSuccess(_ callData: [AnyHashable : Any]!) {
+        self.callData = JSON(callData!)
+        print("Accept \(callData!)")
+        Toast(text: "Call Accepted").show()
+        self.performSegue(withIdentifier: "DashboardToCall", sender: self)
+    }
+    
+    func onIncomingCallRejectSuccess(_ callData: [AnyHashable : Any]!) {
+        print("Reject \(JSON(callData!))")
+        Toast(text: "Call Rejected").show()
+    }
+    
+    func onIncomingCallActionPerformed(fromOtherDevice data: [AnyHashable : Any]!) {
+        print("onIncomingCallActionPerformedFromOtherDevice")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DashboardToCall" {
+            let vc = segue.destination as! OneToOneCallViewController
+            vc.callData = self.callData
+        }
+    }
 }

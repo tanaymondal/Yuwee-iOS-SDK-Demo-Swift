@@ -214,6 +214,7 @@
                         <outlet property="labelEmail" destination="3lY-Kt-W6U" id="hp4-WE-7Ma"/>
                         <outlet property="labelName" destination="Fbi-pf-t78" id="9qB-iK-YHg"/>
                         <segue destination="WdP-Sn-0dZ" kind="unwind" identifier="unwindToLogin" unwindAction="unwind:" id="2ug-oo-RoR"/>
+                        <segue destination="PB8-zE-Nb1" kind="show" identifier="DashboardToCall" id="dDY-FR-Weg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lvq-lq-u4c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -665,6 +666,109 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BL7-VF-D1D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1721.7391304347827" y="1175.5434782608697"/>
+        </scene>
+        <!--Incoming Call View Controller-->
+        <scene sceneID="LPJ-d3-VYw">
+            <objects>
+                <viewController storyboardIdentifier="incoming_call" id="Jut-2p-pOh" customClass="IncomingCallViewController" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mdE-zb-Fjf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Nf-XB-VtP">
+                                <rect key="frame" x="10" y="343" width="394" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aEu-dF-dW5"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tRJ-VU-Z4r">
+                                <rect key="frame" x="20" y="20" width="374" height="303"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming Video Call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGk-EN-8U4">
+                                        <rect key="frame" x="59" y="0.0" width="256.33333333333331" height="88.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NP9-pO-s0r">
+                                        <rect key="frame" x="165" y="98.666666666666686" width="44.333333333333343" height="65"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tanay Mondal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGh-tZ-8Kn">
+                                        <rect key="frame" x="85.666666666666671" y="173.66666666666663" width="202.66666666666663" height="129.33333333333337"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="34"/>
+                                        <color key="textColor" systemColor="systemOrangeColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dwg-6L-7zA">
+                                <rect key="frame" x="20" y="616" width="374" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUe-A6-JxG">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="SY0-Oy-lve"/>
+                                            <constraint firstAttribute="height" constant="80" id="ZJD-ON-xiL"/>
+                                        </constraints>
+                                        <state key="normal" image="call_accept_audio"/>
+                                        <connections>
+                                            <action selector="onAcceptAudioCall:" destination="Jut-2p-pOh" eventType="touchUpInside" id="zUj-Pd-IkG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVB-yf-dok">
+                                        <rect key="frame" x="147" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="4ow-ht-eTH"/>
+                                            <constraint firstAttribute="width" constant="80" id="PYO-jK-pzG"/>
+                                        </constraints>
+                                        <state key="normal" image="call_accept_video"/>
+                                        <connections>
+                                            <action selector="onAcceptVideoCall:" destination="Jut-2p-pOh" eventType="touchUpInside" id="5Gm-Hh-f0j"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDL-OW-Lv7">
+                                        <rect key="frame" x="294" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="0qC-M3-EZ3"/>
+                                            <constraint firstAttribute="width" constant="80" id="7os-gP-cDW"/>
+                                        </constraints>
+                                        <state key="normal" image="call_end"/>
+                                        <connections>
+                                            <action selector="onRejectCall:" destination="Jut-2p-pOh" eventType="touchUpInside" id="BIV-DK-7Yp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kxf-xX-uee"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1Nf-XB-VtP" firstAttribute="centerX" secondItem="kxf-xX-uee" secondAttribute="centerX" id="0Ci-8x-w5G"/>
+                            <constraint firstItem="tRJ-VU-Z4r" firstAttribute="top" secondItem="kxf-xX-uee" secondAttribute="top" constant="20" id="RkD-kx-6dU"/>
+                            <constraint firstItem="kxf-xX-uee" firstAttribute="bottom" secondItem="dwg-6L-7zA" secondAttribute="bottom" constant="40" id="bbb-nZ-SgV"/>
+                            <constraint firstItem="kxf-xX-uee" firstAttribute="trailing" secondItem="dwg-6L-7zA" secondAttribute="trailing" constant="20" id="c6B-Kf-eEu"/>
+                            <constraint firstItem="kxf-xX-uee" firstAttribute="trailing" secondItem="tRJ-VU-Z4r" secondAttribute="trailing" constant="20" id="g5x-vA-5LD"/>
+                            <constraint firstItem="1Nf-XB-VtP" firstAttribute="leading" secondItem="kxf-xX-uee" secondAttribute="leading" constant="10" id="kuz-c9-bka"/>
+                            <constraint firstItem="kxf-xX-uee" firstAttribute="trailing" secondItem="1Nf-XB-VtP" secondAttribute="trailing" constant="10" id="mZG-rf-GPv"/>
+                            <constraint firstItem="1Nf-XB-VtP" firstAttribute="centerY" secondItem="kxf-xX-uee" secondAttribute="centerY" id="pIo-7W-sK0"/>
+                            <constraint firstItem="tRJ-VU-Z4r" firstAttribute="leading" secondItem="kxf-xX-uee" secondAttribute="leading" constant="20" id="qzo-ki-GSO"/>
+                            <constraint firstItem="dwg-6L-7zA" firstAttribute="leading" secondItem="kxf-xX-uee" secondAttribute="leading" constant="20" id="wfa-jz-9R2"/>
+                            <constraint firstItem="1Nf-XB-VtP" firstAttribute="top" secondItem="tRJ-VU-Z4r" secondAttribute="bottom" constant="20" id="z1f-t7-QQN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnVideo" destination="zVB-yf-dok" id="BDi-oo-OBa"/>
+                        <outlet property="labelIncomingMessage" destination="BGk-EN-8U4" id="1Tv-db-FEs"/>
+                        <outlet property="labelName" destination="dGh-tZ-8Kn" id="321-bh-jeX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Da1-1K-lpg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2472.463768115942" y="-587.77173913043487"/>
         </scene>
         <!--One To One Call View Controller-->
         <scene sceneID="pSy-qC-WPf">
@@ -1288,9 +1392,13 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="9Pe-gA-Nj7"/>
+        <segue reference="dDY-FR-Weg"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="audio_unmute" width="33" height="33"/>
+        <image name="call_accept_audio" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="call_accept_video" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="call_end" width="170.66667175292969" height="170.66667175292969"/>
         <image name="hand_raise" width="33" height="33"/>
         <image name="three_dot" width="23.333333969116211" height="23.333333969116211"/>
         <image name="video_unmute" width="33" height="33"/>
@@ -1311,6 +1419,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

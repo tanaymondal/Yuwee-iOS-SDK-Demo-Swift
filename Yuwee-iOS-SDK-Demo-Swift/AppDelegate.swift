@@ -23,23 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Yuwee.sharedInstance().initWithAppId(Constants.appId, appSecret: Constants.appSecret, clientId: Constants.clientId)
         
-//        let mainViewController   = MainViewController()
-//                let drawerViewController = DrawerViewController()
-//                let drawerController     = KYDrawerController()
-//                drawerController.mainViewController = UINavigationController(
-//                    rootViewController: mainViewController
-//                )
-//                drawerController.drawerViewController = drawerViewController
-//
-//                /* Customize
-//                drawerController.drawerDirection = .Right
-//                drawerController.drawerWidth     = 200
-//                */
-//
-//                window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//                window?.rootViewController = drawerController
-//                window?.makeKeyAndVisible()
-        
         return true
     }
     

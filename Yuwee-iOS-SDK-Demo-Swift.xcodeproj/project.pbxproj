@@ -24,6 +24,7 @@
 		A640278125D6E33D00087824 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640278025D6E33D00087824 /* LoginViewController.swift */; };
 		A640278325D6E35800087824 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640278225D6E35800087824 /* RegisterViewController.swift */; };
 		A640279125D6F9B700087824 /* String+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640279025D6F9B700087824 /* String+Shortcuts.swift */; };
+		A68C7466264A4B1B00C2A6EE /* IncomingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68C7465264A4B1B00C2A6EE /* IncomingCallViewController.swift */; };
 		A691CB51262EC8F500B41307 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691CB50262EC8F500B41307 /* DashboardViewController.swift */; };
 		A691CB88262F05BE00B41307 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691CB87262F05BE00B41307 /* Constants.swift */; };
 		A691CB8A262F0D5A00B41307 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691CB89262F0D5A00B41307 /* Utils.swift */; };
@@ -128,6 +129,7 @@
 		A640278025D6E33D00087824 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A640278225D6E35800087824 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A640279025D6F9B700087824 /* String+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Shortcuts.swift"; sourceTree = "<group>"; };
+		A68C7465264A4B1B00C2A6EE /* IncomingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallViewController.swift; sourceTree = "<group>"; };
 		A691CB50262EC8F500B41307 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A691CB86262F048F00B41307 /* Yuwee-iOS-SDK-Demo-Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Yuwee-iOS-SDK-Demo-Swift.entitlements"; sourceTree = "<group>"; };
 		A691CB87262F05BE00B41307 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			children = (
 				A691CB8B262F13A100B41307 /* OneToOneViewController.swift */,
 				A691CB8F262F208100B41307 /* OneToOneCallViewController.swift */,
+				A68C7465264A4B1B00C2A6EE /* IncomingCallViewController.swift */,
 			);
 			path = OneToOne;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				A640272D25D6520C00087824 /* AppDelegate.swift in Sources */,
 				A691CB90262F208100B41307 /* OneToOneCallViewController.swift in Sources */,
 				A640272F25D6520C00087824 /* SceneDelegate.swift in Sources */,
+				A68C7466264A4B1B00C2A6EE /* IncomingCallViewController.swift in Sources */,
 				A6D99D812636973300B6DD9A /* Extensions.swift in Sources */,
 				A6C77861263C0C1B00E6DAC7 /* MemberTableViewCell.swift in Sources */,
 				A6A39623263150D000CBD533 /* CreateMeetingViewController.swift in Sources */,
