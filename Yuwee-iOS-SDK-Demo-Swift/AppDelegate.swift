@@ -12,14 +12,21 @@ import SwiftyJSON
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    var window: UIWindow?
+    
     static var meetingData: JSON = JSON("")
     static var callTokenId = ""
     static var passCode = ""
     static var isAudioEnabled = false
     static var isVideoEnabled = false
+    
+    static var loggedInUserId = ""
+    static var loggedInEmail = ""
+    static var loggedInName = ""
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow()
         
         Yuwee.sharedInstance().initWithAppId(Constants.appId, appSecret: Constants.appSecret, clientId: Constants.clientId)
         

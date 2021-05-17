@@ -26,6 +26,17 @@ extension Date {
 
 }
 
+extension Int64 {
+    func dateFormat(format: String) -> String {
+        let date = Date(milliseconds: self)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        
+        return dateFormatter.string(from: date)
+    }
+}
+
 extension String {
     func trim() -> String {
           return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

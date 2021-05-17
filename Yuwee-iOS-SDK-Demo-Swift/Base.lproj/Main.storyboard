@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MYr-kD-SLq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MYr-kD-SLq">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -71,6 +71,124 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CyJ-B3-gkc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3407" y="1476"/>
+        </scene>
+        <!--Chat List View Controller-->
+        <scene sceneID="Ybd-JB-233">
+            <objects>
+                <viewController id="0MD-0Q-Xib" customClass="ChatListViewController" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8El-Pg-oft">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rLk-eC-8Pd">
+                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="chat_list_cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chat_list_cell" rowHeight="60" id="Lof-GX-mBQ" customClass="ChatListTableViewCell" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="414" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lof-GX-mBQ" id="Wtv-jY-ylC">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzb-Bh-uMx">
+                                                    <rect key="frame" x="10" y="2" width="239" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXX-Kv-JDO">
+                                                    <rect key="frame" x="10" y="37" width="394" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4a8-TO-4un">
+                                                    <rect key="frame" x="254" y="2" width="150" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="tG5-eC-2KG"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="eXX-Kv-JDO" secondAttribute="trailing" constant="10" id="9Qn-aE-5MA"/>
+                                                <constraint firstItem="4a8-TO-4un" firstAttribute="top" secondItem="Wtv-jY-ylC" secondAttribute="top" constant="2" id="ADV-L1-hQW"/>
+                                                <constraint firstItem="bzb-Bh-uMx" firstAttribute="leading" secondItem="Wtv-jY-ylC" secondAttribute="leading" constant="10" id="Ey6-AP-8BF"/>
+                                                <constraint firstAttribute="bottom" secondItem="eXX-Kv-JDO" secondAttribute="bottom" constant="2" id="Jty-76-zea"/>
+                                                <constraint firstItem="eXX-Kv-JDO" firstAttribute="leading" secondItem="Wtv-jY-ylC" secondAttribute="leading" constant="10" id="NxE-jx-lwg"/>
+                                                <constraint firstItem="4a8-TO-4un" firstAttribute="leading" secondItem="bzb-Bh-uMx" secondAttribute="trailing" constant="5" id="XVm-Z0-Vqx"/>
+                                                <constraint firstItem="bzb-Bh-uMx" firstAttribute="top" secondItem="Wtv-jY-ylC" secondAttribute="top" constant="2" id="mdj-b2-3l6"/>
+                                                <constraint firstAttribute="trailing" secondItem="4a8-TO-4un" secondAttribute="trailing" constant="10" id="u2x-KX-x05"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="labelDate" destination="4a8-TO-4un" id="bdS-sS-Rif"/>
+                                            <outlet property="labelMessage" destination="eXX-Kv-JDO" id="98I-5f-G4K"/>
+                                            <outlet property="labelName" destination="bzb-Bh-uMx" id="ZoY-Au-eoj"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XKq-rk-mFE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rLk-eC-8Pd" firstAttribute="leading" secondItem="XKq-rk-mFE" secondAttribute="leading" id="DAb-9X-jpL"/>
+                            <constraint firstItem="rLk-eC-8Pd" firstAttribute="bottom" secondItem="XKq-rk-mFE" secondAttribute="bottom" id="U3m-bO-Jbu"/>
+                            <constraint firstItem="rLk-eC-8Pd" firstAttribute="top" secondItem="XKq-rk-mFE" secondAttribute="top" id="dmn-1g-SUZ"/>
+                            <constraint firstItem="rLk-eC-8Pd" firstAttribute="trailing" secondItem="XKq-rk-mFE" secondAttribute="trailing" id="mYl-2r-v6C"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4ue-Nm-nYN"/>
+                    <connections>
+                        <outlet property="tableView" destination="rLk-eC-8Pd" id="Ujb-Ft-NLm"/>
+                        <segue destination="A1h-bK-C3g" kind="show" identifier="chat_details" id="8PJ-Rk-SWT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fzh-sy-Llq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2533.3333333333335" y="1475.5434782608697"/>
+        </scene>
+        <!--Chat Details View Controller-->
+        <scene sceneID="8pZ-Ad-oyb">
+            <objects>
+                <viewController id="A1h-bK-C3g" customClass="ChatDetailsViewController" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Fy-0b-849">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qaf-qf-TRg">
+                                <rect key="frame" x="102" y="345" width="209.33333333333337" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hm8-h0-TJ1">
+                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4G9-rz-Z3N"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="trailing" secondItem="4G9-rz-Z3N" secondAttribute="trailing" id="2hN-BS-PJG"/>
+                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="leading" secondItem="4G9-rz-Z3N" secondAttribute="leading" id="9Sp-Mb-DDC"/>
+                            <constraint firstItem="4G9-rz-Z3N" firstAttribute="bottom" secondItem="hm8-h0-TJ1" secondAttribute="bottom" id="tAv-Zv-ahi"/>
+                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="top" secondItem="4G9-rz-Z3N" secondAttribute="top" id="w3h-q6-eaz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zM4-yj-Bpw"/>
+                    <connections>
+                        <outlet property="tableView" destination="hm8-h0-TJ1" id="8wG-go-RCl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c4z-qx-lCJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2533.3333333333335" y="2167.663043478261"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -164,7 +282,7 @@
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <state key="normal" title="Chat"/>
                                         <connections>
-                                            <segue destination="dWw-qm-oov" kind="show" id="A6K-7f-BPJ"/>
+                                            <segue destination="0MD-0Q-Xib" kind="show" id="1ar-HW-nk6"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -778,7 +896,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M9u-3O-zWB" customClass="YuweeRemoteVideoView">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="M9u-3O-zWB" customClass="YuweeRemoteVideoView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -917,7 +1035,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MeetingCell" textLabel="Lim-JQ-fnJ" detailTextLabel="KcZ-d2-fP0" style="IBUITableViewCellStyleSubtitle" id="1o4-bk-psy">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="55.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="414" height="55.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1o4-bk-psy" id="QTX-Wt-Y6n">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55.666667938232422"/>
@@ -1164,7 +1282,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="member_cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="member_cell" rowHeight="65" id="iVH-Pk-tpD" customClass="MemberTableViewCell" customModule="Yuwee_iOS_SDK_Demo_Swift" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="24.333333969116211" width="414" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iVH-Pk-tpD" id="OMN-dy-Rjk">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>

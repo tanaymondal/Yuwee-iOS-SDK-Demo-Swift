@@ -233,8 +233,8 @@ class MeetingCallViewController: UIViewController {
 
         self.publishStream()
         self.getAllRemoteStreams()
-        self.getAllParticipants()
         self.drawer?.setAmIAdmin(amIAdmin: self.amIAdmin)
+        self.getAllParticipants()
     }
     
     private func publishStream() {
@@ -531,7 +531,7 @@ extension MeetingCallViewController: OnHostedMeetingDelegate {
         print("onCallAdminsUpdated \(json)")
         let _id = json["userId"].string
         if json["userId"].string == loggedInUserId {
-            self.amIAdmin = false
+            self.amIAdmin = json["isCallAdmin"].boolValue
             self.drawer?.setAmIAdmin(amIAdmin: amIAdmin)
         }
         

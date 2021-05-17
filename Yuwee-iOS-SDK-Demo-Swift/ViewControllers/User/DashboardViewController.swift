@@ -26,8 +26,12 @@ class DashboardViewController: UIViewController {
         
         let json = Utils.getLoginJSON()
         
-        self.labelName.text = "Name: \(String(describing: json["result"]["user"]["name"].string!))"
-        self.labelEmail.text = "Email: \(String(describing: json["result"]["user"]["email"].string!))"
+        AppDelegate.loggedInUserId = json["result"]["user"]["_id"].string!
+        AppDelegate.loggedInEmail = json["result"]["user"]["email"].string!
+        AppDelegate.loggedInName = json["result"]["user"]["name"].string!
+        
+        self.labelName.text = "Name: \(AppDelegate.loggedInName)"
+        self.labelEmail.text = "Email: \(AppDelegate.loggedInEmail)"
         
         Yuwee.sharedInstance().getCallManager().setIncomingCallEventDelegate(self)
     }

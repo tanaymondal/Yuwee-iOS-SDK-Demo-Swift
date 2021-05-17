@@ -15,6 +15,9 @@ PODS:
   - KRProgressHUD (3.4.7):
     - KRActivityIndicatorView (= 3.0.7)
   - KYDrawerController (2.1.0)
+  - MessageInputBar (0.4.1):
+    - MessageInputBar/Core (= 0.4.1)
+  - MessageInputBar/Core (0.4.1)
   - MMWormhole (2.0.0):
     - MMWormhole/Core (= 2.0.0)
   - MMWormhole/Core (2.0.0)
@@ -31,6 +34,7 @@ DEPENDENCIES:
   - AWSS3 (~> 2.12.0)
   - KRProgressHUD
   - KYDrawerController
+  - MessageInputBar
   - MMWormhole (~> 2.0.0)
   - NewPopMenu (~> 2.0)
   - PMAlertController
@@ -49,6 +53,7 @@ SPEC REPOS:
     - KRActivityIndicatorView
     - KRProgressHUD
     - KYDrawerController
+    - MessageInputBar
     - MMWormhole
     - NewPopMenu
     - PMAlertController
@@ -67,6 +72,7 @@ SPEC CHECKSUMS:
   KRActivityIndicatorView: ad69e89c4ce40c986cf580595be4829dcad0e35a
   KRProgressHUD: a248f0bc6c9c2aed40a37b76e03ffecc7f85c887
   KYDrawerController: baad0e63b09c0cb564bd48f0f7f70f45d9176ebc
+  MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   NewPopMenu: c6129e08e8192f6257ceb5f9a4357e1b59c6e2e7
   PMAlertController: ab5fcf4d085b7878c9451466d701449c4bf6efb8
@@ -75,6 +81,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: de191f078df6d68565034b6bfac9e8a3e243628b
+PODFILE CHECKSUM: cea0ff0f1d4bd4ac002d509b9341f1870b149586
 
 COCOAPODS: 1.10.1

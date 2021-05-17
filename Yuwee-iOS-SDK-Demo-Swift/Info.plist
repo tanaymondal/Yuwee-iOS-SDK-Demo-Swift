@@ -33,6 +33,8 @@
 	<string>YuWee SDK Demo need this local network permission for connecting calls.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We will use the access to transfer your voice to others through call.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We will use this to send image files</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

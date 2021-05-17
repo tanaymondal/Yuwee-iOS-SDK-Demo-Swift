@@ -24,6 +24,16 @@
 		A640278125D6E33D00087824 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640278025D6E33D00087824 /* LoginViewController.swift */; };
 		A640278325D6E35800087824 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640278225D6E35800087824 /* RegisterViewController.swift */; };
 		A640279125D6F9B700087824 /* String+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640279025D6F9B700087824 /* String+Shortcuts.swift */; };
+		A643B503264D6CE80018D3B9 /* TextMyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A643B501264D6CE80018D3B9 /* TextMyTableViewCell.swift */; };
+		A643B504264D6CE80018D3B9 /* MyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A643B502264D6CE80018D3B9 /* MyTableViewCell.xib */; };
+		A643B507264D76D60018D3B9 /* TextOtherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A643B505264D76D60018D3B9 /* TextOtherTableViewCell.swift */; };
+		A643B508264D76D60018D3B9 /* OtherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A643B506264D76D60018D3B9 /* OtherTableViewCell.xib */; };
+		A644910F265261BC00572A2B /* FileMyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644910D265261BC00572A2B /* FileMyTableViewCell.swift */; };
+		A6449110265261BC00572A2B /* FileMyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A644910E265261BC00572A2B /* FileMyTableViewCell.xib */; };
+		A6449113265261CF00572A2B /* FileOtherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6449111265261CF00572A2B /* FileOtherTableViewCell.swift */; };
+		A6449114265261CF00572A2B /* FileOtherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6449112265261CF00572A2B /* FileOtherTableViewCell.xib */; };
+		A6449117265261E100572A2B /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6449115265261E100572A2B /* CallTableViewCell.swift */; };
+		A6449118265261E100572A2B /* CallTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6449116265261E100572A2B /* CallTableViewCell.xib */; };
 		A68C7466264A4B1B00C2A6EE /* IncomingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68C7465264A4B1B00C2A6EE /* IncomingCallViewController.swift */; };
 		A691CB51262EC8F500B41307 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691CB50262EC8F500B41307 /* DashboardViewController.swift */; };
 		A691CB88262F05BE00B41307 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691CB87262F05BE00B41307 /* Constants.swift */; };
@@ -38,6 +48,10 @@
 		A6A39623263150D000CBD533 /* CreateMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A39622263150D000CBD533 /* CreateMeetingViewController.swift */; };
 		A6A396252631517900CBD533 /* JoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A396242631517900CBD533 /* JoinMeetingViewController.swift */; };
 		A6A396272631534600CBD533 /* MeetingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A396262631534600CBD533 /* MeetingCallViewController.swift */; };
+		A6B961BD264C12EF0002DEB6 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B961BC264C12EF0002DEB6 /* ChatListViewController.swift */; };
+		A6B961BF264C140E0002DEB6 /* ChatDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B961BE264C140E0002DEB6 /* ChatDetailsViewController.swift */; };
+		A6B961C1264C1ADA0002DEB6 /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B961C0264C1ADA0002DEB6 /* ChatListTableViewCell.swift */; };
+		A6C0D3D6264EC17000091967 /* SlackInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0D3D5264EC17000091967 /* SlackInputBar.swift */; };
 		A6C77861263C0C1B00E6DAC7 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C77860263C0C1B00E6DAC7 /* MemberTableViewCell.swift */; };
 		A6CF523F26401EE400198797 /* Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CF523E26401EE400198797 /* Communication.swift */; };
 		A6CFBA0F2637FFDE001F1A03 /* DrawerMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */; };
@@ -129,6 +143,16 @@
 		A640278025D6E33D00087824 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A640278225D6E35800087824 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A640279025D6F9B700087824 /* String+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Shortcuts.swift"; sourceTree = "<group>"; };
+		A643B501264D6CE80018D3B9 /* TextMyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMyTableViewCell.swift; sourceTree = "<group>"; };
+		A643B502264D6CE80018D3B9 /* MyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTableViewCell.xib; sourceTree = "<group>"; };
+		A643B505264D76D60018D3B9 /* TextOtherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOtherTableViewCell.swift; sourceTree = "<group>"; };
+		A643B506264D76D60018D3B9 /* OtherTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherTableViewCell.xib; sourceTree = "<group>"; };
+		A644910D265261BC00572A2B /* FileMyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMyTableViewCell.swift; sourceTree = "<group>"; };
+		A644910E265261BC00572A2B /* FileMyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMyTableViewCell.xib; sourceTree = "<group>"; };
+		A6449111265261CF00572A2B /* FileOtherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileOtherTableViewCell.swift; sourceTree = "<group>"; };
+		A6449112265261CF00572A2B /* FileOtherTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileOtherTableViewCell.xib; sourceTree = "<group>"; };
+		A6449115265261E100572A2B /* CallTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; };
+		A6449116265261E100572A2B /* CallTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallTableViewCell.xib; sourceTree = "<group>"; };
 		A68C7465264A4B1B00C2A6EE /* IncomingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallViewController.swift; sourceTree = "<group>"; };
 		A691CB50262EC8F500B41307 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A691CB86262F048F00B41307 /* Yuwee-iOS-SDK-Demo-Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Yuwee-iOS-SDK-Demo-Swift.entitlements"; sourceTree = "<group>"; };
@@ -140,6 +164,10 @@
 		A6A39622263150D000CBD533 /* CreateMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingViewController.swift; sourceTree = "<group>"; };
 		A6A396242631517900CBD533 /* JoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMeetingViewController.swift; sourceTree = "<group>"; };
 		A6A396262631534600CBD533 /* MeetingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCallViewController.swift; sourceTree = "<group>"; };
+		A6B961BC264C12EF0002DEB6 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		A6B961BE264C140E0002DEB6 /* ChatDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailsViewController.swift; sourceTree = "<group>"; };
+		A6B961C0264C1ADA0002DEB6 /* ChatListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewCell.swift; sourceTree = "<group>"; };
+		A6C0D3D5264EC17000091967 /* SlackInputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackInputBar.swift; sourceTree = "<group>"; };
 		A6C77860263C0C1B00E6DAC7 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		A6CF523E26401EE400198797 /* Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communication.swift; sourceTree = "<group>"; };
 		A6CFBA0E2637FFDE001F1A03 /* DrawerMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewController.swift; sourceTree = "<group>"; };
@@ -279,8 +307,62 @@
 				A6C605FA2630516800B736B2 /* User */,
 				A6C605F82630513900B736B2 /* OneToOne */,
 				A6C605F92630515500B736B2 /* Meeting */,
+				A6B961BB264C12A20002DEB6 /* Chat */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A6B961BB264C12A20002DEB6 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A6C0D3D3264EC12F00091967 /* ChatList */,
+				A6C0D3D1264EC0E500091967 /* ChatDetails */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		A6C0D3D1264EC0E500091967 /* ChatDetails */ = {
+			isa = PBXGroup;
+			children = (
+				A6C0D3D4264EC14000091967 /* InputBar */,
+				A6B961BE264C140E0002DEB6 /* ChatDetailsViewController.swift */,
+				A6C0D3D2264EC10F00091967 /* Cells */,
+			);
+			path = ChatDetails;
+			sourceTree = "<group>";
+		};
+		A6C0D3D2264EC10F00091967 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A643B501264D6CE80018D3B9 /* TextMyTableViewCell.swift */,
+				A643B502264D6CE80018D3B9 /* MyTableViewCell.xib */,
+				A643B505264D76D60018D3B9 /* TextOtherTableViewCell.swift */,
+				A643B506264D76D60018D3B9 /* OtherTableViewCell.xib */,
+				A644910D265261BC00572A2B /* FileMyTableViewCell.swift */,
+				A644910E265261BC00572A2B /* FileMyTableViewCell.xib */,
+				A6449111265261CF00572A2B /* FileOtherTableViewCell.swift */,
+				A6449112265261CF00572A2B /* FileOtherTableViewCell.xib */,
+				A6449115265261E100572A2B /* CallTableViewCell.swift */,
+				A6449116265261E100572A2B /* CallTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		A6C0D3D3264EC12F00091967 /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				A6B961BC264C12EF0002DEB6 /* ChatListViewController.swift */,
+				A6B961C0264C1ADA0002DEB6 /* ChatListTableViewCell.swift */,
+			);
+			path = ChatList;
+			sourceTree = "<group>";
+		};
+		A6C0D3D4264EC14000091967 /* InputBar */ = {
+			isa = PBXGroup;
+			children = (
+				A6C0D3D5264EC17000091967 /* SlackInputBar.swift */,
+			);
+			path = InputBar;
 			sourceTree = "<group>";
 		};
 		A6C605F82630513900B736B2 /* OneToOne */ = {
@@ -424,8 +506,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A640273925D6520D00087824 /* LaunchScreen.storyboard in Resources */,
+				A643B504264D6CE80018D3B9 /* MyTableViewCell.xib in Resources */,
 				A640273625D6520D00087824 /* Assets.xcassets in Resources */,
+				A6449114265261CF00572A2B /* FileOtherTableViewCell.xib in Resources */,
 				A640273425D6520C00087824 /* Main.storyboard in Resources */,
+				A6449118265261E100572A2B /* CallTableViewCell.xib in Resources */,
+				A643B508264D76D60018D3B9 /* OtherTableViewCell.xib in Resources */,
+				A6449110265261BC00572A2B /* FileMyTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,11 +595,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6E748B926444DC3002A8111 /* ScreenShareDialogViewController.swift in Sources */,
+				A6C0D3D6264EC17000091967 /* SlackInputBar.swift in Sources */,
 				A640278125D6E33D00087824 /* LoginViewController.swift in Sources */,
 				A691CB51262EC8F500B41307 /* DashboardViewController.swift in Sources */,
 				A691CB8C262F13A100B41307 /* OneToOneViewController.swift in Sources */,
 				A691CB8A262F0D5A00B41307 /* Utils.swift in Sources */,
+				A6B961BD264C12EF0002DEB6 /* ChatListViewController.swift in Sources */,
 				A640278325D6E35800087824 /* RegisterViewController.swift in Sources */,
+				A6B961BF264C140E0002DEB6 /* ChatDetailsViewController.swift in Sources */,
 				A6A396252631517900CBD533 /* JoinMeetingViewController.swift in Sources */,
 				A6A396272631534600CBD533 /* MeetingCallViewController.swift in Sources */,
 				A6D99D832636BFDC00B6DD9A /* MeetingDetailsViewController.swift in Sources */,
@@ -521,14 +611,20 @@
 				A640272F25D6520C00087824 /* SceneDelegate.swift in Sources */,
 				A68C7466264A4B1B00C2A6EE /* IncomingCallViewController.swift in Sources */,
 				A6D99D812636973300B6DD9A /* Extensions.swift in Sources */,
+				A6B961C1264C1ADA0002DEB6 /* ChatListTableViewCell.swift in Sources */,
 				A6C77861263C0C1B00E6DAC7 /* MemberTableViewCell.swift in Sources */,
+				A643B507264D76D60018D3B9 /* TextOtherTableViewCell.swift in Sources */,
 				A6A39623263150D000CBD533 /* CreateMeetingViewController.swift in Sources */,
+				A643B503264D6CE80018D3B9 /* TextMyTableViewCell.swift in Sources */,
 				A6CFBA0F2637FFDE001F1A03 /* DrawerMenuTableViewController.swift in Sources */,
 				A640279125D6F9B700087824 /* String+Shortcuts.swift in Sources */,
+				A6449113265261CF00572A2B /* FileOtherTableViewCell.swift in Sources */,
 				A6CF523F26401EE400198797 /* Communication.swift in Sources */,
 				A691CB8E262F13C500B41307 /* MeetingViewController.swift in Sources */,
 				A6D9DA8B263AB27900A9EEA0 /* StreamCollectionViewCell.swift in Sources */,
+				A644910F265261BC00572A2B /* FileMyTableViewCell.swift in Sources */,
 				A691CB88262F05BE00B41307 /* Constants.swift in Sources */,
+				A6449117265261E100572A2B /* CallTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

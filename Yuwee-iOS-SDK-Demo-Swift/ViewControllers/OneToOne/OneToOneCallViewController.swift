@@ -243,6 +243,51 @@ extension OneToOneCallViewController: YuWeeCallManagerDelegate{
     }
     
     func setUpAditionalViewsOn(_ remoteView: YuweeRemoteVideoView!, with size: CGSize) {
-        print("setUpAditionalViewsOn")
+        print("setUpAditionalViewsOn \(size.height) \(size.width)")
+        print("Height: \(self.remoteVideoView.frame.height) Width: \(self.remoteVideoView.frame.width)")
+        
+        if size.width > 0.0 && size.height > 0.0 {
+            var videoFrame = AVMakeRect(aspectRatio: size, insideRect: view.bounds)
+            var scale: CGFloat = 1.0
+            if videoFrame.size.width > videoFrame.size.height {
+                if videoFrame.size.height > view.bounds.size.height {
+                    scale = videoFrame.size.height / view.bounds.size.height
+                } else {
+                    scale = view.bounds.size.height / videoFrame.size.height
+                }
+            } else if videoFrame.size.height > videoFrame.size.width {
+                if videoFrame.size.height > view.bounds.size.height {
+                    scale = videoFrame.size.height / view.bounds.size.height
+                } else if videoFrame.size.height == view.bounds.size.height {
+                    if videoFrame.size.width > view.bounds.size.width {
+                        scale = videoFrame.size.width / view.bounds.size.width
+                    } else {
+                        scale = view.bounds.size.width / videoFrame.size.width
+                    }
+                } else {
+                    scale = view.bounds.size.height / videoFrame.size.height
+                }
+            } else if videoFrame.size.height == view.bounds.size.height {
+                scale = videoFrame.size.height / view.bounds.size.height
+            } else if videoFrame.size.width == view.bounds.size.width {
+                scale = videoFrame.size.width / view.bounds.size.width
+            } else {
+                if videoFrame.size.width > view.bounds.size.width {
+                    scale = videoFrame.size.width / view.bounds.size.width
+                } else if view.bounds.size.width > videoFrame.size.width {
+                    scale = view.bounds.size.width / videoFrame.size.width
+                } else if videoFrame.size.height > view.bounds.size.height {
+                    scale = videoFrame.size.height / view.bounds.size.height
+                } else if view.bounds.size.height > videoFrame.size.height {
+                    scale = view.bounds.size.height / videoFrame.size.height
+                }
+            }
+            videoFrame.size.width = videoFrame.size.width * scale
+            videoFrame.size.height = videoFrame.size.height * scale
+            remoteVideoView.frame = videoFrame
+            remoteVideoView.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
+            remoteVideoView.translatesAutoresizingMaskIntoConstraints = true
+            
+        }
     }
 }
