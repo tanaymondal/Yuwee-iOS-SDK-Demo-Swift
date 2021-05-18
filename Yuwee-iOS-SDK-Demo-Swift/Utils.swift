@@ -41,4 +41,20 @@ class Utils {
         Toast(text: message).show()
     }
     
+    static func getAwsJSON() -> JSON? {
+        let data = UserDefaults.init(suiteName: Constants.APP_GROUP_NAME)?.value(forKey: Constants.AWS_DATA)
+        if data == nil {
+            return nil
+        }
+        
+        do{
+            let dict = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data as! Data)
+            
+            return JSON(dict!)
+        }
+        catch {
+            return nil
+        }
+    }
+    
 }

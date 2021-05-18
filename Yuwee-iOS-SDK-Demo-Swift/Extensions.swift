@@ -12,7 +12,7 @@ extension Date {
     var millisecondsSince1970:Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
     }
-
+    
     init(milliseconds:Int64) {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
     }
@@ -20,10 +20,10 @@ extension Date {
     func localDate() -> Date {
         let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: self))
         guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: self) else {return Date()}
-
+        
         return localDate
     }
-
+    
 }
 
 extension Int64 {
@@ -39,7 +39,7 @@ extension Int64 {
 
 extension String {
     func trim() -> String {
-          return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 }
 
@@ -54,13 +54,13 @@ extension UIButton{
 }
 
 extension UIView {
-
+    
     enum Visibility {
         case visible
         case invisible
         case gone
     }
-
+    
     var visibility: Visibility {
         get {
             let constraint = (self.constraints.filter{$0.firstAttribute == .height && $0.constant == 0}.first)
@@ -76,10 +76,10 @@ extension UIView {
             }
         }
     }
-
+    
     private func setVisibility(_ visibility: Visibility) {
         let constraint = (self.constraints.filter{$0.firstAttribute == .height && $0.constant == 0}.first)
-
+        
         switch visibility {
         case .visible:
             constraint?.isActive = false
@@ -97,6 +97,34 @@ extension UIView {
                 self.addConstraint(constraint)
                 constraint.isActive = true
             }
+        }
+    }
+}
+
+extension UIImage {
+    func resize(to size: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
+}
+
+extension UIImage {
+    func saveToDocumentDir(imageName: String) -> String {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileName = "\(imageName).png" // name of the image to be saved
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+        if let data = self.jpegData(compressionQuality: 1.0),!FileManager.default.fileExists(atPath: fileURL.path){
+            do {
+                try data.write(to: fileURL)
+                print("file saved")
+            } catch {
+                print("error saving file:", error)
+            }
+            return fileURL.path
+        }
+        else {
+            return ""
         }
     }
 }

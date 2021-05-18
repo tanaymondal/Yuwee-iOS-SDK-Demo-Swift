@@ -26,6 +26,8 @@ class TextMyTableViewCell: UITableViewCell {
     
     func update(with message: Message) {
         labelMessage.text = message.textData.text
+        labelMessage.numberOfLines = 0
+        labelMessage.sizeToFit()
         labelTime.text = message.messageTime!.dateFormat(format: "HH:mm:ss")
     }
     

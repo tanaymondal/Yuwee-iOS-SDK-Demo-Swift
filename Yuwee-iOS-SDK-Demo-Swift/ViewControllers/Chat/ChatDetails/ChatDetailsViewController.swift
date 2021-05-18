@@ -35,6 +35,7 @@ class ChatDetailsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.keyboardDismissMode = .interactive
+        tableView.rowHeight = UITableView.automaticDimension
         
         inputBar = SlackInputBar()
         inputBar?.delegate = self
@@ -54,6 +55,18 @@ class ChatDetailsViewController: UIViewController {
         
         self.getMessages()
         
+        Yuwee.sharedInstance().getChatManager().getFileManager().initFileShare(withRoomId: chatListData!.roomId!) { message, isSuccess in
+            
+            if isSuccess {
+                print(message!)
+            }
+            else {
+                Toast(text: "Unable to init file share").show()
+            }
+        }
+        
+        
+        
     }
     
     override var inputAccessoryView: UIView? {
@@ -72,8 +85,6 @@ class ChatDetailsViewController: UIViewController {
                 let json = JSON(data!)
                 
                 let arr = json["result"]["messages"]
-                
-               
                 
                 for item in arr.arrayValue {
                     self.addServerMessage(item: item)
@@ -149,21 +160,22 @@ extension ChatDetailsViewController: InputbarButtonPressDelegate {
 extension ChatDetailsViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let imgUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL{
-                let imgName = imgUrl.lastPathComponent
-                let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-                let localPath = documentDirectory?.appending(imgName)
-
-            let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-            let data = image.pngData()! as NSData
-                data.write(toFile: localPath!, atomically: true)
-                //let imageData = NSData(contentsOfFile: localPath!)!
-                let photoURL = URL.init(fileURLWithPath: localPath!)//NSURL(fileURLWithPath: localPath!)
-                print(photoURL)
-
-            }
+        let pic : NSURL = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerImageURL")] as! NSURL
+        print("imagePickerController Pic: \(String(describing: pic.path))")
         
         
+        do {
+            let fileSize = sizeForLocalFilePath(filePath: pic.path!)
+            print("File Size: \(fileSize)")
+            
+            let url = URL(fileURLWithPath: pic.path!)
+            print("Extension: \(url.pathExtension)")
+            let uuid = UUID().uuidString
+            let data = try Data(contentsOf: url)
+            Yuwee.sharedInstance().getChatManager().getFileManager().sendFile(withRoomId: chatListData!.roomId!, withUniqueIdentifier: uuid, withFileData: data, withFileName: uuid, withFileExtension: url.pathExtension, withFileSize: UInt(fileSize), with: self)
+        } catch {
+            print(error)
+        }
         picker.dismiss(animated: true, completion: nil)
     }
     
@@ -171,7 +183,55 @@ extension ChatDetailsViewController: UIImagePickerControllerDelegate & UINavigat
         print("imagePickerControllerDidCancel")
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    func getFromDocumentDir(imageName: String) -> UIImage {
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath = paths.first{
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName)
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            return image!
+        }
+        return UIImage.init(named: "default.png")!
+    }
+    
+    func sizeForLocalFilePath(filePath:String) -> UInt64 {
+        do {
+            let fileAttributes = try FileManager.default.attributesOfItem(atPath: filePath)
+            if let fileSize = fileAttributes[FileAttributeKey.size]  {
+                return (fileSize as! NSNumber).uint64Value
+            } else {
+                print("Failed to get a size attribute from path: \(filePath)")
+            }
+        } catch {
+            print("Failed to get file attributes for local path: \(filePath) with error: \(error)")
+        }
+        return 0
+    }
 }
+
+extension ChatDetailsViewController: YuWeeFileUploadDelegate {
+    
+    func onUploadSuccess() {
+        print("onUploadSuccess")
+    }
+    
+    func onUploadStarted() {
+        print("onUploadStarted")
+    }
+    
+    func onUploadFailed() {
+        print("onUploadFailed")
+    }
+    
+    func onProgressUpdate(withProgress progress: Double) {
+        print("onProgressUpdate")
+    }
+    
+    
+}
+
 
 
 extension ChatDetailsViewController: UITableViewDataSource, UITableViewDelegate {

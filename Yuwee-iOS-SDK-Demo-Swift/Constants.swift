@@ -16,4 +16,5 @@ class Constants {
     
     static let LOGIN_DATA = "login-data"
     static let SCREEN_SHARE_DATA = "screen-share-data"
+    static let AWS_DATA = "aws-data"
 }

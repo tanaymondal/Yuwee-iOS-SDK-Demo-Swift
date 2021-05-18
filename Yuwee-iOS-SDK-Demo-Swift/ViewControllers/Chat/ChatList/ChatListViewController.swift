@@ -34,6 +34,81 @@ class ChatListViewController: UIViewController, UIAlertViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         
+        
+        self.getChatList()
+        self.getAwsCred()
+    }
+    
+    private func getAwsCred() {
+        
+        if Utils.getAwsJSON() != nil {
+            let json = Utils.getAwsJSON()!
+            
+            let expTime = json["result"]["Expiration"].stringValue
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            let expDate = dateFormatter.date(from: expTime)
+            let expTimeFloat = Float(expDate?.timeIntervalSince1970 ?? 0.0)
+            let today = Float(Date().timeIntervalSince1970)
+            
+            if expTimeFloat > today {
+                self.setAwsCred(json: json)
+            }
+            else {
+                self.getYuweeAwsCred()
+            }
+        }
+        else {
+            self.getYuweeAwsCred()
+        }
+    }
+    
+    private func setAwsCred(json: JSON) {
+        Yuwee.sharedInstance().getChatManager().getFileManager().setupAwsCredential(withAccessKey: json["result"]["credentials"]["AccessKeyId"].stringValue, withSecretAccessKey: json["result"]["credentials"]["SecretAccessKey"].stringValue, withSessionToken: json["result"]["credentials"]["SessionToken"].stringValue)
+    }
+    
+    private func getYuweeAwsCred() {
+        Yuwee.sharedInstance().getChatManager().getFileManager().getAwsCredentials { data, isSuccess in
+            let json = JSON(data!)
+            print(json)
+            if isSuccess {
+                print("get aws cred success")
+                
+                do {
+                    let mData = try NSKeyedArchiver.archivedData(withRootObject: data!, requiringSecureCoding: false)
+                    
+                    let userDefault = UserDefaults.init(suiteName: Constants.APP_GROUP_NAME)
+                    userDefault?.setValue(mData, forKey: Constants.AWS_DATA)
+                }
+                catch {
+                    
+                }
+                
+                self.setAwsCred(json: json)
+                
+            }
+            else {
+                print("get aws cred failed")
+            }
+        }
+    }
+    
+    @objc func rightButtonAction(sender: UIBarButtonItem){
+        
+        let alert = UIAlertController(title: "New Chat", message: "Enter members seperated by commas!", preferredStyle: .alert)
+        alert.addTextField { (field) in
+            field.placeholder = "Enter here..."
+        }
+        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
+            
+            let enteredEmails = alert.textFields![0] as UITextField
+            self.processCreateChat(enteredEmails.text)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func getChatList() {
         Yuwee.sharedInstance().getChatManager().fetchChatList { (isSuccess, data) in
             if isSuccess {
                 let json = JSON(data!)
@@ -49,7 +124,7 @@ class ChatListViewController: UIViewController, UIAlertViewDelegate {
                         }
                         else {
                             for item in item["membersInfo"].arrayValue {
-                                if item["_id"].string != Utils.getLoginJSON()["result"]["user"]["_id"].string! {
+                                if item["_id"].string != AppDelegate.loggedInUserId {
                                     data.name = item["name"].string
                                     break
                                 }
@@ -105,21 +180,6 @@ class ChatListViewController: UIViewController, UIAlertViewDelegate {
                 KRProgressHUD.showError(withMessage: "Unable to fetch chat list.")
             }
         }
-    }
-    
-    @objc func rightButtonAction(sender: UIBarButtonItem){
-        
-        let alert = UIAlertController(title: "New Chat", message: "Enter members seperated by commas!", preferredStyle: .alert)
-        alert.addTextField { (field) in
-            field.placeholder = "Enter here..."
-        }
-        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
-            
-            let enteredEmails = alert.textFields![0] as UITextField
-            self.processCreateChat(enteredEmails.text)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     func processCreateChat(_ enteredEmails: String?) {
