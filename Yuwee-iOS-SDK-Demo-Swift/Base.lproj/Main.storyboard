@@ -175,10 +175,10 @@
                         <viewLayoutGuide key="safeArea" id="4G9-rz-Z3N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="trailing" secondItem="4G9-rz-Z3N" secondAttribute="trailing" id="2hN-BS-PJG"/>
-                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="leading" secondItem="4G9-rz-Z3N" secondAttribute="leading" id="9Sp-Mb-DDC"/>
-                            <constraint firstItem="4G9-rz-Z3N" firstAttribute="bottom" secondItem="hm8-h0-TJ1" secondAttribute="bottom" id="tAv-Zv-ahi"/>
-                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="top" secondItem="4G9-rz-Z3N" secondAttribute="top" id="w3h-q6-eaz"/>
+                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="top" secondItem="4G9-rz-Z3N" secondAttribute="top" id="7Ey-ZW-4Gg"/>
+                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="leading" secondItem="4G9-rz-Z3N" secondAttribute="leading" id="OL4-vU-TQl"/>
+                            <constraint firstItem="hm8-h0-TJ1" firstAttribute="trailing" secondItem="4G9-rz-Z3N" secondAttribute="trailing" id="Qon-Wu-RT5"/>
+                            <constraint firstItem="4G9-rz-Z3N" firstAttribute="bottom" secondItem="hm8-h0-TJ1" secondAttribute="bottom" id="h9c-yU-XgH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zM4-yj-Bpw"/>

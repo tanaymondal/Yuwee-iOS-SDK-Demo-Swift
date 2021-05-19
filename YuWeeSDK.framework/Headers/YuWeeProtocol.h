@@ -216,13 +216,13 @@
 
 @protocol YuWeeFileUploadDelegate <NSObject>
 
-- (void) onUploadSuccess;
+- (void) onUploadSuccessWithUniqueId:(NSString*)uniqueId;
 
-- (void) onUploadStarted;
+- (void) onUploadStartedWithUniqueId:(NSString*)uniqueId;
 
-- (void) onUploadFailed;
+- (void) onUploadFailedWithUniqueId:(NSString*)uniqueId;
 
-- (void) onProgressUpdateWithProgress:(double)progress;
+- (void) onProgressUpdateWithProgress:(double)progress withUniqueId:(NSString*)uniqueId;
 
 @end
 

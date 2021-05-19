@@ -11,6 +11,8 @@ class CallTableViewCell: UITableViewCell {
     @IBOutlet weak var labelCallText: UILabel!
     @IBOutlet weak var labelTime: UILabel!
     
+    private var array: [Message] = []
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,6 +22,10 @@ class CallTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setList(list: [Message]) {
+        array = list
     }
     
     func update(with message: Message) {

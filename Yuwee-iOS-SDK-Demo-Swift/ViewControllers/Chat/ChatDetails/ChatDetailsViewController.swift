@@ -25,6 +25,12 @@ class ChatDetailsViewController: UIViewController {
         super.viewDidLoad()
     
         self.navigationItem.title = chatListData?.name
+        let rightItem = UIBarButtonItem(title: "Clear",
+                                       style: UIBarButtonItem.Style.plain,
+                                       target: self,
+                                       action: #selector(rightButtonAction(sender:)))
+
+        self.navigationItem.rightBarButtonItem = rightItem
         
         tableView.register(UINib(nibName: "MyTableViewCell", bundle: nil), forCellReuseIdentifier: "my_cell")
         tableView.register(UINib(nibName: "OtherTableViewCell", bundle: nil), forCellReuseIdentifier: "other_cell")
@@ -36,6 +42,8 @@ class ChatDetailsViewController: UIViewController {
         tableView.delegate = self
         tableView.keyboardDismissMode = .interactive
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         
         inputBar = SlackInputBar()
         inputBar?.delegate = self
@@ -64,9 +72,51 @@ class ChatDetailsViewController: UIViewController {
                 Toast(text: "Unable to init file share").show()
             }
         }
+        Yuwee.sharedInstance().getChatManager().getFileManager().setUploadDelegate(self)
         
-        
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification:Notification) {
+
+        print("keyboardWillShow")
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            print("Keyboard Show Height \(keyboardSize.height)")
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        }
+    }
+    @objc func keyboardWillHide(_ notification:Notification) {
+        print("keyboardWillHide")
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            print("Keyboard Hide Height \(keyboardSize.height)")
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+    }
+    
+    @objc func rightButtonAction(sender: UIBarButtonItem){
+        let alert = UIAlertController(title: "Chear Chat", message: "Do you want to clear chat messages in this room?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            self.clearChat()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func clearChat() {
+        KRProgressHUD.show()
+        Yuwee.sharedInstance().getChatManager().clearChats(forRoomId: chatListData!.roomId!) { isSuccess, data in
+            KRProgressHUD.dismiss()
+            if isSuccess {
+                Toast(text: "Chat room cleared").show()
+                self.array.removeAll()
+                self.tableView.reloadData()
+            }
+            else {
+                Toast(text: "Unable to clear chat room").show()
+            }
+        }
     }
     
     override var inputAccessoryView: UIView? {
@@ -110,9 +160,12 @@ class ChatDetailsViewController: UIViewController {
             message.textData.text = item["message"].string
         }
         else if message.messageType == "file" {
-            message.fileData.fileId = ""
-            message.fileData.fileUrl = ""
-            message.fileData.filePath = ""
+            message.fileData.fileId = item["fileInfo"]["_id"].string
+            message.fileData.fileUrl = nil
+            message.fileData.filePath = nil
+            message.fileData.fileKey = item["fileInfo"]["fileKey"].string
+            message.fileData.fileName = item["fileInfo"]["fileName"].string
+            message.fileData.fileExt = item["fileInfo"]["fileExtension"].string
         }
         
         self.array.append(message)
@@ -172,7 +225,7 @@ extension ChatDetailsViewController: UIImagePickerControllerDelegate & UINavigat
             print("Extension: \(url.pathExtension)")
             let uuid = UUID().uuidString
             let data = try Data(contentsOf: url)
-            Yuwee.sharedInstance().getChatManager().getFileManager().sendFile(withRoomId: chatListData!.roomId!, withUniqueIdentifier: uuid, withFileData: data, withFileName: uuid, withFileExtension: url.pathExtension, withFileSize: UInt(fileSize), with: self)
+            Yuwee.sharedInstance().getChatManager().getFileManager().sendFile(withRoomId: chatListData!.roomId!, withUniqueIdentifier: uuid, withFileData: data, withFileName: uuid, withFileExtension: url.pathExtension, withFileSize: UInt(fileSize))
         } catch {
             print(error)
         }
@@ -212,24 +265,21 @@ extension ChatDetailsViewController: UIImagePickerControllerDelegate & UINavigat
 }
 
 extension ChatDetailsViewController: YuWeeFileUploadDelegate {
-    
-    func onUploadSuccess() {
-        print("onUploadSuccess")
+    func onUploadSuccess(withUniqueId uniqueId: String!) {
+        print("onUploadSuccess \(uniqueId!)")
     }
     
-    func onUploadStarted() {
-        print("onUploadStarted")
+    func onUploadStarted(withUniqueId uniqueId: String!) {
+        print("onUploadStarted \(uniqueId!)")
     }
     
-    func onUploadFailed() {
-        print("onUploadFailed")
+    func onUploadFailed(withUniqueId uniqueId: String!) {
+        print("onUploadFailed \(uniqueId!)")
     }
     
-    func onProgressUpdate(withProgress progress: Double) {
-        print("onProgressUpdate")
+    func onProgressUpdate(withProgress progress: Double, withUniqueId uniqueId: String!) {
+        print("onProgressUpdate \(uniqueId!)")
     }
-    
-    
 }
 
 
@@ -271,6 +321,20 @@ extension ChatDetailsViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let messageType: String = self.array[indexPath.row].messageType!
+        
+        switch messageType {
+        case "text":
+            return 46
+        case "file":
+            return 158
+        default:
+            return 22
+        }
+    }
 }
 
 extension ChatDetailsViewController: MessageInputBarDelegate {
@@ -279,6 +343,7 @@ extension ChatDetailsViewController: MessageInputBarDelegate {
            
             if text.trim().count > 0 {
                 addTextMessage(with: text)
+                inputBar.inputTextView.text = ""
             }
             else {
                 Toast(text: "Please enter message").show()
@@ -367,6 +432,10 @@ class TextData {
 
 class FileData {
     var fileId: String?
+    var fileKey: String?
     var fileUrl: String?
     var filePath: String?
+    var isDownloaded = false
+    var fileName: String?
+    var fileExt: String?
 }

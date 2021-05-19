@@ -11,17 +11,24 @@ class TextMyTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelMessage: UILabel!
     @IBOutlet weak var labelTime: UILabel!
+    @IBOutlet weak var mainView: UIView!
     
+    private var array: [Message] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        mainView.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setList(list: [Message]) {
+        array = list
     }
     
     func update(with message: Message) {

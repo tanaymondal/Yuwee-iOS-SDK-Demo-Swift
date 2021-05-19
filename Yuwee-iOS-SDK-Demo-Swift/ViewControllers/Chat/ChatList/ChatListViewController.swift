@@ -44,12 +44,12 @@ class ChatListViewController: UIViewController, UIAlertViewDelegate {
         if Utils.getAwsJSON() != nil {
             let json = Utils.getAwsJSON()!
             
-            let expTime = json["result"]["Expiration"].stringValue
+            let expTime = json["result"]["credentials"]["Expiration"].stringValue
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
             let expDate = dateFormatter.date(from: expTime)
-            let expTimeFloat = Float(expDate?.timeIntervalSince1970 ?? 0.0)
-            let today = Float(Date().timeIntervalSince1970)
+            let expTimeFloat = (expDate!.timeIntervalSince1970 * 1000).rounded()
+            let today = (Date().timeIntervalSince1970 * 1000).rounded()
             
             if expTimeFloat > today {
                 self.setAwsCred(json: json)

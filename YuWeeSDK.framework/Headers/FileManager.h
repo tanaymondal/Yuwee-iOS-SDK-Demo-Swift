@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedInstance;
 - (instancetype)init NS_UNAVAILABLE;
 
+@property (strong,nonatomic) NSMutableArray *uploadQueue;
+
 - (void)getAwsCredentialsWithCompletionBlock:(OnGetAwsCredHandler)handler;
 
 - (void)setupAwsCredentialWithAccessKey:(NSString*)accessKeyId
@@ -41,9 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
               withFileData:(NSData*)fileData
               withFileName:(NSString*)fileName
          withFileExtension:(NSString*)fileExtension
-              withFileSize:(unsigned long)fileSize
-              withDelegate:(nonnull id <YuWeeFileUploadDelegate>)delegate;
+              withFileSize:(unsigned long)fileSize;
 
+- (void)setUploadDelegate:(nonnull id <YuWeeFileUploadDelegate>)delegate;
 
 - (void)getFileUrlWithFileId:(NSString*)fileId
                  withFileKey:(NSString*)fileKey

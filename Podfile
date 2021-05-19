@@ -12,6 +12,7 @@ target 'Yuwee-iOS-SDK-Demo-Swift' do
     pod 'NewPopMenu', '~> 2.0'
     pod 'MMWormhole', '~> 2.0.0'
     pod 'MessageInputBar'
+    pod "MapleBacon"
 
     # Pods for YuWee SDK
     pod 'Socket.IO-Client-Swift', '~> 15.2.0'
