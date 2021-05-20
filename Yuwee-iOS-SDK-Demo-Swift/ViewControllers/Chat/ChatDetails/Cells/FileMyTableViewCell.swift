@@ -55,6 +55,11 @@ class FileMyTableViewCell: UITableViewCell {
     func update(with message: Message) {
         self.message = message
         
+        if message.fileData.isLocalFile {
+            //self.message?.fileData.fileUrl = message.fileData.filePath
+            self.imageViewFile.setImage(with: URL(fileURLWithPath: message.fileData.filePath!))
+            self.btnPlay.isHidden = true
+        }
     
     }
     

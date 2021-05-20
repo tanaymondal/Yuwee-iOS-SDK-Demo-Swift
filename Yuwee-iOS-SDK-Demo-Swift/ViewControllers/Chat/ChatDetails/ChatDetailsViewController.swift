@@ -11,12 +11,13 @@ import SwiftyJSON
 import KRProgressHUD
 import MessageInputBar
 
-class ChatDetailsViewController: UIViewController {
+class ChatDetailsViewController: UIViewController, UITextViewDelegate {
     
     var chatListData : ChatListData?
     var array: [Message] = []
     var isConnected = false
     var inputBar: SlackInputBar?
+    private var selectedIndexPath: IndexPath?
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -48,6 +49,7 @@ class ChatDetailsViewController: UIViewController {
         inputBar = SlackInputBar()
         inputBar?.delegate = self
         inputBar?.buttonDelegate = self
+        inputBar?.inputTextView.delegate = self
         
         isConnected = Yuwee.sharedInstance().getConnectionManager().isConnected()
         
@@ -60,6 +62,7 @@ class ChatDetailsViewController: UIViewController {
         Yuwee.sharedInstance().getChatManager().setMessageDeliveredDelegate(self)
         Yuwee.sharedInstance().getChatManager().setMessageDelete(self)
         Yuwee.sharedInstance().getChatManager().setNewMessageReceivedDelegate(self)
+        Yuwee.sharedInstance().getChatManager().setTypingEventDelegate(self)
         
         self.getMessages()
         
@@ -77,7 +80,102 @@ class ChatDetailsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(tablePressed))
+        tableView.addGestureRecognizer(recognizer)
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        Yuwee.sharedInstance().getChatManager().sendTypingStatus(toRoomId: chatListData!.roomId!)
+    }
+    
+    @objc func tablePressed(_ recognizer: UILongPressGestureRecognizer) {
+        let point = recognizer.location(in: tableView)
+        
+        if recognizer.state == .began {
+            let indexPath: IndexPath = tableView.indexPathForRow(at: point)!
+            self.selectedIndexPath = indexPath
+            let cell = tableView.cellForRow(at: indexPath)
+            
+            let copyItem = UIMenuItem(title: "Copy", action: #selector(copyMessage))
+            let deleteForMeItem = UIMenuItem(title: "Delete for me", action: #selector(deleteForMe))
+            let deleteForAllItem = UIMenuItem(title: "Delete for all", action: #selector(deleteForAll))
+            
+            var menuItems: [UIMenuItem] = []
+            switch self.array[indexPath.row].messageType {
+            case "text":
+                menuItems.append(copyItem)
+                menuItems.append(deleteForMeItem)
+                if self.array[indexPath.row].senderId == AppDelegate.loggedInUserId {
+                    menuItems.append(deleteForAllItem)
+                }
+                break
+            case "file":
+                menuItems.append(deleteForMeItem)
+                if self.array[indexPath.row].senderId == AppDelegate.loggedInUserId {
+                    menuItems.append(deleteForAllItem)
+                }
+                break
+            case "call":
+                menuItems.append(deleteForMeItem)
+                break
+            default:
+                break
+            }
+            
+            UIMenuController.shared.menuItems?.removeAll()
+            UIMenuController.shared.menuItems = menuItems
+            UIMenuController.shared.update()
+            
+            self.becomeFirstResponder()
+            let menu = UIMenuController.shared
+            menu.setTargetRect(cell!.frame, in: cell!.superview!)
+            menu.setMenuVisible(true, animated: true)
+        }
+        else {
+            
+        }
+    }
+    
+    @objc func copyMessage() {
+        print("copyMessage")
+        switch self.array[self.selectedIndexPath!.row].messageType {
+        case "text":
+            UIPasteboard.general.string = self.array[self.selectedIndexPath!.row].textData.text
+            break
+        default:
+            break
+        }
+        
+    }
+    @objc func deleteForMe() {
+        print("deleteForMe")
+
+        Yuwee.sharedInstance().getChatManager().deleteMessage(forMessageId: self.array[self.selectedIndexPath!.row].messageId!, roomId: chatListData!.roomId!, deleteType: .DELETE_FOR_ME) { isSuccess, data in
+            let json = JSON(data!)
+            print(json)
+            if isSuccess {
+                Toast(text: "Message deleted").show()
+                self.array.remove(at: self.selectedIndexPath!.row)
+                self.tableView.deleteRows(at: [self.selectedIndexPath!], with: .fade)
+            }
+        }
+    }
+    @objc func deleteForAll() {
+        print("deleteForAll")
+        Yuwee.sharedInstance().getChatManager().deleteMessage(forMessageId: self.array[self.selectedIndexPath!.row].messageId!, roomId: chatListData!.roomId!, deleteType: .DELETE_FOR_ME) { isSuccess, data in
+            let json = JSON(data!)
+            print(json)
+            if isSuccess {
+                Toast(text: "Message deleted").show()
+                self.array.remove(at: self.selectedIndexPath!.row)
+                self.tableView.deleteRows(at: [self.selectedIndexPath!], with: .fade)
+            }
+        }
+    }
+    
+    
+    
     
     @objc func keyboardWillShow(_ notification:Notification) {
 
@@ -186,6 +284,39 @@ class ChatDetailsViewController: UIViewController {
         self.array.append(data)
         self.tableView.insertRows(at: [IndexPath(item: self.array.count - 1, section: 0)], with: .fade)
     }
+    
+    private func addFileMessage(pic: NSURL) {
+        do {
+            let fileSize = sizeForLocalFilePath(filePath: pic.path!)
+            print("File Size: \(fileSize)")
+
+            let url = URL(fileURLWithPath: pic.path!)
+            print("Extension: \(url.pathExtension)")
+            let uuid = UUID().uuidString
+            let data = try Data(contentsOf: url)
+            Yuwee.sharedInstance().getChatManager().getFileManager().sendFile(withRoomId: chatListData!.roomId!, withUniqueIdentifier: uuid, withFileData: data, withFileName: uuid, withFileExtension: url.pathExtension, withFileSize: UInt(fileSize))
+            
+            let mData = Message()
+            mData.messageType = "file"
+            mData.messageTime = Date().millisecondsSince1970
+            mData.senderId = AppDelegate.loggedInUserId
+            mData.senderName = AppDelegate.loggedInName
+            mData.fileData.fileExt = url.pathExtension
+            mData.fileData.fileId = uuid
+            //data.fileData.fileKey = nil
+            mData.fileData.filePath = pic.path
+            //data.fileData.fileUrl = ""
+            mData.fileData.fileName = uuid
+            mData.fileData.isLocalFile = true
+            
+            self.array.append(mData)
+            self.tableView.insertRows(at: [IndexPath(item: self.array.count - 1, section: 0)], with: .fade)
+            
+            
+        } catch {
+            print(error)
+        }
+    }
 }
 
 extension ChatDetailsViewController: InputbarButtonPressDelegate {
@@ -195,12 +326,14 @@ extension ChatDetailsViewController: InputbarButtonPressDelegate {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .camera
+            //imagePicker.allowsEditing = true
             present(imagePicker, animated: true, completion: nil)
             break
         case 1:
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
+            //imagePicker.allowsEditing = true
             present(imagePicker, animated: true, completion: nil)
             break
         default:
@@ -215,20 +348,9 @@ extension ChatDetailsViewController: UIImagePickerControllerDelegate & UINavigat
         
         let pic : NSURL = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerImageURL")] as! NSURL
         print("imagePickerController Pic: \(String(describing: pic.path))")
+
+        self.addFileMessage(pic: pic)
         
-        
-        do {
-            let fileSize = sizeForLocalFilePath(filePath: pic.path!)
-            print("File Size: \(fileSize)")
-            
-            let url = URL(fileURLWithPath: pic.path!)
-            print("Extension: \(url.pathExtension)")
-            let uuid = UUID().uuidString
-            let data = try Data(contentsOf: url)
-            Yuwee.sharedInstance().getChatManager().getFileManager().sendFile(withRoomId: chatListData!.roomId!, withUniqueIdentifier: uuid, withFileData: data, withFileName: uuid, withFileExtension: url.pathExtension, withFileSize: UInt(fileSize))
-        } catch {
-            print(error)
-        }
         picker.dismiss(animated: true, completion: nil)
     }
     
@@ -278,7 +400,8 @@ extension ChatDetailsViewController: YuWeeFileUploadDelegate {
     }
     
     func onProgressUpdate(withProgress progress: Double, withUniqueId uniqueId: String!) {
-        print("onProgressUpdate \(uniqueId!)")
+        print("onProgressUpdate \(uniqueId!)  \(progress)")
+        
     }
 }
 
@@ -363,7 +486,25 @@ extension ChatDetailsViewController: MessageInputBarDelegate {
     }
 }
 
-extension ChatDetailsViewController: YuWeeMessageDeliveredDelegate, YuWeeNewMessageReceivedDelegate, YuWeeMessageDeletedDelegate {
+extension ChatDetailsViewController: YuWeeMessageDeliveredDelegate, YuWeeNewMessageReceivedDelegate, YuWeeMessageDeletedDelegate, YuWeeTypingEventDelegate {
+    func onUserTyping(inRoom dictObject: [AnyHashable : Any]!) {
+        let json = JSON(dictObject!)
+        if json["roomId"].stringValue == chatListData!.roomId! {
+            if chatListData!.isGroup {
+                self.navigationItem.title = "\(json["senderName"].stringValue) is typing..."
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.navigationItem.title = self.chatListData!.name
+                }
+            }
+            else {
+                self.navigationItem.title = "Typing..."
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.navigationItem.title = self.chatListData!.name
+                }
+            }
+        }
+    }
+    
     func onMessageDelivered(_ dictParameter: [AnyHashable : Any]!) {
         let json = JSON(dictParameter!)
         print("onMessageDelivered: \(json)")
@@ -436,6 +577,7 @@ class FileData {
     var fileUrl: String?
     var filePath: String?
     var isDownloaded = false
+    var isLocalFile = false
     var fileName: String?
     var fileExt: String?
 }
