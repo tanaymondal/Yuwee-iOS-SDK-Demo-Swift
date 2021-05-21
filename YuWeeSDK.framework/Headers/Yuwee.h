@@ -1,10 +1,7 @@
 //
 //  Yuwee.h
 //  YuWee SDK
-//
-//  Created by Tanay on 30/01/20.
-//  Copyright © 2020 Prasanna Gupta. All rights reserved.
-//
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import "UserManager.h"

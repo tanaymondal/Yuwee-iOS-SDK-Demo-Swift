@@ -1,10 +1,7 @@
 //
 //  NotificationManager.h
 //  YuWee SDK
-//
-//  Created by Prasanna Gupta on 09/10/18.
-//  Copyright © 2018 Prasanna Gupta. All rights reserved.
-//
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <CallKit/CallKit.h>
 #import <PushKit/PushKit.h>
@@ -24,13 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedInstance;
 - (instancetype)init NS_UNAVAILABLE;
 
-- (void)dailedCallTimedOutSend:(NSDictionary *)dictRecentCall;
-
 - (void)initWithListnerObject:(id <YuWeePushManagerDelegate>)listenerObject;
 
 - (void)processMessageDataFromNotificationDetails:(NSDictionary *)dictResponse;
 
-- (void)pushRegistryDidReceivedPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void (^)(void))completion;
+- (void)pushRegistryDidReceivedPushWithPayload:(PKPushPayload *)payload
+                                       forType:(PKPushType)type
+                         withCompletionHandler:(void (^)(void))completion;
 
 @end
 

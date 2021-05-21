@@ -1,10 +1,7 @@
 //
 //  YuWeeProtocol.h
 //  YuWee SDK
-//
-//  Created by Prasanna Gupta on 07/09/18.
-//  Copyright © 2018 Prasanna Gupta. All rights reserved.
-//
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #ifndef YuWeeProtocol_h
 #define YuWeeProtocol_h

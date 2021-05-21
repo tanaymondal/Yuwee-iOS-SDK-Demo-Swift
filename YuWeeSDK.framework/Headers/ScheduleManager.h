@@ -1,10 +1,7 @@
 //
 //  ScheduleManager.h
 //  YuWee SDK
-//
-//  Created by Prasanna Gupta on 20/09/18.
-//  Copyright © 2018 Prasanna Gupta. All rights reserved.
-//
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import "YuWeeProtocol.h"

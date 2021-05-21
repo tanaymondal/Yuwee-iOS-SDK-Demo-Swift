@@ -146,7 +146,6 @@ class ChatDetailsViewController: UIViewController, UITextViewDelegate {
         default:
             break
         }
-        
     }
     @objc func deleteForMe() {
         print("deleteForMe")
@@ -174,23 +173,22 @@ class ChatDetailsViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    
-    
-    
     @objc func keyboardWillShow(_ notification:Notification) {
 
-        print("keyboardWillShow")
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            print("Keyboard Show Height \(keyboardSize.height)")
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        //print("keyboardWillShow")
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            //print("Keyboard Show Height \(keyboardSize.height)")
+            tableView.contentInset.bottom = keyboardSize.height
         }
+        scrollToBottom()
     }
     @objc func keyboardWillHide(_ notification:Notification) {
-        print("keyboardWillHide")
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            print("Keyboard Hide Height \(keyboardSize.height)")
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //print("keyboardWillHide")
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            //print("Keyboard Hide Height \(keyboardSize.height)")
+            tableView.contentInset.bottom = keyboardSize.height
         }
+        scrollToBottom()
     }
     
     @objc func rightButtonAction(sender: UIBarButtonItem){
@@ -240,6 +238,7 @@ class ChatDetailsViewController: UIViewController, UITextViewDelegate {
                 
                 print(json)
                 self.tableView.reloadData()
+                self.scrollToBottom()
             }
             else {
                 KRProgressHUD.showInfo(withMessage: "No old messages")
@@ -283,6 +282,13 @@ class ChatDetailsViewController: UIViewController, UITextViewDelegate {
         
         self.array.append(data)
         self.tableView.insertRows(at: [IndexPath(item: self.array.count - 1, section: 0)], with: .fade)
+        scrollToBottom()
+    }
+    
+    private func scrollToBottom() {
+        if array.count > 0 {
+            self.tableView.scrollToRow(at: IndexPath(item:array.count-1, section: 0), at: .bottom, animated: true)
+        }
     }
     
     private func addFileMessage(pic: NSURL) {
@@ -311,7 +317,7 @@ class ChatDetailsViewController: UIViewController, UITextViewDelegate {
             
             self.array.append(mData)
             self.tableView.insertRows(at: [IndexPath(item: self.array.count - 1, section: 0)], with: .fade)
-            
+            scrollToBottom()
             
         } catch {
             print(error)
@@ -514,6 +520,7 @@ extension ChatDetailsViewController: YuWeeMessageDeliveredDelegate, YuWeeNewMess
         let json = JSON(dictParameter!)
         self.addServerMessage(item: json)
         self.tableView.insertRows(at: [IndexPath(item: self.array.count - 1, section: 0)], with: .fade)
+        scrollToBottom()
     }
     
     func onMessageDeleted(_ dictParameter: [AnyHashable : Any]!) {

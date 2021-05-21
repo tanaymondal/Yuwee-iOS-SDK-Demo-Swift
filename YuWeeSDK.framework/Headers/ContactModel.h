@@ -1,10 +1,7 @@
 //
 //  ContactModel.h
 //  YuWee SDK
-//
-//  Created by Tanay on 04/02/20.
-//  Copyright © 2020 Prasanna Gupta. All rights reserved.
-//
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <Foundation/Foundation.h>
 

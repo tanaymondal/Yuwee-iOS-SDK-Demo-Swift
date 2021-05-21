@@ -1,10 +1,7 @@
 //
 //  YuweeVideoView.h
 //  YuWee SDK
-//
-//  Created by Arijit Das on 04/03/20.
-//  Copyright © 2020 Prasanna Gupta. All rights reserved.
-//
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>

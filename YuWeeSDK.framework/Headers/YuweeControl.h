@@ -1,10 +1,7 @@
 //
 //  YuweeControl.h
-//  YuWee
-//
-//  Created by Arijit Das on 22/04/20.
-//  Copyright © 2020 DAT-Asset-158. All rights reserved.
-//
+//  YuWee SDK
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <UIKit/UIKit.h>
 

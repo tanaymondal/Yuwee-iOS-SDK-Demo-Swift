@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		43B474042DC201C9957C3432 /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32CC0B318030F7DDAC6A88A /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */; };
+		4BE2ED42B5F1923D7EA442DD /* Pods_Yuwee_Screen_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BAAD81BB005E1BB75DB0DD /* Pods_Yuwee_Screen_Share.framework */; };
+		5268E507A484D7968A5C50C6 /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380977EA709AB5B3DFB3B75E /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */; };
 		A640272D25D6520C00087824 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640272C25D6520C00087824 /* AppDelegate.swift */; };
 		A640272F25D6520C00087824 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640272E25D6520C00087824 /* SceneDelegate.swift */; };
 		A640273425D6520C00087824 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A640273225D6520C00087824 /* Main.storyboard */; };
@@ -66,7 +67,6 @@
 		A6E748A32643E400002A8111 /* YuWeeScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E748A22643E400002A8111 /* YuWeeScreenShare.framework */; };
 		A6E748A42643E400002A8111 /* YuWeeScreenShare.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6E748A22643E400002A8111 /* YuWeeScreenShare.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A6E748B926444DC3002A8111 /* ScreenShareDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E748B826444DC3002A8111 /* ScreenShareDialogViewController.swift */; };
-		DD52D5278E285DE6F60EFCEE /* Pods_Yuwee_Screen_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F998F89510409BE01339664 /* Pods_Yuwee_Screen_Share.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,9 +118,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2F998F89510409BE01339664 /* Pods_Yuwee_Screen_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yuwee_Screen_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		33FDB0502A3299F493518B5E /* Pods-Yuwee Screen Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee Screen Share.debug.xcconfig"; path = "Target Support Files/Pods-Yuwee Screen Share/Pods-Yuwee Screen Share.debug.xcconfig"; sourceTree = "<group>"; };
-		6A3EEBFFF782F2B20D6A0220 /* Pods-Yuwee Screen Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee Screen Share.release.xcconfig"; path = "Target Support Files/Pods-Yuwee Screen Share/Pods-Yuwee Screen Share.release.xcconfig"; sourceTree = "<group>"; };
+		25BAAD81BB005E1BB75DB0DD /* Pods_Yuwee_Screen_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yuwee_Screen_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		380977EA709AB5B3DFB3B75E /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yuwee_iOS_SDK_Demo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5ACE557A6B30258F6812B1D7 /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig"; path = "Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		A640272925D6520C00087824 /* Yuwee-iOS-SDK-Demo-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yuwee-iOS-SDK-Demo-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A640272C25D6520C00087824 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A640272E25D6520C00087824 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,9 +181,9 @@
 		A6E748722643DD28002A8111 /* Yuwee Screen Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Yuwee Screen Share.entitlements"; sourceTree = "<group>"; };
 		A6E748A22643E400002A8111 /* YuWeeScreenShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YuWeeScreenShare.framework; sourceTree = "<group>"; };
 		A6E748B826444DC3002A8111 /* ScreenShareDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShareDialogViewController.swift; sourceTree = "<group>"; };
-		B32CC0B318030F7DDAC6A88A /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yuwee_iOS_SDK_Demo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D91D0459D4579DE0E15B49FE /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig"; path = "Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
-		F031DB3FB99D6E5FC120CDFF /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig"; path = "Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig"; sourceTree = "<group>"; };
+		BB29DB32667C18B5B2CB2225 /* Pods-Yuwee Screen Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee Screen Share.release.xcconfig"; path = "Target Support Files/Pods-Yuwee Screen Share/Pods-Yuwee Screen Share.release.xcconfig"; sourceTree = "<group>"; };
+		BDC40F83D414ADA875256BFE /* Pods-Yuwee Screen Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee Screen Share.debug.xcconfig"; path = "Target Support Files/Pods-Yuwee Screen Share/Pods-Yuwee Screen Share.debug.xcconfig"; sourceTree = "<group>"; };
+		E51914745DFC5ECEF08576E9 /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig"; path = "Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +191,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43B474042DC201C9957C3432 /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework in Frameworks */,
 				A640275F25D6907900087824 /* CoreAudio.framework in Frameworks */,
 				A640275D25D6907200087824 /* CFNetwork.framework in Frameworks */,
 				A640275B25D6906600087824 /* AVKit.framework in Frameworks */,
@@ -202,6 +201,7 @@
 				A691CBB1262F366200B41307 /* YuWeeSDK.framework in Frameworks */,
 				A640276525D690A500087824 /* PushKit.framework in Frameworks */,
 				A640276325D6909100087824 /* GLKit.framework in Frameworks */,
+				5268E507A484D7968A5C50C6 /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,8 +211,8 @@
 			files = (
 				A6E748A32643E400002A8111 /* YuWeeScreenShare.framework in Frameworks */,
 				A6E748652643DD0D002A8111 /* ReplayKit.framework in Frameworks */,
-				DD52D5278E285DE6F60EFCEE /* Pods_Yuwee_Screen_Share.framework in Frameworks */,
 				A6E7488C2643E2EC002A8111 /* WebRTC.framework in Frameworks */,
+				4BE2ED42B5F1923D7EA442DD /* Pods_Yuwee_Screen_Share.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,10 +222,10 @@
 		2AAFE883210E3135DE78FFCB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D91D0459D4579DE0E15B49FE /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */,
-				F031DB3FB99D6E5FC120CDFF /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */,
-				33FDB0502A3299F493518B5E /* Pods-Yuwee Screen Share.debug.xcconfig */,
-				6A3EEBFFF782F2B20D6A0220 /* Pods-Yuwee Screen Share.release.xcconfig */,
+				BDC40F83D414ADA875256BFE /* Pods-Yuwee Screen Share.debug.xcconfig */,
+				BB29DB32667C18B5B2CB2225 /* Pods-Yuwee Screen Share.release.xcconfig */,
+				5ACE557A6B30258F6812B1D7 /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */,
+				E51914745DFC5ECEF08576E9 /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -245,9 +245,9 @@
 				A640275525D6903F00087824 /* OWT.framework */,
 				A640275225D6903500087824 /* WebRTC.framework */,
 				A640274E25D6902700087824 /* YuWeeSDK.framework */,
-				B32CC0B318030F7DDAC6A88A /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */,
 				A6E748642643DD0D002A8111 /* ReplayKit.framework */,
-				2F998F89510409BE01339664 /* Pods_Yuwee_Screen_Share.framework */,
+				25BAAD81BB005E1BB75DB0DD /* Pods_Yuwee_Screen_Share.framework */,
+				380977EA709AB5B3DFB3B75E /* Pods_Yuwee_iOS_SDK_Demo_Swift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -426,13 +426,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A640273D25D6520D00087824 /* Build configuration list for PBXNativeTarget "Yuwee-iOS-SDK-Demo-Swift" */;
 			buildPhases = (
-				5B5D911884E949B987966B48 /* [CP] Check Pods Manifest.lock */,
+				9DA7976AD7232418EA6379EC /* [CP] Check Pods Manifest.lock */,
 				A640272525D6520C00087824 /* Sources */,
 				A640272625D6520C00087824 /* Frameworks */,
 				A640272725D6520C00087824 /* Resources */,
-				F6C1ADE438023498F6667F8C /* [CP] Embed Pods Frameworks */,
 				A691CBB3262F366300B41307 /* Embed Frameworks */,
 				A6E7486D2643DD0D002A8111 /* Embed App Extensions */,
+				311AE2F8E2D0A29383110B28 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -448,7 +448,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6E748702643DD0D002A8111 /* Build configuration list for PBXNativeTarget "Yuwee Screen Share" */;
 			buildPhases = (
-				D921BF051963C84AE43D9A7F /* [CP] Check Pods Manifest.lock */,
+				0FB2B54C6557C6119DCA657D /* [CP] Check Pods Manifest.lock */,
 				A6E7485F2643DD0D002A8111 /* Sources */,
 				A6E748602643DD0D002A8111 /* Frameworks */,
 				A6E748612643DD0D002A8111 /* Resources */,
@@ -526,29 +526,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5B5D911884E949B987966B48 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Yuwee-iOS-SDK-Demo-Swift-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D921BF051963C84AE43D9A7F /* [CP] Check Pods Manifest.lock */ = {
+		0FB2B54C6557C6119DCA657D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -570,7 +548,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F6C1ADE438023498F6667F8C /* [CP] Embed Pods Frameworks */ = {
+		311AE2F8E2D0A29383110B28 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -585,6 +563,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Yuwee-iOS-SDK-Demo-Swift/Pods-Yuwee-iOS-SDK-Demo-Swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9DA7976AD7232418EA6379EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Yuwee-iOS-SDK-Demo-Swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -784,7 +784,7 @@
 		};
 		A640273E25D6520D00087824 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D91D0459D4579DE0E15B49FE /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */;
+			baseConfigurationReference = 5ACE557A6B30258F6812B1D7 /* Pods-Yuwee-iOS-SDK-Demo-Swift.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -817,7 +817,7 @@
 		};
 		A640273F25D6520D00087824 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F031DB3FB99D6E5FC120CDFF /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */;
+			baseConfigurationReference = E51914745DFC5ECEF08576E9 /* Pods-Yuwee-iOS-SDK-Demo-Swift.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -849,7 +849,7 @@
 		};
 		A6E7486E2643DD0D002A8111 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33FDB0502A3299F493518B5E /* Pods-Yuwee Screen Share.debug.xcconfig */;
+			baseConfigurationReference = BDC40F83D414ADA875256BFE /* Pods-Yuwee Screen Share.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Yuwee Screen Share/Yuwee Screen Share.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -877,7 +877,7 @@
 		};
 		A6E7486F2643DD0D002A8111 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A3EEBFFF782F2B20D6A0220 /* Pods-Yuwee Screen Share.release.xcconfig */;
+			baseConfigurationReference = BB29DB32667C18B5B2CB2225 /* Pods-Yuwee Screen Share.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Yuwee Screen Share/Yuwee Screen Share.entitlements";
 				CODE_SIGN_STYLE = Automatic;

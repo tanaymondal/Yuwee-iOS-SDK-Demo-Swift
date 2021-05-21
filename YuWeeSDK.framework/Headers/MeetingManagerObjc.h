@@ -1,10 +1,7 @@
 //
 //  MeetingManagerObjc.h
 //  YuWee SDK
-//
-//  Created by Arijit Das on 22/09/20.
-//  Copyright © 2020 Prasanna Gupta. All rights reserved.
-//
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
@@ -37,63 +34,110 @@ typedef NS_ENUM(NSUInteger, RoleType) {
 + (nonnull instancetype)sharedInstance;
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
+/// Set this delegate to get all events of a meeting.
 - (void)setMeetingDelegate:(nonnull id <OnHostedMeetingDelegate>)listenerObject;
 
-// main call functions
+/// Call this method to join a meeting.
+- (void)joinMeeting:(MeetingParams*)meetingParams
+       withlistener:(OnMeetingCompletionHandler)completionHandler;
 
-- (void)joinMeeting:(MeetingParams *) meetingParams withlistener:(OnMeetingCompletionHandler)completionHandler;
+/// Host a meeting.
+- (void)hostMeeting:(HostMeetingBody*)hostMeetingBody
+       withlistener:(OnMeetingCompletionHandler)completionHandler;
 
-- (void)hostMeeting:(HostMeetingBody *) hostMeetingBody withlistener:(OnMeetingCompletionHandler)completionHandler;
+/// Register a meeting before calling join meeting.
+-(void)registerInMeeting:(RegisterMeetingBody*)registerMeetingBody
+            withlistener:(OnMeetingCompletionHandler)completionHandler;
 
-- (void)registerInMeeting:(RegisterMeetingBody *) registerMeetingBody withlistener:(OnMeetingCompletionHandler)completionHandler;
-
+/// Get all available remote streams on a meeting.
 - (NSMutableArray<OWTRemoteStream *> *)getAllRemoteStream;
 
-
+/// Attache local camera stream on view.
 - (void)attachLocalCameraStream:(YuweeVideoView *)videoView;
-//    - (void)attachLocalScreenStream(videoView: YuweeVideoView) // doc
+
+/// Detach local camera stream from view.
 - (void)detachLocalCameraStream:(YuweeVideoView *)videoView;
-//    - (void)detachLocalScreenStream(videoView: YuweeVideoView) // doc
 
-- (void)attachRemoteStream:(OWTRemoteStream *)stream withVideoView:(YuweeVideoView *)videoView;
+/// Attach remote stream on view.
+- (void)attachRemoteStream:(OWTRemoteStream*)stream
+             withVideoView:(YuweeVideoView*)videoView;
 
-- (void)detachRemoteStream:(OWTRemoteStream *)stream videoView:(YuweeVideoView *)videoView;
+/// Detach remote stream from view.
+- (void)detachRemoteStream:(OWTRemoteStream *)stream
+                 videoView:(YuweeVideoView *)videoView;
 
-- (void)subscribeRemoteStream:(OWTRemoteStream *)stream withlistener:(id<YuWeeRemoteStreamSubscriptionDelegate>)listener;
-- (void)publishCameraStream:(RoleType)roleType withlistener:(OnMeetingCompletionHandler)completionHandler;
+/// Subscribe a remote stream to before you can attach the stream on view.
+- (void)subscribeRemoteStream:(OWTRemoteStream *)stream
+                 withlistener:(id<YuWeeRemoteStreamSubscriptionDelegate>)listener;
+
+/// Publish camera stream.
+- (void)publishCameraStream:(RoleType)roleType
+               withlistener:(OnMeetingCompletionHandler)completionHandler;
+
+/// Unpublish camera stream.
 - (void)unpublishCameraStream;
 
+/// Swicth camera.
+- (void)switchCamera:(RoleType)roleType
+        withlistener:(OnMeetingCompletionHandler)completionHandler;
 
-//- (void)publishScreenStream(roleType: RoleType, listener: OnPublishStreamCompletionHandler) // tested. doc
-//- (void)unpublishScreenStream() // tested. doc
-
-- (void)switchCamera:(RoleType)roleType withlistener:(OnMeetingCompletionHandler)completionHandler;
+/// Enable or disable audio output to speaker.
 - (void)setSpeakerEnabled:(BOOL)isSpeakerEnabled;
-- (void)setMediaEnabled:(BOOL)isAudioEnabled withVideoEnabled:(BOOL)isVideoEnabled withlistener:(OnMeetingCompletionHandler)completionHandler; // Need to test
+
+/// Enable or disable audio or video.
+- (void)setMediaEnabled:(BOOL)isAudioEnabled
+       withVideoEnabled:(BOOL)isVideoEnabled
+           withlistener:(OnMeetingCompletionHandler)completionHandler;
+
+/// Leave a meeting.
 - (void)leaveMeeting:(OnMeetingCompletionHandler)completionHandler;
+
+/// End a meeting. Only admin can end a meeting.
 - (void)endMeeting:(OnMeetingCompletionHandler)completionHandler;
 
-
-// normal apis
-
+/// Fetch all active meetings.
 - (void)fetchActiveMeetings:(OnMeetingCompletionHandler)completionHandler;
-- (void)deleteMeeting:(NSString *)meetingTokenId withlistener:(OnMeetingCompletionHandler)completionHandler;
-- (void)editMeeting:(EditMeetingBody *)body withlistener:(OnMeetingCompletionHandler)completionHandler;
 
-// call specific apis
+/// Delete a meeting.
+- (void)deleteMeeting:(NSString*)meetingTokenId
+         withlistener:(OnMeetingCompletionHandler)completionHandler;
 
-- (void)toggleParticipantAudio:(MuteUnmuteBody *)body withlistener:(OnMeetingCompletionHandler)completionHandler;
-- (void)toggleHandRaise:(HandRaiseBody *)body withlistener:(OnMeetingCompletionHandler)completionHandler; // Need to test
-- (void)dropParticipant:(NSString *)userId withlistener:(OnMeetingCompletionHandler)completionHandler;
-- (void)updatePresenterStatus:(CallPresenterBody *)body roleType:(RoleType)roleType withlistener:(OnMeetingCompletionHandler)completionHandler;
-- (void)makeOrRevokeAdmin:(CallAdminBody *)body withlistener:(OnMeetingCompletionHandler)completionHandler; 
+/// Edit a meeting.
+- (void)editMeeting:(EditMeetingBody*)body
+       withlistener:(OnMeetingCompletionHandler)completionHandler;
+
+/// Toggle participant's audio. Only admin can perform this action.
+- (void)toggleParticipantAudio:(MuteUnmuteBody*)body
+                  withlistener:(OnMeetingCompletionHandler)completionHandler;
+
+/// Toggle hand raise.
+- (void)toggleHandRaise:(HandRaiseBody*)body
+           withlistener:(OnMeetingCompletionHandler)completionHandler;
+
+/// Drop a participant. Only admin can peform this action.
+- (void)dropParticipant:(NSString*)userId
+           withlistener:(OnMeetingCompletionHandler)completionHandler;
+
+/// Update role of a participant. Only admin can perform this action.
+- (void)updateParticipantRole:(CallPresenterBody*)body
+                     roleType:(RoleType)roleType
+                 withlistener:(OnMeetingCompletionHandler)completionHandler;
+
+
+/// Make or revoke admin status of a participant. Only admin can peform this action.
+- (void)makeOrRevokeAdmin:(CallAdminBody*)body
+             withlistener:(OnMeetingCompletionHandler)completionHandler;
+
+/// Fetch all active participant list in a meeting.
 - (void)fetchActiveParticipantsList:(OnMeetingCompletionHandler)completionHandler;
 
+/// Start call recording in a meeting. Only admin can perform this action.
 -(void)startCallRecordingWithRoleType:(RoleType)roleType
                      withSenderUserId:(NSString*)senderUserId
                           withMongoId:(NSString*)mongoId
                   withCompletionBlock:(OnStartRecordingCompletionHandler)handler;
 
+/// Stop call recording in a meeting. Only admin can perform this action.
 -(void)stopCallRecordingWithRecordingId:(NSString*)recordingId
                             withMongoId:(NSString*)mongoId
                       withIsRoleUpdated:(BOOL)isRoleUpdated

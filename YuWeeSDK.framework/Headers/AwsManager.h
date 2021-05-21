@@ -1,10 +1,7 @@
 //
 //  AwsManager.h
-//  YuWeeSDK
-//
-//  Created by Tanay on 18/12/20.
-//  Copyright © 2020 yuwee. All rights reserved.
-//
+//  YuWee SDK
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import "YuWeeProtocol.h"

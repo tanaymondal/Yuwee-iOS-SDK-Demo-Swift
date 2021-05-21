@@ -1,10 +1,7 @@
 //
 //  YuWeeSDK.h
-//  YuWeeSDK
-//
-//  Created by Arijit Das on 19/02/20.
-//  Copyright © 2020 yuwee. All rights reserved.
-//
+//  YuWee SDK
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <Foundation/Foundation.h>
 

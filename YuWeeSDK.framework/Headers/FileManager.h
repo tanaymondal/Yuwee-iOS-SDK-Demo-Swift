@@ -1,10 +1,7 @@
 //
 //  FileManager.h
-//  YuWeeSDK
-//
-//  Created by Tanay on 17/12/20.
-//  Copyright © 2020 yuwee. All rights reserved.
-//
+//  YuWee SDK
+//  Copyright © Yuvitime XS Pte. Ltd. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import "YuWeeProtocol.h"
@@ -20,24 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic) NSMutableArray *uploadQueue;
 
+/// Fet AWS credention to use Yuwee aws storage.
 - (void)getAwsCredentialsWithCompletionBlock:(OnGetAwsCredHandler)handler;
 
+/// Set AWS credentials.
 - (void)setupAwsCredentialWithAccessKey:(NSString*)accessKeyId
                     withSecretAccessKey:(NSString*)secretAccessKey
                        withSessionToken:(NSString*)sessionToken;
 
+/// Initiate file share in room Id.
+/// Call this method for a room before sending any file in room Id.
 - (void)initFileShareWithRoomId:(NSString*)roomId
             withCompletionBlock:(OnInitFileShareCompletionHandler)completionHandler;
 
-//fun sendFile(roomId: String,
-//                 uniqueIdentifier: String,
-//                 filePath: String,
-//                 fileName: String,
-//                 fileExtension: String,
-//                 listener: SendFileListener)
-//
-//    fun getFileUrl(fileId: String, fileKey: String, urlListener: GetFileUrlListener)
-
+///Send file in a room.
 - (void)sendFileWithRoomId:(NSString*)roomId
       withUniqueIdentifier:(NSString*)uniqueIdentidier
               withFileData:(NSData*)fileData
@@ -45,8 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
          withFileExtension:(NSString*)fileExtension
               withFileSize:(unsigned long)fileSize;
 
+/// Send file upload delegate to get file upload progress, file upload success, file upload failure events.
 - (void)setUploadDelegate:(nonnull id <YuWeeFileUploadDelegate>)delegate;
 
+/// Get file URL with file Id.
 - (void)getFileUrlWithFileId:(NSString*)fileId
                  withFileKey:(NSString*)fileKey
          withCompletionBlock:(OnInitFileShareCompletionHandler)completionHandler;

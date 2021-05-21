@@ -969,7 +969,7 @@ extension MeetingCallViewController: PopMenuViewControllerDelegate {
         body.isTempPresenter = false
         body.userId = self.memberData!.userId!
         KRProgressHUD.show()
-        Yuwee.sharedInstance().getMeetingManager().updatePresenterStatus(body, roleType: role) { (data, isSuccess) in
+        Yuwee.sharedInstance().getMeetingManager().updateParticipantRole(body, roleType: role) { (data, isSuccess) in
             KRProgressHUD.dismiss()
             if isSuccess {
                 self.memberData!.roleType = role
